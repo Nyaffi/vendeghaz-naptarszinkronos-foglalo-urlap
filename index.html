@@ -3,6 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- BEMUTATO OLDAL: nem indexelheto. Eles ugyfeloldalon ezt a ket sort torolni kell! -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="googlebot" content="noindex, nofollow">
 <title>Könczevölgyi Vendégház — Őrség, Nagyrákos</title>
 <meta name="description" content="Önálló, 120 m²-es vendégház az Őrségben, Nagyrákoson. Három hálótér, három külön bejáratú fürdőszoba, max. 7 fő. Kemencés nyári konyha, fedett kiülő, privát porta. Állatbarát szállás.">
 <meta name="theme-color" content="#313F1D">
@@ -599,233 +603,18 @@ body.menu-open .burger span::after{ top:0; transform:rotate(-45deg); }
   color:var(--green-deep); font-size:1.02rem;
 }
 
-/* ---------- Gyakori kérdések ---------- */
+/* ---------- Hírlevél ----------
+   A feliratkozó maga a Hírlevél modul (modulok/hirlevel); az oldal csak a szélességet adja. */
+.hirlevel-wrap{ max-width:720px; }
+
+/* ---------- Gyakori kérdések ----------
+   A GYIK maga a GYIK modul (modulok/gyik); az oldal csak a szélességet adja. */
 .faq-wrap{ max-width:820px; }
 
-.faq{ border-top:1px solid var(--cream-line); }
-
-.faq-item{ border-bottom:1px solid var(--cream-line); }
-.faq-item h3{ margin:0; font-size:inherit; letter-spacing:normal; }
-
-.faq-q{
-  width:100%; display:flex; align-items:center; gap:1.5rem;
-  padding:1.5rem .35rem;
-  background:none; border:0; cursor:pointer; text-align:left;
-  font-family:var(--f-display); font-weight:600;
-  font-size:clamp(1.06rem,1.5vw,1.24rem); line-height:1.35;
-  font-variation-settings:"SOFT" 50,"WONK" 1;
-  color:var(--ink);
-  transition:color .25s;
-}
-.faq-q > span:first-child{ flex:1; text-wrap:pretty; }
-.faq-q:hover{ color:var(--green-deep); }
-
-/* pluszjel, ami nyitáskor mínusszá fordul */
-.faq-ico{
-  position:relative; flex:none;
-  width:2.1rem; height:2.1rem; border-radius:50%;
-  background:var(--green-mist); border:1px solid #DDE7CB;
-  transition:background .3s, border-color .3s, transform .45s cubic-bezier(.21,.7,.24,1);
-}
-.faq-ico::before,.faq-ico::after{
-  content:""; position:absolute; top:50%; left:50%;
-  width:.8rem; height:1.6px; border-radius:2px;
-  background:var(--green-deep);
-  transform:translate(-50%,-50%);
-  transition:transform .45s cubic-bezier(.21,.7,.24,1), opacity .3s;
-}
-.faq-ico::after{ transform:translate(-50%,-50%) rotate(90deg); }
-.faq-q:hover .faq-ico{ background:var(--green); border-color:var(--green); }
-.faq-q:hover .faq-ico::before,.faq-q:hover .faq-ico::after{ background:#fff; }
-
-.faq-q[aria-expanded="true"] .faq-ico{
-  background:var(--green-deep); border-color:var(--green-deep);
-  transform:rotate(180deg);
-}
-.faq-q[aria-expanded="true"] .faq-ico::before,
-.faq-q[aria-expanded="true"] .faq-ico::after{ background:#fff; }
-.faq-q[aria-expanded="true"] .faq-ico::after{ opacity:0; transform:translate(-50%,-50%) rotate(0deg); }
-
-/* a válasz 0fr → 1fr rácssorral nyílik, így mindkét irányban animál */
-.faq-panel{
-  display:grid; grid-template-rows:0fr;
-  visibility:hidden;
-  transition:grid-template-rows .5s cubic-bezier(.21,.7,.24,1), visibility 0s linear .5s;
-}
-.faq-item.is-open .faq-panel{
-  grid-template-rows:1fr;
-  visibility:visible;
-  transition:grid-template-rows .5s cubic-bezier(.21,.7,.24,1), visibility 0s;
-}
-.faq-a{ overflow:hidden; }
-.faq-a p{
-  margin:0; padding:0 3.6rem 1.7rem .35rem;
-  color:var(--ink-soft); font-size:1rem; line-height:1.7;
-  opacity:0; transform:translateY(-6px);
-  transition:opacity .45s ease .12s, transform .45s ease .12s;
-}
-.faq-item.is-open .faq-a p{ opacity:1; transform:none; }
-.faq-a a{ color:var(--green-deep); font-weight:600; text-decoration:none; border-bottom:1.5px solid var(--green); }
-.faq-a a:hover{ color:var(--ink); border-bottom-color:var(--ink); }
-.faq-a strong{ color:var(--brown); }
-
-@media (prefers-reduced-motion: reduce){
-  .faq-panel, .faq-a p, .faq-ico, .faq-ico::before, .faq-ico::after{ transition-duration:.01ms; }
-}
-
-/* ---------- Foglaltság-naptár ---------- */
-.sr{
-  position:absolute; width:1px; height:1px; padding:0; margin:-1px;
-  overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
-}
-
-.cal{
-  max-width:880px; margin-inline:auto;
-  background:var(--paper);
-  border:1px solid var(--cream-line);
-  border-radius:24px;
-  padding:clamp(1.2rem,3vw,2.2rem);
-  box-shadow:var(--shadow-soft);
-}
-
-.cal-bar{
-  display:flex; align-items:center; justify-content:space-between;
-  gap:1rem; margin-bottom:clamp(1.2rem,2.5vw,1.8rem);
-}
-.cal-range{
-  margin:0; flex:1; text-align:center;
-  font-family:var(--f-display); font-weight:600;
-  font-size:clamp(1.05rem,2vw,1.3rem);
-  font-variation-settings:"SOFT" 50,"WONK" 1;
-  color:var(--ink);
-}
-.cal-nav{
-  flex:none; width:2.6rem; height:2.6rem; border-radius:50%;
-  display:grid; place-items:center; cursor:pointer;
-  background:var(--green-mist); border:1px solid #DDE7CB;
-  color:var(--green-deep);
-  transition:background .25s, color .25s, border-color .25s, opacity .25s;
-}
-.cal-nav svg{ width:1.1rem; height:1.1rem; }
-.cal-nav:hover:not(:disabled){ background:var(--green-deep); border-color:var(--green-deep); color:#fff; }
-.cal-nav:disabled{ opacity:.32; cursor:default; }
-
-.cal-months{
-  display:grid; grid-template-columns:repeat(2,1fr);
-  gap:clamp(1.2rem,3vw,2.4rem);
-}
-
-table.cal-m{
-  width:100%; border-collapse:separate; border-spacing:5px;
-  table-layout:fixed;
-}
-table.cal-m caption{
-  font-family:var(--f-display); font-weight:600; font-size:1.02rem;
-  font-variation-settings:"SOFT" 50,"WONK" 1;
-  color:var(--brown); text-align:center;
-  padding-bottom:.75rem;
-}
-table.cal-m th{
-  font-family:var(--f-body); font-weight:700;
-  font-size:.62rem; letter-spacing:.12em; text-transform:uppercase;
-  color:var(--ink-faint); padding-bottom:.25rem;
-}
-table.cal-m th abbr{ text-decoration:none; border:0; }
-
-/* a nap-"zseton" a span, nem a cella:
-   az aspect-ratio table-cell-en nem érvényesül */
-.cal-d{ padding:0; vertical-align:middle; }
-.cal-d .cal-n{
-  position:relative;
-  display:grid; place-items:center;
-  width:100%; aspect-ratio:1;
-  border-radius:9px;
-  font-size:.86rem; line-height:1;
-}
-
-.cal-d--free .cal-n{ background:var(--green-mist); color:var(--green-dark); font-weight:700; }
-.cal-d--busy .cal-n{ background:#EADFCB; color:#A08E72; }
-.cal-d--busy .cal-n::after{
-  content:""; position:absolute; left:22%; right:22%; top:50%;
-  height:1px; background:rgba(119,103,73,.38);
-  transform:rotate(-38deg); transform-origin:center;
-}
-.cal-d--past .cal-n{ color:#C6B99F; }
-
-.cal-d.is-today .cal-n{ box-shadow:inset 0 0 0 2px var(--green-deep); }
-
-/* betöltés alatt egyetlen nap se tűnjön szabadnak vagy foglaltnak:
-   minden zseton háttér nélkül, halványan lüktetve */
-.cal.is-loading .cal-d .cal-n{
-  background:none; color:#C4B79E; font-weight:400;
-  box-shadow:none;
-}
-.cal.is-loading .cal-d--busy .cal-n::after{ display:none; }
-
-/* lekérdezési hiba: a naptár nem állít semmit, helyette telefonra irányít */
-.cal.is-error .cal-d .cal-n{
-  background:none; color:#C4B79E; font-weight:400; box-shadow:none;
-}
-.cal.is-error .cal-d--busy .cal-n::after{ display:none; }
-.cal.is-error .cal-foot{ display:none; }
-.cal.is-error .cal-months{ opacity:.6; }
-
-.cal-hiba{
-  display:flex; align-items:flex-start; gap:.8rem;
-  margin:0 0 1.4rem;
-  padding:.95rem 1.15rem;
-  background:#FBF0DC;
-  border:1px solid #E8D3A8;
-  border-radius:14px;
-  font-size:.93rem; line-height:1.55;
-  color:#6B5327;
-}
-.cal-hiba[hidden]{ display:none; }
-.cal-hiba svg{ width:1.25rem; height:1.25rem; flex:none; margin-top:.15rem; color:#B8912F; }
-.cal-hiba a{ color:#6B5327; font-weight:700; text-decoration:none; border-bottom:1.5px solid #C9A94E; white-space:nowrap; }
-.cal-hiba a:hover{ color:var(--ink); border-bottom-color:var(--ink); }
-.cal.is-loading .cal-months{ animation:calTolt 1.4s ease-in-out infinite; }
-@keyframes calTolt{ 0%,100%{ opacity:.85; } 50%{ opacity:.45; } }
-@media (prefers-reduced-motion: reduce){
-  .cal.is-loading .cal-months{ animation:none; opacity:.7; }
-}
-
-.cal-foot{
-  margin-top:clamp(1.2rem,2.5vw,1.8rem);
-  padding-top:1.1rem; border-top:1px solid var(--cream-line);
-  display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:.8rem 1.5rem;
-}
-.cal-legend{
-  list-style:none; margin:0; padding:0;
-  display:flex; flex-wrap:wrap; gap:1.1rem;
-  font-size:.83rem; color:var(--ink-soft);
-}
-.cal-legend li{ display:flex; align-items:center; gap:.45rem; }
-.cal-legend .k{ width:1rem; height:1rem; border-radius:5px; flex:none; }
-.cal-legend .k--free{ background:var(--green-mist); box-shadow:inset 0 0 0 1px #DDE7CB; }
-.cal-legend .k--busy{ background:#EADFCB; }
-.cal-legend .k--past{ background:none; box-shadow:inset 0 0 0 1px var(--cream-line); }
-
-.cal-note{
-  margin:0; font-size:.8rem; color:var(--ink-faint);
-  text-align:right; flex:1; min-width:14rem;
-}
-
-.cal-info{
-  margin:1rem 0 0;
-  display:flex; align-items:flex-start; gap:.6rem;
-  font-size:.87rem; line-height:1.55;
-  color:var(--ink-soft);
-}
-.cal-info svg{ width:1.05rem; height:1.05rem; flex:none; margin-top:.2rem; color:var(--green-deep); }
-.cal-info a{
-  color:var(--green-deep); font-weight:600; text-decoration:none;
-  border-bottom:1.5px solid var(--green); white-space:nowrap;
-}
-.cal-info a:hover{ color:var(--ink); border-bottom-color:var(--ink); }
-
-/* hibaállapotban a borostyán sáv már ugyanezt mondja */
-.cal.is-error .cal-info{ display:none; }
+/* ---------- Foglaltság-naptár ----------
+   A naptár maga a Foglaltságjelző modul (modulok/foglaltsagjelzo).
+   Az oldal csak azt mondja meg, milyen széles legyen. */
+.bc-foglaltsagjelzo{ max-width:880px; margin-inline:auto; }
 
 .cal-cta{
   margin-top:clamp(1.8rem,3.5vw,2.6rem);
@@ -902,6 +691,15 @@ table.cal-m th abbr{ text-decoration:none; border:0; }
   justify-content:space-between; font-size:.8rem; color:rgba(237,241,226,.6);
 }
 .foot-bottom .ntak{ letter-spacing:.08em; }
+
+/* Bemutato-jelzes — eles ugyfeloldalon torlendo */
+.foot-demo{
+  margin:1.6rem 0 0; padding:.85rem 1.1rem;
+  border:1px solid rgba(237,241,226,.22); border-radius:10px;
+  background:rgba(237,241,226,.05);
+  font-size:.8rem; line-height:1.55; color:rgba(237,241,226,.62);
+}
+.foot-demo b{ color:rgba(237,241,226,.82); font-weight:600; }
 
 .to-top{
   position:fixed; right:1.4rem; bottom:1.4rem; z-index:90;
@@ -1001,18 +799,6 @@ table.cal-m th abbr{ text-decoration:none; border:0; }
   .contact-card img{ aspect-ratio:4/3; }
 }
 
-@media (max-width:760px){
-  .cal-months{ grid-template-columns:1fr; }
-  .cal-months > table.cal-m:nth-child(2){ display:none; }
-  /* a hónap nevét a felső sáv mutatja — a caption maradjon, de csak olvasóknak */
-  .cal-months table.cal-m caption{
-    position:absolute; width:1px; height:1px; padding:0; margin:-1px;
-    overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap;
-  }
-  .cal-note{ text-align:left; }
-  .cal-foot{ flex-direction:column; align-items:flex-start; }
-}
-
 @media (max-width:620px){
   .offers{ grid-template-columns:1fr; gap:2.4rem; }
   .offer-fig img{ aspect-ratio:4/3; }
@@ -1029,13 +815,9 @@ table.cal-m th abbr{ text-decoration:none; border:0; }
   .gal--c,.gal--d,.gal--tall{ grid-column:span 1; grid-row:span 2; }
   .hero-cta .btn{ width:100%; justify-content:center; }
   .cal-cta .btn{ width:100%; justify-content:center; }
-  .cal{ padding:1.1rem .9rem 1.3rem; }
-  table.cal-m{ border-spacing:4px; }
   .quote::before{ font-size:5rem; }
   .contact-list a, .contact-list .val{ font-size:1.02rem; }
   .contact-list{ gap:1.15rem; }
-  .faq-q{ gap:1rem; padding:1.25rem .2rem; }
-  .faq-a p{ padding:0 .6rem 1.5rem .2rem; }
   .about-media .m2{ width:42%; right:-.5rem; }
 }
 
@@ -1043,172 +825,982 @@ table.cal-m th abbr{ text-decoration:none; border:0; }
   .site-header,.to-top,.hero-media{ display:none; }
 }
 
-/* ---------- Árajánlat-kalkulátor ---------- */
-.calc{
+/* ---------- Árajánlat-kalkulátor ----------
+   A kalkulátor maga a Foglalás kalkulátor modul (modulok/foglalas-kalkulator).
+   Az oldal csak azt mondja meg, hol álljon meg görgetéskor az összesítő
+   (a ragadós fejléc alatt). */
+.bc-foglalas-kalkulator{ --bc-sticky-top:6.5rem; }
+
+</style>
+<style>
+/* ============================================================
+   FOGLALTSÁGJELZŐ MODUL — bc-vendeghaz-modulok
+   ------------------------------------------------------------
+   Minden szabály a .bc-foglaltsagjelzo dobozon belül él, így nem
+   ütközik se a témával, se más bővítménnyel.
+
+   Színek és betűk: a téma theme.json-jából öröklődnek
+   (--wp--preset--…). Ha nincs ilyen (pl. a demó-oldalon), a
+   második érték, a saját alapszín lép életbe.
+
+   Szélesség: a modul kitölti, amit kap. A szélességet az oldal
+   (WordPressben a téma) dönti el, nem a modul.
+   ============================================================ */
+
+.bc-foglaltsagjelzo{
+  /* ---- MINDEN SZÍN INNEN JÖN — a modulban máshol nincs színkód ----
+     A slugok a WordPress-átadás doksi 5. fejezetéből; ha Berni design
+     systemje más neveket használ, csak ezt a blokkot kell átírni. */
+
+  /* a témából öröklött színek (slug, tartalék) */
+  --bc-paper:      var(--wp--preset--color--paper,          #FFFDF8);
+  --bc-cream-deep: var(--wp--preset--color--base-deep,      #F2E8D6);
+  --bc-line:       var(--wp--preset--color--base-line,      #E3D6BE);
+  --bc-ink:        var(--wp--preset--color--contrast,       #2F251A);
+  --bc-ink-soft:   var(--wp--preset--color--contrast-soft,  #5C4E3D);
+  --bc-ink-faint:  var(--wp--preset--color--contrast-faint, #776749);
+  --bc-brown:      var(--wp--preset--color--secondary,      #63513A);
+  --bc-green:      var(--wp--preset--color--primary,        #8CBF4D);
+  --bc-green-deep: var(--wp--preset--color--primary-deep,   #5C8A2A);
+  --bc-green-dark: var(--wp--preset--color--primary-dark,   #313F1D);
+  --bc-green-mist: var(--wp--preset--color--primary-mist,   #EDF3E1);
+
+  /* a fentiekből kevert árnyalatok — maguktól követik a téma színeit */
+  --bc-green-line: color-mix(in srgb, var(--bc-green-mist) 82%, var(--bc-green));
+  --bc-busy:       color-mix(in srgb, var(--bc-cream-deep) 50%, var(--bc-line));
+  --bc-busy-ink:   color-mix(in srgb, var(--bc-ink-faint) 64%, var(--bc-line));
+  --bc-busy-mark:  color-mix(in srgb, var(--bc-ink-faint) 38%, transparent);
+  --bc-muted:      color-mix(in srgb, var(--bc-ink-faint) 27%, var(--bc-line));
+  --bc-on-green:   #fff;
+  --bc-shadow:     0 2px 6px rgba(70,56,38,.05), 0 14px 40px -18px rgba(70,56,38,.28);
+
+  /* állapotszínek (figyelmeztetés) — nem márkaszín, ezért nem a témából */
+  --bc-warn-bg:    #FBF0DC;
+  --bc-warn-line:  #E8D3A8;
+  --bc-warn-ink:   #6B5327;
+  --bc-warn-icon:  #B8912F;
+  --bc-warn-link:  #C9A94E;
+
+  --bc-f-display: var(--wp--preset--font-family--display, "Fraunces", "Iowan Old Style", Georgia, serif);
+  --bc-f-body:    var(--wp--preset--font-family--body, "Karla", "Segoe UI", system-ui, sans-serif);
+
+  container-type:inline-size;
+}
+
+.bc-foglaltsagjelzo *,
+.bc-foglaltsagjelzo *::before,
+.bc-foglaltsagjelzo *::after{ box-sizing:border-box; }
+
+.bc-foglaltsagjelzo .bc-sr{
+  position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+  overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
+}
+
+.bc-cal{
+  background:var(--bc-paper);
+  border:1px solid var(--bc-line);
+  border-radius:24px;
+  padding:clamp(1.2rem,3vw,2.2rem);
+  box-shadow:var(--bc-shadow);
+  color:var(--bc-ink);
+}
+
+.bc-cal-bar{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:1rem; margin-bottom:clamp(1.2rem,2.5vw,1.8rem);
+}
+.bc-cal-range{
+  margin:0; flex:1; text-align:center;
+  font-family:var(--bc-f-display); font-weight:600;
+  font-size:clamp(1.05rem,2vw,1.3rem); line-height:1.72;
+  font-variation-settings:"SOFT" 50,"WONK" 1;
+  color:var(--bc-ink);
+}
+.bc-cal-nav{
+  flex:none; width:2.6rem; height:2.6rem; border-radius:50%;
+  display:grid; place-items:center; cursor:pointer; padding:0;
+  background:var(--bc-green-mist); border:1px solid var(--bc-green-line);
+  color:var(--bc-green-deep);
+  transition:background .25s, color .25s, border-color .25s, opacity .25s;
+}
+.bc-cal-nav svg{ width:1.1rem; height:1.1rem; }
+.bc-cal-nav:hover:not(:disabled){ background:var(--bc-green-deep); border-color:var(--bc-green-deep); color:var(--bc-on-green); }
+.bc-cal-nav:disabled{ opacity:.32; cursor:default; }
+
+.bc-cal-months{
+  display:grid; grid-template-columns:repeat(2,1fr);
+  gap:clamp(1.2rem,3vw,2.4rem);
+}
+
+table.bc-cal-m{
+  width:100%; border-collapse:separate; border-spacing:5px;
+  table-layout:fixed; margin:0;
+}
+table.bc-cal-m caption{
+  font-family:var(--bc-f-display); font-weight:600; font-size:1.02rem;
+  font-variation-settings:"SOFT" 50,"WONK" 1;
+  color:var(--bc-brown); text-align:center;
+  padding-bottom:.75rem;
+}
+table.bc-cal-m th{
+  font-family:var(--bc-f-body); font-weight:700;
+  font-size:.62rem; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--bc-ink-faint); padding:0 0 .25rem;
+}
+table.bc-cal-m th abbr{ text-decoration:none; border:0; }
+
+/* a nap-"zseton" a span, nem a cella:
+   az aspect-ratio table-cell-en nem érvényesül */
+.bc-cal-d{ padding:0; vertical-align:middle; border:0; }
+.bc-cal-d .bc-cal-n{
+  position:relative;
+  display:grid; place-items:center;
+  width:100%; aspect-ratio:1;
+  border-radius:9px;
+  font-size:.86rem; line-height:1;
+}
+
+.bc-cal-d--free .bc-cal-n{ background:var(--bc-green-mist); color:var(--bc-green-dark); font-weight:700; }
+.bc-cal-d--busy .bc-cal-n{ background:var(--bc-busy); color:var(--bc-busy-ink); }
+.bc-cal-d--busy .bc-cal-n::after{
+  content:""; position:absolute; left:22%; right:22%; top:50%;
+  height:1px; background:var(--bc-busy-mark);
+  transform:rotate(-38deg); transform-origin:center;
+}
+.bc-cal-d--past .bc-cal-n{ color:var(--bc-muted); }
+
+.bc-cal-d.is-today .bc-cal-n{ box-shadow:inset 0 0 0 2px var(--bc-green-deep); }
+
+/* betöltés alatt egyetlen nap se tűnjön szabadnak vagy foglaltnak:
+   minden zseton háttér nélkül, halványan lüktetve */
+.bc-cal.is-loading .bc-cal-d .bc-cal-n{
+  background:none; color:var(--bc-muted); font-weight:400;
+  box-shadow:none;
+}
+.bc-cal.is-loading .bc-cal-d--busy .bc-cal-n::after{ display:none; }
+.bc-cal.is-loading .bc-cal-months{ animation:bcCalTolt 1.4s ease-in-out infinite; }
+@keyframes bcCalTolt{ 0%,100%{ opacity:.85; } 50%{ opacity:.45; } }
+@media (prefers-reduced-motion: reduce){
+  .bc-cal.is-loading .bc-cal-months{ animation:none; opacity:.7; }
+}
+
+/* lekérdezési hiba: a naptár nem állít semmit, helyette telefonra irányít */
+.bc-cal.is-error .bc-cal-d .bc-cal-n{
+  background:none; color:var(--bc-muted); font-weight:400; box-shadow:none;
+}
+.bc-cal.is-error .bc-cal-d--busy .bc-cal-n::after{ display:none; }
+.bc-cal.is-error .bc-cal-foot{ display:none; }
+.bc-cal.is-error .bc-cal-months{ opacity:.6; }
+
+.bc-cal-hiba{
+  display:flex; align-items:flex-start; gap:.8rem;
+  margin:0 0 1.4rem;
+  padding:.95rem 1.15rem;
+  background:var(--bc-warn-bg);
+  border:1px solid var(--bc-warn-line);
+  border-radius:14px;
+  font-size:.93rem; line-height:1.55;
+  color:var(--bc-warn-ink);
+}
+.bc-cal-hiba[hidden]{ display:none; }
+.bc-cal-hiba svg{ width:1.25rem; height:1.25rem; flex:none; margin-top:.15rem; color:var(--bc-warn-icon); }
+.bc-cal-hiba a{ color:var(--bc-warn-ink); font-weight:700; text-decoration:none; border-bottom:1.5px solid var(--bc-warn-link); white-space:nowrap; }
+.bc-cal-hiba a:hover{ color:var(--bc-ink); border-bottom-color:var(--bc-ink); }
+
+.bc-cal-foot{
+  margin-top:clamp(1.2rem,2.5vw,1.8rem);
+  padding-top:1.1rem; border-top:1px solid var(--bc-line);
+  display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:.8rem 1.5rem;
+}
+.bc-cal-legend{
+  list-style:none; margin:0; padding:0;
+  display:flex; flex-wrap:wrap; gap:1.1rem;
+  font-size:.83rem; color:var(--bc-ink-soft);
+}
+.bc-cal-legend li{ display:flex; align-items:center; gap:.45rem; margin:0; }
+.bc-cal-legend .bc-k{ width:1rem; height:1rem; border-radius:5px; flex:none; }
+.bc-cal-legend .bc-k--free{ background:var(--bc-green-mist); box-shadow:inset 0 0 0 1px var(--bc-green-line); }
+.bc-cal-legend .bc-k--busy{ background:var(--bc-busy); }
+.bc-cal-legend .bc-k--past{ background:none; box-shadow:inset 0 0 0 1px var(--bc-line); }
+
+.bc-cal-note{
+  margin:0; font-size:.8rem; color:var(--bc-ink-faint);
+  text-align:right; flex:1; min-width:14rem;
+}
+
+.bc-cal-info{
+  margin:1rem 0 0;
+  display:flex; align-items:flex-start; gap:.6rem;
+  font-size:.87rem; line-height:1.55;
+  color:var(--bc-ink-soft);
+}
+.bc-cal-info svg{ width:1.05rem; height:1.05rem; flex:none; margin-top:.2rem; color:var(--bc-green-deep); }
+.bc-cal-info a{
+  color:var(--bc-green-deep); font-weight:600; text-decoration:none;
+  border-bottom:1.5px solid var(--bc-green); white-space:nowrap;
+}
+.bc-cal-info a:hover{ color:var(--bc-ink); border-bottom-color:var(--bc-ink); }
+
+/* hibaállapotban a borostyán sáv már ugyanezt mondja */
+.bc-cal.is-error .bc-cal-info{ display:none; }
+
+/* ---- Keskeny doboz: egy hónap ----
+   A doboz szélességére figyelünk, nem a képernyőére (a JS ugyanezt
+   a 700 px-es határt használja a fejléc szövegéhez). */
+@container (max-width:699px){
+  .bc-cal-months{ grid-template-columns:1fr; }
+  .bc-cal-months > table.bc-cal-m:nth-child(2){ display:none; }
+  /* a hónap nevét a felső sáv mutatja — a caption maradjon, de csak olvasóknak */
+  .bc-cal-months table.bc-cal-m caption{
+    position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+    overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap;
+  }
+  .bc-cal-note{ text-align:left; }
+  .bc-cal-foot{ flex-direction:column; align-items:flex-start; }
+}
+
+@container (max-width:569px){
+  .bc-cal{ padding:1.1rem .9rem 1.3rem; }
+  table.bc-cal-m{ border-spacing:4px; }
+}
+
+</style>
+<style>
+/* ============================================================
+   FOGLALÁS KALKULÁTOR MODUL — bc-vendeghaz-modulok
+   ------------------------------------------------------------
+   Minden szabály a .bc-foglalas-kalkulator dobozon belül él.
+   Szélesség: a modul kitölti, amit kap. A doboz szélességére
+   reagál (@container), nem a képernyőére.
+
+   Az összesítő görgetéskor a helyén marad (sticky). Hogy milyen
+   messze a lap tetejétől, azt az oldal mondja meg:
+     .bc-foglalas-kalkulator{ --bc-sticky-top: 6.5rem; }
+   ============================================================ */
+
+.bc-foglalas-kalkulator{
+  /* ---- MINDEN SZÍN INNEN JÖN — a modulban máshol nincs színkód ----
+     A slugok a WordPress-átadás doksi 5. fejezetéből; ha Berni design
+     systemje más neveket használ, csak ezt a blokkot kell átírni. */
+
+  /* a témából öröklött színek (slug, tartalék) */
+  --bc-cream:      var(--wp--preset--color--base,           #FBF6EC);
+  --bc-cream-deep: var(--wp--preset--color--base-deep,      #F2E8D6);
+  --bc-paper:      var(--wp--preset--color--paper,          #FFFDF8);
+  --bc-line:       var(--wp--preset--color--base-line,      #E3D6BE);
+  --bc-ink:        var(--wp--preset--color--contrast,       #2F251A);
+  --bc-ink-faint:  var(--wp--preset--color--contrast-faint, #776749);
+  --bc-brown:      var(--wp--preset--color--secondary,      #63513A);
+  --bc-green-deep: var(--wp--preset--color--primary-deep,   #5C8A2A);
+  --bc-green-dark: var(--wp--preset--color--primary-dark,   #313F1D);
+  --bc-green-mist: var(--wp--preset--color--primary-mist,   #EDF3E1);
+  --bc-accent:     var(--wp--preset--color--accent,         #CFDC1E);
+
+  /* a fentiekből kevert árnyalatok — maguktól követik a téma színeit */
+  --bc-focus:      color-mix(in srgb, var(--bc-green-deep) 16%, transparent);
+  --bc-on-dark:    var(--bc-green-mist);                                        /* szöveg a sötét összesítőn */
+  --bc-on-dark-78: color-mix(in srgb, var(--bc-on-dark) 78%, transparent);
+  --bc-on-dark-62: color-mix(in srgb, var(--bc-on-dark) 62%, transparent);
+  --bc-on-dark-55: color-mix(in srgb, var(--bc-on-dark) 55%, transparent);
+  --bc-on-dark-50: color-mix(in srgb, var(--bc-on-dark) 50%, transparent);
+  --bc-on-dark-28: color-mix(in srgb, var(--bc-on-dark) 28%, transparent);
+  --bc-on-dark-20: color-mix(in srgb, var(--bc-on-dark) 20%, transparent);
+  --bc-on-accent:  color-mix(in srgb, var(--bc-green-dark) 85%, #000);
+  --bc-white:      #fff;
+  --bc-glass:      rgba(255,255,255,.07);
+  --bc-btn-shadow:       0 10px 24px -14px color-mix(in srgb, var(--bc-green-dark) 85%, transparent);
+  --bc-btn-shadow-hover: 0 18px 34px -16px color-mix(in srgb, var(--bc-green-dark) 90%, transparent);
+
+  /* állapotszínek (figyelmeztetés) — nem márkaszín, ezért nem a témából */
+  --bc-warn-ink:   #9A6A1E;
+  --bc-warn-bg:    #FBF0DC;
+  --bc-warn-line:  #E8D3A8;
+
+  --bc-f-display: var(--wp--preset--font-family--display, "Fraunces", "Iowan Old Style", Georgia, serif);
+  --bc-f-body:    var(--wp--preset--font-family--body, "Karla", "Segoe UI", system-ui, sans-serif);
+
+  container-type:inline-size;
+  color:var(--bc-ink);
+}
+
+.bc-foglalas-kalkulator *,
+.bc-foglalas-kalkulator *::before,
+.bc-foglalas-kalkulator *::after{ box-sizing:border-box; }
+
+.bc-calc{
   display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);
   gap:clamp(1.5rem,3vw,2.6rem);
   align-items:start;
 }
 
-.calc-form{ display:grid; gap:1.1rem; }
+.bc-calc-form{ display:grid; gap:1.1rem; }
 
-.calc-block{
+.bc-calc-block{
   margin:0; padding:1.3rem 1.4rem 1.5rem;
-  background:var(--paper);
-  border:1px solid var(--cream-line);
+  background:var(--bc-paper);
+  border:1px solid var(--bc-line);
   border-radius:18px;
+  min-width:0;
 }
-.calc-block legend{
+.bc-calc-block legend{
   padding:0 .5rem; margin-left:-.5rem;
-  font-family:var(--f-display); font-weight:600; font-size:1.04rem;
+  font-family:var(--bc-f-display); font-weight:600; font-size:1.04rem;
   font-variation-settings:"SOFT" 50,"WONK" 1;
-  color:var(--brown);
+  color:var(--bc-brown);
 }
 
-.calc-row{ display:grid; grid-template-columns:1fr 1fr; gap:.9rem; }
+.bc-calc-row{ display:grid; grid-template-columns:1fr 1fr; gap:.9rem; }
 
-.calc-field{ display:grid; gap:.35rem; }
-.calc-field > span{
+.bc-calc-field{ display:grid; gap:.35rem; margin:0; }
+.bc-calc-field > span{
   font-size:.7rem; letter-spacing:.14em; text-transform:uppercase;
-  font-weight:700; color:var(--ink-faint);
+  font-weight:700; color:var(--bc-ink-faint);
 }
-.calc-field input{
-  font-family:var(--f-body); font-size:.98rem;
-  padding:.68rem .8rem;
-  border:1.5px solid var(--cream-line); border-radius:11px;
-  background:var(--cream); color:var(--ink);
+.bc-calc-field input{
+  font-family:var(--bc-f-body); font-size:.98rem;
+  padding:.68rem .8rem; margin:0;
+  border:1.5px solid var(--bc-line); border-radius:11px;
+  background:var(--bc-cream); color:var(--bc-ink);
   width:100%;
 }
-.calc-field input:focus-visible{ border-color:var(--green-deep); outline:none; box-shadow:0 0 0 3px rgba(92,138,42,.16); }
-.calc-field--wide{ max-width:16rem; }
+.bc-calc-field input:focus-visible{ border-color:var(--bc-green-deep); outline:none; box-shadow:0 0 0 3px var(--bc-focus); }
+.bc-calc-field--wide{ max-width:16rem; }
 
-.calc-hint{
-  margin:.75rem 0 0; font-size:.83rem; line-height:1.5; color:var(--ink-faint);
+.bc-calc-hint{
+  margin:.75rem 0 0; font-size:.83rem; line-height:1.5; color:var(--bc-ink-faint);
 }
-.calc-hint.is-warn{ color:#9A6A1E; font-weight:600; }
-.calc-hint.is-ok{ color:var(--green-deep); font-weight:600; }
-.calc-hint a{ color:inherit; font-weight:700; text-decoration:underline; text-underline-offset:2px; }
-.calc-hint a:hover{ color:var(--ink); }
+.bc-calc-hint.is-warn{ color:var(--bc-warn-ink); font-weight:600; }
+.bc-calc-hint.is-ok{ color:var(--bc-green-deep); font-weight:600; }
+.bc-calc-hint a{ color:inherit; font-weight:700; text-decoration:underline; text-underline-offset:2px; }
+.bc-calc-hint a:hover{ color:var(--bc-ink); }
 
 /* léptető */
-.calc-stepper{
+.bc-calc-stepper{
   display:flex; align-items:center; justify-content:space-between; gap:1rem;
   padding:.62rem 0;
-  border-bottom:1px solid var(--cream-deep);
+  border-bottom:1px solid var(--bc-cream-deep);
 }
-.calc-stepper:last-of-type{ border-bottom:0; padding-bottom:0; }
-.calc-st-txt{ display:flex; flex-direction:column; gap:.1rem; min-width:0; }
-.calc-st-txt b{ font-size:.97rem; font-weight:600; color:var(--ink); }
-.calc-st-txt small{ font-size:.79rem; color:var(--ink-faint); }
+.bc-calc-stepper:last-of-type{ border-bottom:0; padding-bottom:0; }
+.bc-calc-st-txt{ display:flex; flex-direction:column; gap:.1rem; min-width:0; line-height:1.72; }
+.bc-calc-st-txt b{ font-size:.97rem; font-weight:600; color:var(--bc-ink); }
+.bc-calc-st-txt small{ font-size:.79rem; color:var(--bc-ink-faint); }
 
-.calc-st-ctl{ display:flex; align-items:center; gap:.2rem; flex:none; }
-.calc-st-ctl button{
-  width:2.1rem; height:2.1rem; border-radius:50%;
-  border:1.5px solid var(--cream-line); background:var(--cream);
-  color:var(--brown); font-size:1.1rem; line-height:1;
+.bc-calc-st-ctl{ display:flex; align-items:center; gap:.2rem; flex:none; }
+.bc-calc-st-ctl button{
+  width:2.1rem; height:2.1rem; border-radius:50%; padding:0; margin:0;
+  border:1.5px solid var(--bc-line); background:var(--bc-cream);
+  color:var(--bc-brown); font-size:1.1rem; line-height:1; font-family:inherit;
   cursor:pointer; display:grid; place-items:center;
   transition:background .2s, border-color .2s, color .2s, opacity .2s;
 }
-.calc-st-ctl button:hover:not(:disabled){ background:var(--green-deep); border-color:var(--green-deep); color:#fff; }
-.calc-st-ctl button:disabled{ opacity:.3; cursor:default; }
-.calc-st-ctl output{
+.bc-calc-st-ctl button:hover:not(:disabled){ background:var(--bc-green-deep); border-color:var(--bc-green-deep); color:var(--bc-white); }
+.bc-calc-st-ctl button:disabled{ opacity:.3; cursor:default; }
+.bc-calc-st-ctl output{
   min-width:2rem; text-align:center;
-  font-family:var(--f-display); font-weight:600; font-size:1.05rem;
-  color:var(--ink);
+  font-family:var(--bc-f-display); font-weight:600; font-size:1.05rem;
+  color:var(--bc-ink);
 }
 
 /* jelölőnégyzet-sor */
-.calc-check{
+.bc-calc-check{
   display:flex; align-items:center; gap:.85rem;
-  padding:.72rem 0; cursor:pointer;
-  border-bottom:1px solid var(--cream-deep);
+  padding:.72rem 0; cursor:pointer; margin:0;
+  border-bottom:1px solid var(--bc-cream-deep);
 }
-.calc-check:last-of-type{ border-bottom:0; padding-bottom:0; }
-.calc-check input{
-  flex:none; width:1.2rem; height:1.2rem; accent-color:var(--green-deep); cursor:pointer;
+.bc-calc-check:last-of-type{ border-bottom:0; padding-bottom:0; }
+.bc-calc-check input{
+  flex:none; width:1.2rem; height:1.2rem; margin:0; accent-color:var(--bc-green-deep); cursor:pointer;
 }
-.calc-ch-txt{ display:flex; flex-direction:column; gap:.1rem; flex:1; min-width:0; }
-.calc-ch-txt b{ font-size:.97rem; font-weight:600; color:var(--ink); }
-.calc-ch-txt small{ font-size:.79rem; color:var(--ink-faint); }
-.calc-ch-ar{
-  flex:none; font-size:.86rem; font-weight:700; color:var(--green-deep); white-space:nowrap;
+.bc-calc-ch-txt{ display:flex; flex-direction:column; gap:.1rem; flex:1; min-width:0; line-height:1.72; }
+.bc-calc-ch-txt b{ font-size:.97rem; font-weight:600; color:var(--bc-ink); }
+.bc-calc-ch-txt small{ font-size:.79rem; color:var(--bc-ink-faint); }
+.bc-calc-ch-ar{
+  flex:none; font-size:.86rem; font-weight:700; color:var(--bc-green-deep); white-space:nowrap;
 }
 
 /* összesítő */
-.calc-sum{
-  background:var(--green-dark); color:#EDF1E2;
+.bc-calc-sum{
+  background:var(--bc-green-dark); color:var(--bc-on-dark);
   border-radius:20px;
   padding:clamp(1.4rem,2.6vw,1.9rem);
-  position:sticky; top:6.5rem;
+  position:sticky; top:var(--bc-sticky-top, 1.5rem);
 }
-.calc-sum h3{
-  color:#fff; font-size:1.2rem; margin-bottom:1.1rem;
+.bc-calc-sum h3{
+  color:var(--bc-white); font-size:1.2rem; margin:0 0 1.1rem;
+  font-family:var(--bc-f-display); font-weight:600; line-height:1.08; letter-spacing:-.015em;
   font-variation-settings:"SOFT" 50,"WONK" 1;
 }
 
-.calc-tetelek{ margin:0 0 1.1rem; display:grid; gap:.5rem; font-size:.9rem; }
-.calc-tetelek .cs{ display:flex; justify-content:space-between; gap:1rem; align-items:baseline; }
-.calc-tetelek dt{ color:rgba(237,241,226,.78); min-width:0; }
-.calc-tetelek dt small{ display:block; font-size:.78rem; color:rgba(237,241,226,.5); }
-.calc-tetelek dd{ margin:0; font-weight:600; color:#fff; white-space:nowrap; }
-.calc-tetelek .cs--ked dt, .calc-tetelek .cs--ked dd{ color:var(--chart); }
-.calc-tetelek .cs--vonal{
-  border-top:1px solid rgba(237,241,226,.2); padding-top:.6rem; margin-top:.25rem;
+.bc-calc-tetelek{ margin:0 0 1.1rem; display:grid; gap:.5rem; font-size:.9rem; line-height:1.72; }
+.bc-calc-tetelek .bc-cs{ display:flex; justify-content:space-between; gap:1rem; align-items:baseline; }
+.bc-calc-tetelek dt{ color:var(--bc-on-dark-78); min-width:0; }
+.bc-calc-tetelek dt small{ display:block; font-size:.78rem; color:var(--bc-on-dark-50); }
+.bc-calc-tetelek dd{ margin:0; font-weight:600; color:var(--bc-white); white-space:nowrap; }
+.bc-calc-tetelek .bc-cs--ked dt, .bc-calc-tetelek .bc-cs--ked dd{ color:var(--bc-accent); }
+.bc-calc-tetelek .bc-cs--vonal{
+  border-top:1px solid var(--bc-on-dark-20); padding-top:.6rem; margin-top:.25rem;
 }
-.calc-tetelek .cs--ures{ color:rgba(237,241,226,.5); font-style:italic; }
-.calc-tetelek .cs--cim dt{
+.bc-calc-tetelek .bc-cs--ures{ color:var(--bc-on-dark-50); font-style:italic; }
+.bc-calc-tetelek .bc-cs--cim dt{
   font-size:.74rem; letter-spacing:.14em; text-transform:uppercase;
-  font-weight:700; color:rgba(237,241,226,.55);
+  font-weight:700; color:var(--bc-on-dark-55);
 }
-.calc-tetelek .cs--ingyen dd{ color:rgba(237,241,226,.6); font-weight:500; }
+.bc-calc-tetelek .bc-cs--ingyen dd{ color:var(--bc-on-dark-62); font-weight:500; }
 
-.calc-total{
+.bc-calc-total{
   display:flex; justify-content:space-between; align-items:baseline; gap:1rem;
-  padding-top:.9rem; border-top:1px solid rgba(237,241,226,.28);
+  padding-top:.9rem; border-top:1px solid var(--bc-on-dark-28);
 }
-.calc-total span{ font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; font-weight:700; color:rgba(237,241,226,.6); }
-.calc-total strong{
-  font-family:var(--f-display); font-weight:600;
-  font-size:clamp(1.5rem,3vw,1.95rem); color:var(--chart);
+.bc-calc-total span{ font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; font-weight:700; color:var(--bc-on-dark-62); }
+.bc-calc-total strong{
+  font-family:var(--bc-f-display); font-weight:600;
+  font-size:clamp(1.5rem,3vw,1.95rem); color:var(--bc-accent);
   letter-spacing:-.02em; white-space:nowrap;
 }
-.calc-fajlagos{
+.bc-calc-fajlagos{
   margin:.3rem 0 0; text-align:right;
-  font-size:.84rem; color:rgba(237,241,226,.62);
+  font-size:.84rem; color:var(--bc-on-dark-62);
 }
 
-.calc-kaucio{
+.bc-calc-kaucio{
   display:flex; justify-content:space-between; align-items:flex-start; gap:1rem;
   margin-top:1.1rem; padding:.8rem .95rem;
-  background:rgba(255,255,255,.07); border-radius:12px;
-  font-size:.85rem; color:rgba(237,241,226,.8);
+  background:var(--bc-glass); border-radius:12px;
+  font-size:.85rem; color:var(--bc-on-dark-78);
 }
-.calc-kaucio span{ display:flex; flex-direction:column; gap:.12rem; }
-.calc-kaucio b{ color:#fff; }
-.calc-kaucio > b{ white-space:nowrap; }
-.calc-kaucio small{ font-size:.77rem; color:rgba(237,241,226,.52); }
+.bc-calc-kaucio span{ display:flex; flex-direction:column; gap:.12rem; }
+.bc-calc-kaucio b{ color:var(--bc-white); }
+.bc-calc-kaucio > b{ white-space:nowrap; }
+.bc-calc-kaucio small{ font-size:.77rem; color:var(--bc-on-dark-50); }
 
-.calc-kuld{
-  --bg:var(--chart); --fg:#2A3417; --bd:var(--chart);
-  width:100%; justify-content:center; margin-top:1.2rem;
+/* küldés gomb */
+.bc-calc-kuld{
+  display:flex; align-items:center; justify-content:center; gap:.6rem;
+  width:100%; margin-top:1.2rem;
+  padding:.92rem 1.7rem;
+  font-family:var(--bc-f-body); font-weight:700;
+  font-size:.94rem; letter-spacing:.03em;
+  text-decoration:none; white-space:nowrap;
+  background:var(--bc-accent); color:var(--bc-on-accent);
+  border:1.5px solid var(--bc-accent); border-radius:100px;
+  cursor:pointer;
+  transition:transform .28s cubic-bezier(.2,.8,.3,1), box-shadow .28s, background .22s, color .22s;
+  box-shadow:var(--bc-btn-shadow);
 }
-.calc-kuld[aria-disabled="true"]{ opacity:.4; pointer-events:none; }
+.bc-calc-kuld:hover{ transform:translateY(-2.5px); box-shadow:var(--bc-btn-shadow-hover); }
+.bc-calc-kuld:active{ transform:translateY(0); }
+.bc-calc-kuld svg{ width:1.05em; height:1.05em; flex:none; }
+.bc-calc-kuld:disabled{ opacity:.4; pointer-events:none; }
+.bc-calc-kuld:focus-visible{ outline:2.5px solid var(--bc-accent); outline-offset:3px; }
 
-.calc-laber{
+/* küldési panel: hogyan küldje el a vendég az ajánlatot */
+.bc-calc-panel{
+  margin-top:.8rem; padding:.9rem;
+  background:var(--bc-glass); border:1px solid var(--bc-on-dark-20); border-radius:14px;
+  display:grid; gap:.45rem;
+}
+.bc-calc-panel[hidden]{ display:none; }
+.bc-calc-panel-cim{
+  margin:0 0 .2rem; font-size:.74rem; letter-spacing:.14em; text-transform:uppercase;
+  font-weight:700; color:var(--bc-on-dark-62);
+}
+.bc-calc-opcio{
+  display:block; width:100%; margin:0; text-align:left;
+  padding:.62rem .85rem; border-radius:10px;
+  font-family:var(--bc-f-body); font-size:.9rem; font-weight:600; line-height:1.3;
+  color:var(--bc-white); text-decoration:none; cursor:pointer;
+  background:transparent; border:1px solid var(--bc-on-dark-28);
+  transition:background .2s, border-color .2s, color .2s;
+}
+.bc-calc-opcio small{
+  display:block; margin-top:.15rem;
+  font-size:.76rem; font-weight:500; color:var(--bc-on-dark-62);
+}
+.bc-calc-opcio:hover small, .bc-calc-opcio:focus-visible small{ color:inherit; opacity:.75; }
+.bc-calc-opcio:hover, .bc-calc-opcio:focus-visible{
+  background:var(--bc-accent); border-color:var(--bc-accent); color:var(--bc-on-accent); outline:none;
+}
+.bc-calc-panel-info{ margin:.2rem 0 0; font-size:.8rem; line-height:1.5; color:var(--bc-on-dark-78); }
+.bc-calc-panel-info:empty{ display:none; }
+.bc-calc-panel-info a{ color:var(--bc-white); font-weight:700; white-space:nowrap; }
+.bc-calc-masolo{
+  display:block; width:100%; margin-top:.45rem; padding:.55rem .65rem;
+  font-family:var(--bc-f-body); font-size:.8rem; line-height:1.45;
+  color:var(--bc-ink); background:var(--bc-paper);
+  border:0; border-radius:8px; resize:vertical;
+}
+.bc-calc-cimzett{ color:var(--bc-white); font-weight:600; user-select:all; word-break:break-all; }
+
+.bc-calc-laber{
   margin:.9rem 0 0; font-size:.78rem; line-height:1.5;
-  color:rgba(237,241,226,.5);
+  color:var(--bc-on-dark-50);
 }
 
-@media (max-width:900px){
-  .calc{ grid-template-columns:1fr; }
-  .calc-sum{ position:static; }
+/* betöltés és hiba (ha a leírás címről jön) */
+.bc-calc-tolt{ margin:0; padding:1.4rem; text-align:center; color:var(--bc-ink-faint); }
+.bc-calc-hiba{
+  margin:0; padding:.95rem 1.15rem;
+  background:var(--bc-warn-bg); border:1px solid var(--bc-warn-line); border-radius:14px;
+  font-size:.93rem; line-height:1.55; color:var(--bc-warn-ink);
 }
-@media (max-width:620px){
-  .calc-row{ grid-template-columns:1fr; }
-  .calc-field--wide{ max-width:none; }
-  .calc-check{ flex-wrap:wrap; }
-  .calc-ch-ar{ width:100%; padding-left:2.05rem; }
+.bc-calc-hiba a{ color:inherit; font-weight:700; white-space:nowrap; }
+
+/* ---- Keskenyebb doboz: egy oszlop, az összesítő a végén ---- */
+@container (max-width:827px){
+  .bc-calc{ grid-template-columns:1fr; }
+  .bc-calc-sum{ position:static; }
 }
+@container (max-width:569px){
+  .bc-calc-row{ grid-template-columns:1fr; }
+  .bc-calc-field--wide{ max-width:none; }
+  .bc-calc-check{ flex-wrap:wrap; }
+  .bc-calc-ch-ar{ width:100%; padding-left:2.05rem; }
+}
+
+</style>
+<style>
+/* ============================================================
+   GYIK MODUL (statikus) — bc-vendeghaz-modulok
+   Minden szabály a .bc-gyik dobozon belül él. A modul kitölti,
+   amit kap; a szélességet az oldal (WordPressben a téma) adja.
+   ============================================================ */
+
+.bc-gyik{
+  /* ---- MINDEN SZÍN INNEN JÖN — a modulban máshol nincs színkód ----
+     A slugok a WordPress-átadás doksi 5. fejezetéből; ha Berni design
+     systemje más neveket használ, csak ezt a blokkot kell átírni. */
+  --bc-paper:      var(--wp--preset--color--paper,          #FFFDF8);
+  --bc-line:       var(--wp--preset--color--base-line,      #E3D6BE);
+  --bc-ink:        var(--wp--preset--color--contrast,       #2F251A);
+  --bc-ink-soft:   var(--wp--preset--color--contrast-soft,  #5C4E3D);
+  --bc-brown:      var(--wp--preset--color--secondary,      #63513A);
+  --bc-green:      var(--wp--preset--color--primary,        #8CBF4D);
+  --bc-green-deep: var(--wp--preset--color--primary-deep,   #5C8A2A);
+  --bc-green-mist: var(--wp--preset--color--primary-mist,   #EDF3E1);
+  --bc-green-line: color-mix(in srgb, var(--bc-green-mist) 82%, var(--bc-green));
+  --bc-on-green:   #fff;
+
+  --bc-f-display: var(--wp--preset--font-family--display, "Fraunces", "Iowan Old Style", Georgia, serif);
+  --bc-f-body:    var(--wp--preset--font-family--body, "Karla", "Segoe UI", system-ui, sans-serif);
+
+  color:var(--bc-ink);
+}
+.bc-gyik *, .bc-gyik *::before, .bc-gyik *::after{ box-sizing:border-box; }
+
+.bc-gyik-lista{ border-top:1px solid var(--bc-line); }
+.bc-gyik-elem{ border-bottom:1px solid var(--bc-line); }
+.bc-gyik-elem h3{ margin:0; font-size:inherit; letter-spacing:normal; }
+
+.bc-gyik-q{
+  width:100%; display:flex; align-items:center; gap:1.5rem; margin:0;
+  padding:1.5rem .35rem;
+  background:none; border:0; cursor:pointer; text-align:left;
+  font-family:var(--bc-f-display); font-weight:600;
+  font-size:clamp(1.06rem,1.5vw,1.24rem); line-height:1.35;
+  font-variation-settings:"SOFT" 50,"WONK" 1;
+  color:var(--bc-ink);
+  transition:color .25s;
+}
+.bc-gyik-q > span:first-child{ flex:1; text-wrap:pretty; }
+.bc-gyik-q:hover{ color:var(--bc-green-deep); }
+
+/* pluszjel, ami nyitáskor mínusszá fordul */
+.bc-gyik-ico{
+  position:relative; flex:none;
+  width:2.1rem; height:2.1rem; border-radius:50%;
+  background:var(--bc-green-mist); border:1px solid var(--bc-green-line);
+  transition:background .3s, border-color .3s, transform .45s cubic-bezier(.21,.7,.24,1);
+}
+.bc-gyik-ico::before, .bc-gyik-ico::after{
+  content:""; position:absolute; top:50%; left:50%;
+  width:.8rem; height:1.6px; border-radius:2px;
+  background:var(--bc-green-deep);
+  transform:translate(-50%,-50%);
+  transition:transform .45s cubic-bezier(.21,.7,.24,1), opacity .3s;
+}
+.bc-gyik-ico::after{ transform:translate(-50%,-50%) rotate(90deg); }
+.bc-gyik-q:hover .bc-gyik-ico{ background:var(--bc-green); border-color:var(--bc-green); }
+.bc-gyik-q:hover .bc-gyik-ico::before, .bc-gyik-q:hover .bc-gyik-ico::after{ background:var(--bc-on-green); }
+
+.bc-gyik-q[aria-expanded="true"] .bc-gyik-ico{
+  background:var(--bc-green-deep); border-color:var(--bc-green-deep); transform:rotate(180deg);
+}
+.bc-gyik-q[aria-expanded="true"] .bc-gyik-ico::before,
+.bc-gyik-q[aria-expanded="true"] .bc-gyik-ico::after{ background:var(--bc-on-green); }
+.bc-gyik-q[aria-expanded="true"] .bc-gyik-ico::after{ opacity:0; transform:translate(-50%,-50%) rotate(0deg); }
+
+/* a válasz 0fr → 1fr rácssorral nyílik, így mindkét irányban animál */
+.bc-gyik-panel{
+  display:grid; grid-template-rows:0fr; visibility:hidden;
+  transition:grid-template-rows .5s cubic-bezier(.21,.7,.24,1), visibility 0s linear .5s;
+}
+.bc-gyik-elem.is-open .bc-gyik-panel{
+  grid-template-rows:1fr; visibility:visible;
+  transition:grid-template-rows .5s cubic-bezier(.21,.7,.24,1), visibility 0s;
+}
+.bc-gyik-a{ overflow:hidden; }
+.bc-gyik-a p{
+  margin:0; padding:0 3.6rem 1rem .35rem;
+  color:var(--bc-ink-soft); font-size:1rem; line-height:1.7;
+  opacity:0; transform:translateY(-6px);
+  transition:opacity .45s ease .12s, transform .45s ease .12s;
+}
+.bc-gyik-a p:last-child{ padding-bottom:1.7rem; }
+.bc-gyik-elem.is-open .bc-gyik-a p{ opacity:1; transform:none; }
+.bc-gyik-a a, .bc-gyik-kerdezz a{
+  color:var(--bc-green-deep); font-weight:600; text-decoration:none;
+  border-bottom:1.5px solid var(--bc-green);
+}
+.bc-gyik-a a:hover, .bc-gyik-kerdezz a:hover{ color:var(--bc-ink); border-bottom-color:var(--bc-ink); }
+.bc-gyik-a strong{ color:var(--bc-brown); }
+.bc-gyik-a .bc-gyik-akcio a{ border-bottom-width:0; font-weight:700; }
+
+@media (prefers-reduced-motion: reduce){
+  .bc-gyik-panel, .bc-gyik-a p, .bc-gyik-ico, .bc-gyik-ico::before, .bc-gyik-ico::after{ transition-duration:.01ms; }
+}
+
+/* „Nem találtad, amit keresel? Kérdezz minket!” */
+.bc-gyik-kerdezz{
+  margin-top:1.8rem; padding:1.3rem 1.4rem;
+  background:var(--bc-paper); border:1px solid var(--bc-line); border-radius:18px;
+  text-align:center;
+}
+.bc-gyik-kerdezz p{ margin:0; }
+.bc-gyik-kerdezz-cim{
+  font-family:var(--bc-f-display); font-weight:600; font-size:1.08rem;
+  font-variation-settings:"SOFT" 50,"WONK" 1; color:var(--bc-brown);
+}
+.bc-gyik-kerdezz-elerhetoseg{ margin-top:.5rem !important; font-size:.98rem; }
+.bc-gyik-kerdezz-ido{ margin-top:.3rem !important; font-size:.85rem; color:var(--bc-ink-soft); }
+.bc-gyik-tolt{ margin:0; padding:1rem; text-align:center; color:var(--bc-ink-soft); }
+
+@container (max-width:560px){
+  .bc-gyik-a p{ padding-right:.35rem; }
+}
+.bc-gyik{ container-type:inline-size; }
+
+/* e-mail: a cím szövegként + Gmail / levelezőalkalmazás / másolás (nem sima mailto) */
+.bc-gyik .bc-email{ display:block; margin-top:.5rem; }
+.bc-gyik .bc-email-cim{ display:block; font-weight:700; color:var(--bc-ink); user-select:all; word-break:break-all; }
+.bc-gyik .bc-email-opciok{ display:flex; flex-wrap:wrap; justify-content:center; gap:.4rem; margin-top:.5rem; }
+.bc-gyik .bc-email-opciok a, .bc-gyik .bc-email-opciok button{
+  margin:0; padding:.38rem .8rem; border-radius:999px; cursor:pointer;
+  font:inherit; font-size:.82rem; font-weight:700; line-height:1.3; text-decoration:none;
+  color:var(--bc-green-deep); background:var(--bc-green-mist); border:1px solid var(--bc-green-line);
+}
+.bc-gyik .bc-email-opciok a:hover, .bc-gyik .bc-email-opciok button:hover,
+.bc-gyik .bc-email-opciok a:focus-visible, .bc-gyik .bc-email-opciok button:focus-visible{
+  color:var(--bc-on-green); background:var(--bc-green-deep); border-color:var(--bc-green-deep); outline:none;
+}
+.bc-gyik .bc-gyik-tel{ display:block; margin-top:.7rem; font-size:.95rem; }
+.bc-gyik .bc-email-szoveg{ color:var(--bc-ink); }
+
+</style>
+<style>
+/* ============================================================
+   „KÉRDEZD A HÁZAT!” MODUL — bc-vendeghaz-modulok (Pimpelt csomag)
+   Lebegő fül a képernyő jobb szélének közepén (nem ütközik a lenti
+   sütisávval és a jobb alsó „vissza a tetejére” gombbal).
+   ============================================================ */
+
+.bc-kerdezd{
+  /* ---- MINDEN SZÍN INNEN JÖN — a modulban máshol nincs színkód ----
+     A slugok a WordPress-átadás doksi 5. fejezetéből; ha Berni design
+     systemje más neveket használ, csak ezt a blokkot kell átírni. */
+  --bc-paper:      var(--wp--preset--color--paper,          #FFFDF8);
+  --bc-cream:      var(--wp--preset--color--base,           #FBF6EC);
+  --bc-line:       var(--wp--preset--color--base-line,      #E3D6BE);
+  --bc-ink:        var(--wp--preset--color--contrast,       #2F251A);
+  --bc-ink-soft:   var(--wp--preset--color--contrast-soft,  #5C4E3D);
+  --bc-ink-faint:  var(--wp--preset--color--contrast-faint, #776749);
+  --bc-brown:      var(--wp--preset--color--secondary,      #63513A);
+  --bc-green:      var(--wp--preset--color--primary,        #8CBF4D);
+  --bc-green-deep: var(--wp--preset--color--primary-deep,   #5C8A2A);
+  --bc-green-dark: var(--wp--preset--color--primary-dark,   #313F1D);
+  --bc-green-mist: var(--wp--preset--color--primary-mist,   #EDF3E1);
+  --bc-accent:     var(--wp--preset--color--accent,         #CFDC1E);
+  --bc-on-green:   #fff;
+  --bc-on-accent:  color-mix(in srgb, var(--bc-green-dark) 85%, #000);
+  --bc-shadow:     0 4px 10px rgba(70,56,38,.08), 0 26px 60px -22px rgba(70,56,38,.45);
+
+  --bc-f-display: var(--wp--preset--font-family--display, "Fraunces", "Iowan Old Style", Georgia, serif);
+  --bc-f-body:    var(--wp--preset--font-family--body, "Karla", "Segoe UI", system-ui, sans-serif);
+
+  /* A doboz a jobb szélen a képernyő teljes magasságában fut, a fület középre teszi.
+     (transform itt nem lehet: elrontaná a telefonos, position:fixed panelt.)
+     Ha a témában más rétegrend kell: --bc-kh-z */
+  position:fixed; z-index:var(--bc-kh-z, 900);
+  right:0; top:0; bottom:0;
+  display:flex; align-items:center;
+  pointer-events:none;              /* a doboz üres része ne fogja el a kattintást */
+  font-family:var(--bc-f-body);
+  color:var(--bc-ink);
+}
+.bc-kerdezd > *{ pointer-events:auto; }
+.bc-kerdezd *, .bc-kerdezd *::before, .bc-kerdezd *::after{ box-sizing:border-box; }
+
+/* ---- a fül ---- */
+.bc-kh-ful{
+  display:flex; align-items:center; gap:.55rem;
+  writing-mode:vertical-rl; transform:rotate(180deg);
+  margin:0; padding:1.1rem .7rem;
+  background:var(--bc-green-deep); color:var(--bc-on-green);
+  border:0; border-radius:0 14px 14px 0;
+  font-family:var(--bc-f-body); font-weight:700; font-size:.95rem; letter-spacing:.03em;
+  cursor:pointer;
+  box-shadow:var(--bc-shadow);
+  transition:background .25s, padding .25s;
+}
+.bc-kh-ful svg{ width:1.2rem; height:1.2rem; transform:rotate(90deg); flex:none; }
+.bc-kh-ful:hover, .bc-kerdezd.is-nyitva .bc-kh-ful{ background:var(--bc-green-dark); padding-right:.9rem; }
+.bc-kh-ful:focus-visible{ outline:2.5px solid var(--bc-accent); outline-offset:3px; }
+
+/* finom jelzés görgetéskor — nem villog, csak megjelenik egy kis felirat */
+.bc-kh-jelzes{
+  position:absolute; right:calc(100% + .6rem); top:50%;
+  transform:translate(.4rem,-50%); opacity:0; pointer-events:none;
+  white-space:nowrap; padding:.45rem .8rem;
+  background:var(--bc-paper); color:var(--bc-green-deep);
+  border:1px solid var(--bc-line); border-radius:999px;
+  font-size:.86rem; font-weight:700;
+  box-shadow:var(--bc-shadow);
+  transition:opacity .6s ease, transform .6s ease;
+}
+.bc-kh-jelzes.is-latszik{ opacity:1; transform:translate(0,-50%); }
+
+/* ---- a panel ---- */
+.bc-kh-panel{
+  position:absolute; right:calc(100% + .5rem); top:50%; transform:translateY(-50%);
+  width:min(380px, calc(100vw - 4.5rem));
+  max-height:min(560px, calc(100vh - 2rem));
+  display:flex; flex-direction:column;
+  background:var(--bc-paper);
+  border:1px solid var(--bc-line); border-radius:20px;
+  box-shadow:var(--bc-shadow);
+  overflow:hidden;
+  animation:bcKhBe .3s ease-out;
+}
+.bc-kh-panel[hidden]{ display:none; }
+@keyframes bcKhBe{ from{ opacity:0; transform:translate(10px,-50%); } to{ opacity:1; transform:translateY(-50%); } }
+
+.bc-kh-fej{
+  display:flex; align-items:center; gap:.4rem;
+  padding:.8rem .8rem .8rem 1.1rem;
+  background:var(--bc-green-dark); color:var(--bc-on-green);
+}
+.bc-kh-cim{
+  flex:1; margin:0;
+  font-family:var(--bc-f-display); font-weight:600; font-size:1.08rem; line-height:1.25;
+  font-variation-settings:"SOFT" 50,"WONK" 1;
+}
+.bc-kh-cim:focus{ outline:none; }
+.bc-kh-ikongomb{
+  flex:none; width:2.1rem; height:2.1rem; padding:0; margin:0;
+  display:grid; place-items:center; cursor:pointer;
+  background:transparent; color:var(--bc-on-green);
+  border:1px solid color-mix(in srgb, var(--bc-on-green) 30%, transparent); border-radius:50%;
+}
+.bc-kh-ikongomb[hidden]{ display:none; }
+.bc-kh-ikongomb svg{ width:1.05rem; height:1.05rem; }
+.bc-kh-ikongomb:hover, .bc-kh-ikongomb:focus-visible{ background:var(--bc-accent); color:var(--bc-on-accent); border-color:var(--bc-accent); outline:none; }
+
+.bc-kh-tartalom{ padding:1rem 1.1rem; overflow-y:auto; flex:1; }
+.bc-kh-bevezeto{ margin:0 0 .8rem; color:var(--bc-ink-soft); font-size:.95rem; }
+.bc-kh-gombok{ display:grid; gap:.45rem; }
+.bc-kh-gomb{
+  display:flex; align-items:center; justify-content:space-between; gap:.8rem;
+  width:100%; margin:0; padding:.75rem .9rem; text-align:left; cursor:pointer;
+  background:var(--bc-cream); color:var(--bc-ink);
+  border:1px solid var(--bc-line); border-radius:12px;
+  font-family:var(--bc-f-body); font-size:.97rem; font-weight:700; line-height:1.3;
+  transition:background .2s, border-color .2s, color .2s;
+}
+.bc-kh-gomb--kerdes{ font-weight:600; font-size:.93rem; }
+.bc-kh-gomb svg{ width:1rem; height:1rem; flex:none; color:var(--bc-green-deep); }
+.bc-kh-gomb:hover, .bc-kh-gomb:focus-visible{
+  background:var(--bc-green-mist); border-color:var(--bc-green); outline:none;
+}
+
+.bc-kh-kerdes{
+  margin:0 0 .6rem;
+  font-family:var(--bc-f-display); font-weight:600; font-size:1.06rem; line-height:1.3;
+  font-variation-settings:"SOFT" 50,"WONK" 1; color:var(--bc-brown);
+}
+.bc-kh-valasz p{ margin:0 0 .7rem; font-size:.95rem; line-height:1.65; color:var(--bc-ink-soft); }
+.bc-kh-valasz a, .bc-kh-kerdezz a{
+  color:var(--bc-green-deep); font-weight:600; text-decoration:none; border-bottom:1.5px solid var(--bc-green);
+}
+.bc-kh-valasz strong{ color:var(--bc-brown); }
+.bc-kh-akcio{
+  display:inline-flex; align-items:center; gap:.45rem; margin-top:.2rem;
+  padding:.65rem 1.1rem; border-radius:999px;
+  background:var(--bc-green-deep); color:var(--bc-on-green);
+  font-weight:700; font-size:.9rem; text-decoration:none;
+}
+.bc-kh-akcio svg{ width:.95rem; height:.95rem; }
+.bc-kh-akcio:hover, .bc-kh-akcio:focus-visible{ background:var(--bc-green-dark); outline:none; }
+
+.bc-kh-kerdezz{
+  padding:.85rem 1.1rem 1rem;
+  border-top:1px solid var(--bc-line); background:var(--bc-cream);
+  font-size:.88rem; line-height:1.55;
+}
+.bc-kh-kerdezz p{ margin:0; }
+.bc-kh-kerdezz-cim{ font-weight:700; color:var(--bc-brown); margin-bottom:.25rem !important; }
+.bc-kh-halk{ color:var(--bc-ink-faint); font-size:.82rem; margin-top:.25rem !important; }
+
+/* telefonon: a panel a képernyő közepén, szinte teljes szélességben */
+@media (max-width:520px){
+  .bc-kh-panel{
+    position:fixed; right:.5rem; left:.5rem; top:50%; width:auto;
+    max-height:calc(100vh - 6rem);
+  }
+  .bc-kh-ful{ padding:.9rem .55rem; font-size:.86rem; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .bc-kh-panel{ animation:none; }
+  .bc-kh-jelzes, .bc-kh-ful{ transition:none; }
+}
+
+/* e-mail: a cím szövegként + Gmail / levelezőalkalmazás / másolás (nem sima mailto) */
+.bc-kerdezd .bc-email{ display:block; }
+.bc-kerdezd .bc-email-cim{ display:block; font-weight:700; color:var(--bc-ink); user-select:all; word-break:break-all; }
+.bc-kerdezd .bc-email-opciok{ display:flex; flex-wrap:wrap; gap:.35rem; margin-top:.4rem; }
+.bc-kerdezd .bc-email-opciok a, .bc-kerdezd .bc-email-opciok button{
+  margin:0; padding:.32rem .7rem; border-radius:999px; cursor:pointer;
+  font:inherit; font-size:.78rem; font-weight:700; line-height:1.3; text-decoration:none;
+  color:var(--bc-green-deep); background:var(--bc-paper); border:1px solid var(--bc-line);
+}
+.bc-kerdezd .bc-email-opciok a:hover, .bc-kerdezd .bc-email-opciok button:hover,
+.bc-kerdezd .bc-email-opciok a:focus-visible, .bc-kerdezd .bc-email-opciok button:focus-visible{
+  color:var(--bc-on-green); background:var(--bc-green-deep); border-color:var(--bc-green-deep); outline:none;
+}
+.bc-kerdezd .bc-kh-tel{ display:block; margin-top:.55rem; }
+.bc-kerdezd .bc-email-szoveg{ color:var(--bc-ink); }
+
+</style>
+<style>
+/* ============================================================
+   HÍRLEVÉL-FELIRATKOZÓ MODUL — bc-vendeghaz-modulok
+   A doboz kitölti, amit kap. A visszaigazoló ablak a lap végére
+   kerül (.bc-hirlevel-ablak), ezért a színek ott is kellenek.
+   ============================================================ */
+
+.bc-hirlevel, .bc-hirlevel-ablak{
+  /* ---- MINDEN SZÍN INNEN JÖN — a modulban máshol nincs színkód ----
+     A slugok a WordPress-átadás doksi 5. fejezetéből; ha Berni design
+     systemje más neveket használ, csak ezt a blokkot kell átírni. */
+  --bc-paper:      var(--wp--preset--color--paper,          #FFFDF8);
+  --bc-cream:      var(--wp--preset--color--base,           #FBF6EC);
+  --bc-line:       var(--wp--preset--color--base-line,      #E3D6BE);
+  --bc-ink:        var(--wp--preset--color--contrast,       #2F251A);
+  --bc-ink-soft:   var(--wp--preset--color--contrast-soft,  #5C4E3D);
+  --bc-ink-faint:  var(--wp--preset--color--contrast-faint, #776749);
+  --bc-brown:      var(--wp--preset--color--secondary,      #63513A);
+  --bc-green:      var(--wp--preset--color--primary,        #8CBF4D);
+  --bc-green-deep: var(--wp--preset--color--primary-deep,   #5C8A2A);
+  --bc-green-dark: var(--wp--preset--color--primary-dark,   #313F1D);
+  --bc-green-mist: var(--wp--preset--color--primary-mist,   #EDF3E1);
+  --bc-on-green:   #fff;
+  --bc-focus:      color-mix(in srgb, var(--bc-green-deep) 16%, transparent);
+  --bc-overlay:    color-mix(in srgb, var(--bc-green-dark) 55%, transparent);
+  --bc-shadow:     0 4px 10px rgba(70,56,38,.08), 0 26px 60px -22px rgba(70,56,38,.45);
+  /* állapotszín (figyelmeztetés) — nem márkaszín */
+  --bc-warn-ink:   #9A6A1E;
+
+  --bc-f-display: var(--wp--preset--font-family--display, "Fraunces", "Iowan Old Style", Georgia, serif);
+  --bc-f-body:    var(--wp--preset--font-family--body, "Karla", "Segoe UI", system-ui, sans-serif);
+}
+.bc-hirlevel{ container-type:inline-size; color:var(--bc-ink); }
+.bc-hirlevel *, .bc-hirlevel-ablak *{ box-sizing:border-box; }
+
+.bc-hl{
+  margin:0; padding:clamp(1.3rem,3vw,2rem);
+  background:var(--bc-paper); border:1px solid var(--bc-line); border-radius:22px;
+  box-shadow:0 2px 6px rgba(70,56,38,.05), 0 14px 40px -18px rgba(70,56,38,.28);
+}
+.bc-hl-cim{
+  margin:0 0 .4rem;
+  font-family:var(--bc-f-display); font-weight:600; font-size:clamp(1.2rem,2.2vw,1.45rem); line-height:1.25;
+  font-variation-settings:"SOFT" 50,"WONK" 1; color:var(--bc-ink);
+}
+.bc-hl-szoveg{ margin:0 0 1rem; color:var(--bc-ink-soft); font-size:.98rem; line-height:1.6; }
+
+.bc-hl-sor{ display:flex; gap:.6rem; }
+.bc-hl-sor input{
+  flex:1; min-width:0; margin:0;
+  font-family:var(--bc-f-body); font-size:1rem;
+  padding:.8rem .95rem;
+  border:1.5px solid var(--bc-line); border-radius:12px;
+  background:var(--bc-cream); color:var(--bc-ink);
+}
+.bc-hl-sor input:focus-visible{ border-color:var(--bc-green-deep); outline:none; box-shadow:0 0 0 3px var(--bc-focus); }
+
+.bc-hl-gomb{
+  flex:none; margin:0; cursor:pointer;
+  padding:.8rem 1.5rem; border-radius:100px;
+  font-family:var(--bc-f-body); font-weight:700; font-size:.95rem; letter-spacing:.02em;
+  background:var(--bc-green-deep); color:var(--bc-on-green); border:1.5px solid var(--bc-green-deep);
+  transition:background .2s, transform .2s;
+}
+.bc-hl-gomb:hover{ background:var(--bc-green-dark); border-color:var(--bc-green-dark); }
+.bc-hl-gomb:focus-visible{ outline:2.5px solid var(--bc-green); outline-offset:3px; }
+.bc-hl-gomb:disabled{ opacity:.55; cursor:default; }
+
+.bc-hl-pipa{
+  display:flex; align-items:flex-start; gap:.6rem; margin:.85rem 0 0; cursor:pointer;
+  font-size:.86rem; line-height:1.5; color:var(--bc-ink-soft);
+}
+.bc-hl-pipa input{ flex:none; width:1.1rem; height:1.1rem; margin:.15rem 0 0; accent-color:var(--bc-green-deep); cursor:pointer; }
+.bc-hl-pipa a{ color:var(--bc-green-deep); font-weight:700; text-decoration:underline; text-underline-offset:2px; }
+
+.bc-hl-allapot{ margin:.7rem 0 0; font-size:.88rem; font-weight:600; color:var(--bc-ink-faint); }
+.bc-hl-allapot:empty{ display:none; }
+.bc-hl-allapot.is-hiba{ color:var(--bc-warn-ink); }
+.bc-hl-allapot.is-ok{ color:var(--bc-green-deep); }
+
+.bc-hl-sr, .bc-hl-csapda{
+  position:absolute !important; width:1px; height:1px; padding:0; margin:-1px;
+  overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
+}
+
+@container (max-width:460px){
+  .bc-hl-sor{ flex-direction:column; }
+  .bc-hl-gomb{ width:100%; }
+}
+
+/* ---- a felugró visszaigazoló ablak ---- */
+.bc-hirlevel-ablak{
+  position:fixed; inset:0; z-index:10000;
+  display:grid; place-items:center; padding:1rem;
+  background:var(--bc-overlay);
+  animation:bcHlBe .25s ease-out;
+}
+.bc-hl-doboz{
+  width:min(440px, 100%);
+  padding:2rem 1.8rem 1.6rem; text-align:center;
+  background:var(--bc-paper); color:var(--bc-ink);
+  border-radius:22px; box-shadow:var(--bc-shadow);
+  font-family:var(--bc-f-body);
+}
+.bc-hl-ikon{
+  width:3.4rem; height:3.4rem; margin:0 auto 1rem; border-radius:50%;
+  display:grid; place-items:center;
+  background:var(--bc-green-mist); color:var(--bc-green-deep);
+}
+.bc-hl-ikon svg{ width:1.6rem; height:1.6rem; }
+.bc-hl-ab-cim{
+  margin:0 0 .6rem;
+  font-family:var(--bc-f-display); font-weight:600; font-size:1.4rem; line-height:1.2;
+  font-variation-settings:"SOFT" 50,"WONK" 1; color:var(--bc-ink);
+}
+.bc-hl-ab-szoveg{ margin:0; font-size:.98rem; line-height:1.6; color:var(--bc-ink-soft); }
+.bc-hl-ab-email{ margin:.8rem 0 0; font-weight:700; color:var(--bc-brown); word-break:break-all; }
+.bc-hl-doboz .bc-hl-gomb{ margin-top:1.4rem; min-width:9rem; }
+
+@keyframes bcHlBe{ from{ opacity:0; } to{ opacity:1; } }
+@media (prefers-reduced-motion: reduce){ .bc-hirlevel-ablak{ animation:none; } }
 
 </style>
 </head>
@@ -1554,80 +2146,12 @@ table.cal-m th abbr{ text-decoration:none; border:0; }
       <p>Ha valamire nem találsz itt választ, hívj minket bátran — szívesen segítünk.</p>
     </div>
 
-    <div class="faq">
-
-      <div class="faq-item" data-reveal>
-        <h3>
-          <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a1" id="faq-q1">
-            <span>Hogyan tudok foglalni, és mennyibe kerül?</span>
-            <span class="faq-ico" aria-hidden="true"></span>
-          </button>
-        </h3>
-        <div class="faq-panel" id="faq-a1" role="region" aria-labelledby="faq-q1">
-          <div class="faq-a">
-            <p>Írj e-mailt a <a href="mailto:konczevolgyivendeghaz@gmail.com">konczevolgyivendeghaz@gmail.com</a> címre, vagy hívj a <a href="tel:+36706338833">+36 70 633 8833</a> számon. Megírod, hányan és mikor jönnétek, mi pedig visszajelzünk a szabad időpontokkal és az aktuális árakkal.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item" data-reveal>
-        <h3>
-          <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a2" id="faq-q2">
-            <span>Hányan férünk el, és hogyan oszlanak meg a szobák?</span>
-            <span class="faq-ico" aria-hidden="true"></span>
-          </button>
-        </h3>
-        <div class="faq-panel" id="faq-a2" role="region" aria-labelledby="faq-q2">
-          <div class="faq-a">
-            <p>A kb. 120 m²-es vendégházban <strong>három hálótér</strong> van, és mindegyikhez <strong>saját, külön bejáratú fürdőszoba</strong> tartozik — így legfeljebb 7 vendég fér el kényelmesen. A ház egyben bérelhető: a nappali, a konyha, a terasz és a nyári konyha is teljes egészében a ti társaságotoké.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item" data-reveal>
-        <h3>
-          <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a3" id="faq-q3">
-            <span>Hozhatjuk a kutyánkat?</span>
-            <span class="faq-ico" aria-hidden="true"></span>
-          </button>
-        </h3>
-        <div class="faq-panel" id="faq-a3" role="region" aria-labelledby="faq-q3">
-          <div class="faq-a">
-            <p>Igen, állatbarát szállás vagyunk, a négylábú családtagokat is örömmel fogadjuk. A porta zárt és privát, a szállásadó nem lakik a helyszínen, így a kutya is nyugodtan mozoghat az udvaron.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item" data-reveal>
-        <h3>
-          <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a4" id="faq-q4">
-            <span>Hol tudunk parkolni?</span>
-            <span class="faq-ico" aria-hidden="true"></span>
-          </button>
-        </h3>
-        <div class="faq-panel" id="faq-a4" role="region" aria-labelledby="faq-q4">
-          <div class="faq-a">
-            <p>A zárt udvaron privát parkoló áll rendelkezésre <strong>3–4 autó</strong> részére, közvetlenül a ház mellett. Nem kell az utcán hagynotok a kocsit, és a pakolás is pár lépés.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item" data-reveal>
-        <h3>
-          <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a5" id="faq-q5">
-            <span>Van wifi és térerő? Tudok innen dolgozni?</span>
-            <span class="faq-ico" aria-hidden="true"></span>
-          </button>
-        </h3>
-        <div class="faq-panel" id="faq-a5" role="region" aria-labelledby="faq-q5">
-          <div class="faq-a">
-            <p>Megmondjuk előre, hogy ne érjen meglepetés: <strong>a térerő gyenge, a wifi pedig lassú.</strong> Üzenetre, e-mailre, egy térkép megnyitására jó — videóhívásra, nagy fájlok mozgatására, folyamatos távmunkára nem. A völgyben vagyunk, és ezen egyelőre nem tudunk változtatni.</p>
-            <p>Sokan pont ezért jönnek. Vacsora után nem mindenki a saját telefonját nézi: előkerülnek a társasjátékok és a kártya, a tűz körül beszélgetés van, néha tánc — úgy, ahogy régen. Ha a nyaralás alatt dolgoznod kellene, ezt érdemes beterveznod; ha viszont pár napra tényleg ki akarsz szakadni, ez a ház pont erre való.</p>
-          </div>
-        </div>
-      </div>
-
-    </div>
+    <!-- GYIK modul, statikus (modulok/gyik) — a kérdések a Google-tábla GYIK lapjáról jönnek,
+         a „Statikus GYIK-ban?” = igen jelölésűek közül legfeljebb 6. -->
+    <div class="bc-gyik" data-reveal
+         data-bc-adat-url="https://script.google.com/macros/s/AKfycby07JO36OS4pJqQfOxzLgPZX2f0b12p-6xijbgEr5bO_dHk0nLTx0Xh2L57lLvBs475/exec?adat=gyik"
+         data-bc-cel-kalkulator="#arajanlat" data-bc-cel-foglaltsag="#foglaltsag"
+         data-bc-telefon="+36 70 633 8833" data-bc-email="konczevolgyivendeghaz@gmail.com"></div>
   </div>
 </section>
 
@@ -1640,38 +2164,12 @@ table.cal-m th abbr{ text-decoration:none; border:0; }
       <p>A naptár a ház aktuális foglaltságát mutatja — a ház mindig egyben bérelhető. Ha a kiszemelt időszak szabad, írj vagy hívj, és véglegesítjük.</p>
     </div>
 
-    <div class="cal" data-reveal>
-      <div class="cal-bar">
-        <button class="cal-nav" type="button" data-cal-prev aria-label="Előző hónap">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
-        </button>
-        <p class="cal-range" data-cal-range aria-live="polite">Naptár betöltése…</p>
-        <button class="cal-nav" type="button" data-cal-next aria-label="Következő hónap">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
-        </button>
-      </div>
-
-      <p class="cal-hiba" data-cal-error hidden>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.01"/></svg>
-        <span>A foglaltság most nem elérhető. Hívj minket a <a href="tel:+36706338833">+36 70 633 8833</a> számon, és azonnal megmondjuk, szabad-e az időpont.</span>
-      </p>
-
-      <div class="cal-months" data-cal-months></div>
-
-      <div class="cal-foot">
-        <ul class="cal-legend">
-          <li><span class="k k--free" aria-hidden="true"></span> Szabad</li>
-          <li><span class="k k--busy" aria-hidden="true"></span> Foglalt</li>
-          <li><span class="k k--past" aria-hidden="true"></span> Elmúlt</li>
-        </ul>
-        <p class="cal-note" data-cal-note></p>
-      </div>
-
-      <p class="cal-info">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v.01M11 11h1v5h1"/></svg>
-        <span>A naptár tájékoztató jellegű, néhány óránként frissül. A pontos szabad időpontokért <a href="mailto:konczevolgyivendeghaz@gmail.com?subject=Szabad%20id%C5%91pont%20%E2%80%93%20K%C3%B6nczev%C3%B6lgyi%20Vend%C3%A9gh%C3%A1z">írj e-mailt</a> vagy <a href="tel:+36706338833">hívj minket</a> — azonnal megmondjuk, foglalható-e az időszak.</span>
-      </p>
-    </div>
+    <!-- Foglaltságjelző modul (modulok/foglaltsagjelzo) — a dobozt a modul tölti ki -->
+    <div class="bc-foglaltsagjelzo" data-reveal
+         data-bc-vegpont="https://script.google.com/macros/s/AKfycby07JO36OS4pJqQfOxzLgPZX2f0b12p-6xijbgEr5bO_dHk0nLTx0Xh2L57lLvBs475/exec"
+         data-bc-telefon="+36 70 633 8833"
+         data-bc-email="konczevolgyivendeghaz@gmail.com"
+         data-bc-email-targy="Szabad időpont – Könczevölgyi Vendégház"></div>
 
     <div class="cal-cta" data-reveal>
       <a class="btn" href="mailto:konczevolgyivendeghaz@gmail.com?subject=Szabad%20id%C5%91pont%20%E2%80%93%20K%C3%B6nczev%C3%B6lgyi%20Vend%C3%A9gh%C3%A1z&amp;body=Szia!%0A%0AA%20naptárban%20szabadnak%20láttam%20a%20következő%20időszakot%3A%20...%0AHányan%20jönnénk%3A%20...%0A%0AKöszönettel%3A">
@@ -1695,190 +2193,22 @@ table.cal-m th abbr{ text-decoration:none; border:0; }
       <p>Állítsd be az időpontot, a létszámot és amit kérnél — azonnal látod, mennyibe kerül. Az ajánlatot egy kattintással el is küldheted nekünk.</p>
     </div>
 
-    <div class="calc" data-reveal>
+    <!-- Foglalás kalkulátor modul (modulok/foglalas-kalkulator) — a dobozt a modul tölti ki.
+         Az árak, extrák, kuponok a Google-táblából jönnek (modulok/sheet-sablon). -->
+    <div class="bc-foglalas-kalkulator" data-reveal data-bc-naptar="#foglaltsag"
+         data-bc-adat-url="https://script.google.com/macros/s/AKfycby07JO36OS4pJqQfOxzLgPZX2f0b12p-6xijbgEr5bO_dHk0nLTx0Xh2L57lLvBs475/exec?adat=arak"
+         data-bc-telefon="+36 70 633 8833"></div>
+  </div>
+</section>
 
-      <div class="calc-form">
-
-        <!-- Időpont -->
-        <fieldset class="calc-block">
-          <legend>Mikor jönnétek?</legend>
-          <div class="calc-row">
-            <label class="calc-field">
-              <span>Érkezés</span>
-              <input type="date" id="ar-erkezes">
-            </label>
-            <label class="calc-field">
-              <span>Távozás</span>
-              <input type="date" id="ar-tavozas">
-            </label>
-          </div>
-          <p class="calc-hint" id="ar-ejszaka-info">Minimum 2 éjszaka foglalható.</p>
-          <p class="calc-hint" id="ar-szabad-info"></p>
-        </fieldset>
-
-        <!-- Létszám -->
-        <fieldset class="calc-block">
-          <legend>Hányan jöttök?</legend>
-
-          <div class="calc-stepper" data-min="1" data-max="7">
-            <span class="calc-st-txt"><b>Felnőtt</b><small>18 év felett</small></span>
-            <span class="calc-st-ctl">
-              <button type="button" data-step="-1" aria-label="Kevesebb felnőtt">−</button>
-              <output id="ar-felnott">2</output>
-              <button type="button" data-step="1" aria-label="Több felnőtt">+</button>
-            </span>
-          </div>
-
-          <div class="calc-stepper" data-min="0" data-max="6">
-            <span class="calc-st-txt"><b>Gyerek</b><small>6–18 év · 75% ár</small></span>
-            <span class="calc-st-ctl">
-              <button type="button" data-step="-1" aria-label="Kevesebb nagyobb gyerek">−</button>
-              <output id="ar-gyerek-nagy">0</output>
-              <button type="button" data-step="1" aria-label="Több nagyobb gyerek">+</button>
-            </span>
-          </div>
-
-          <div class="calc-stepper" data-min="0" data-max="6">
-            <span class="calc-st-txt"><b>Kisgyerek</b><small>3–6 év · fél ár</small></span>
-            <span class="calc-st-ctl">
-              <button type="button" data-step="-1" aria-label="Kevesebb kisgyerek">−</button>
-              <output id="ar-gyerek-kicsi">0</output>
-              <button type="button" data-step="1" aria-label="Több kisgyerek">+</button>
-            </span>
-          </div>
-
-          <div class="calc-stepper" data-min="0" data-max="3">
-            <span class="calc-st-txt"><b>Baba</b><small>3 év alatt · ingyenes</small></span>
-            <span class="calc-st-ctl">
-              <button type="button" data-step="-1" aria-label="Kevesebb baba">−</button>
-              <output id="ar-baba">0</output>
-              <button type="button" data-step="1" aria-label="Több baba">+</button>
-            </span>
-          </div>
-
-          <p class="calc-hint" id="ar-letszam-info"></p>
-        </fieldset>
-
-        <!-- Bekészítés -->
-        <fieldset class="calc-block">
-          <legend>Kérsz bekészítést?</legend>
-
-          <label class="calc-check">
-            <input type="checkbox" id="ar-reggeli">
-            <span class="calc-ch-txt"><b>Reggeli kosár</b><small>helyi termékekből, minden reggelre</small></span>
-            <span class="calc-ch-ar">3 000 Ft / fő / reggel</span>
-          </label>
-
-          <label class="calc-check">
-            <input type="checkbox" id="ar-bor">
-            <span class="calc-ch-txt"><b>Házi bor</b><small>őrségi pincészetből, 1 üveg</small></span>
-            <span class="calc-ch-ar">4 900 Ft</span>
-          </label>
-
-          <label class="calc-check">
-            <input type="checkbox" id="ar-pezsgo">
-            <span class="calc-ch-txt"><b>Pezsgő és gyümölcstál</b><small>érkezéskor hűtve</small></span>
-            <span class="calc-ch-ar">7 900 Ft</span>
-          </label>
-        </fieldset>
-
-        <!-- Ingyenes kérések -->
-        <fieldset class="calc-block">
-          <legend>Egyéb kérések</legend>
-
-          <div class="calc-stepper" data-min="0" data-max="9">
-            <span class="calc-st-txt"><b>Kutya</b><small>15 kg-ig · 5 000 Ft / éj / kutya</small></span>
-            <span class="calc-st-ctl">
-              <button type="button" data-step="-1" aria-label="Eggyel kevesebb kutya">−</button>
-              <output id="ar-kutya">0</output>
-              <button type="button" data-step="1" aria-label="Eggyel több kutya">+</button>
-            </span>
-          </div>
-
-          <div class="calc-stepper" data-min="0" data-max="2">
-            <span class="calc-st-txt"><b>Kiságy</b><small>díjmentes · 2 db áll rendelkezésre</small></span>
-            <span class="calc-st-ctl">
-              <button type="button" data-step="-1" aria-label="Kevesebb kiságy">−</button>
-              <output id="ar-kisagy">0</output>
-              <button type="button" data-step="1" aria-label="Több kiságy">+</button>
-            </span>
-          </div>
-
-          <div class="calc-stepper" data-min="0" data-max="2">
-            <span class="calc-st-txt"><b>Etetőszék</b><small>díjmentes · 2 db áll rendelkezésre</small></span>
-            <span class="calc-st-ctl">
-              <button type="button" data-step="-1" aria-label="Kevesebb etetőszék">−</button>
-              <output id="ar-etetoszek">0</output>
-              <button type="button" data-step="1" aria-label="Több etetőszék">+</button>
-            </span>
-          </div>
-
-          <div class="calc-stepper" data-min="0" data-max="3">
-            <span class="calc-st-txt"><b>Pótágy gyerekeknek</b><small>díjmentes · 3 db áll rendelkezésre</small></span>
-            <span class="calc-st-ctl">
-              <button type="button" data-step="-1" aria-label="Kevesebb pótágy">−</button>
-              <output id="ar-potagy">0</output>
-              <button type="button" data-step="1" aria-label="Több pótágy">+</button>
-            </span>
-          </div>
-
-          <div class="calc-stepper" data-min="0" data-max="4">
-            <span class="calc-st-txt"><b>Kerékpár</b><small>díjmentes · 4 db áll rendelkezésre</small></span>
-            <span class="calc-st-ctl">
-              <button type="button" data-step="-1" aria-label="Kevesebb kerékpár">−</button>
-              <output id="ar-bicikli">0</output>
-              <button type="button" data-step="1" aria-label="Több kerékpár">+</button>
-            </span>
-          </div>
-
-          <p class="calc-hint" id="ar-kutya-info"></p>
-        </fieldset>
-
-        <!-- Kedvezmények -->
-        <fieldset class="calc-block">
-          <legend>Kedvezmények</legend>
-
-          <label class="calc-field calc-field--wide">
-            <span>Kuponkód</span>
-            <input type="text" id="ar-kupon" placeholder="pl. KÖSZI10" autocomplete="off" spellcheck="false">
-          </label>
-          <p class="calc-hint" id="ar-kupon-info"></p>
-
-          <label class="calc-check">
-            <input type="checkbox" id="ar-elore">
-            <span class="calc-ch-txt"><b>A teljes összeget előre kifizetem</b><small>átutalással vagy OTP SZÉP kártyával</small></span>
-            <span class="calc-ch-ar">−5%</span>
-          </label>
-        </fieldset>
-
-      </div>
-
-      <!-- Összesítő -->
-      <aside class="calc-sum" aria-live="polite">
-        <h3>Az ajánlatod</h3>
-
-        <dl class="calc-tetelek" id="ar-tetelek"></dl>
-
-        <div class="calc-total">
-          <span>Fizetendő</span>
-          <strong id="ar-vegosszeg">—</strong>
-        </div>
-        <p class="calc-fajlagos" id="ar-fajlagos"></p>
-
-        <div class="calc-kaucio">
-          <span><b>Kaució</b> érkezéskor<small>károkozás hiányában teljes egészében visszajár</small></span>
-          <b>50 000 Ft</b>
-        </div>
-
-        <a class="btn calc-kuld" id="ar-kuldes" href="#">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>
-          Pontos ajánlatot kérek
-        </a>
-
-        <p class="calc-laber">Az összeg tájékoztató jellegű, a foglalást e-mailben vagy telefonon véglegesítjük. Az idegenforgalmi adó a végösszeg része, a helyszínen fizetendő.</p>
-      </aside>
-
-    </div>
+<!-- ============ HÍRLEVÉL ============ -->
+<section class="section" id="hirlevel">
+  <div class="wrap hirlevel-wrap">
+    <!-- Hírlevél-feliratkozó modul (modulok/hirlevel) — a szövegek a tábla Hírlevél lapjáról,
+         a feliratkozást a script adja tovább a hírlevélküldőnek (Brevo), dupla megerősítéssel. -->
+    <div class="bc-hirlevel" data-reveal
+         data-bc-szovegek-url="https://script.google.com/macros/s/AKfycby07JO36OS4pJqQfOxzLgPZX2f0b12p-6xijbgEr5bO_dHk0nLTx0Xh2L57lLvBs475/exec?adat=hirlevel"
+         data-bc-kuldes-url="https://script.google.com/macros/s/AKfycby07JO36OS4pJqQfOxzLgPZX2f0b12p-6xijbgEr5bO_dHk0nLTx0Xh2L57lLvBs475/exec"></div>
   </div>
 </section>
 
@@ -1991,6 +2321,11 @@ table.cal-m th abbr{ text-decoration:none; border:0; }
       </div>
     </div>
 
+    <p class="foot-demo">
+      <b>Bemutató oldal</b> — nem a Könczevölgyi Vendégház hivatalos weboldala.
+      Az árak és az elérhetőségek tájékoztató jellegűek.
+    </p>
+
     <div class="foot-bottom">
       <span>&copy; <span id="ev">2026</span> Könczevölgyi Vendégház — Őrség, Nagyrákos</span>
       <span class="ntak">NTAK regisztrációs szám: EG20007220</span>
@@ -2023,6 +2358,1694 @@ table.cal-m th abbr{ text-decoration:none; border:0; }
 }
 </script>
 
+<!-- „Kérdezd a házat!” modul (modulok/kerdezd-a-hazat) — lebegő fül a jobb szél közepén -->
+<div class="bc-kerdezd" data-bc-adat-url="https://script.google.com/macros/s/AKfycby07JO36OS4pJqQfOxzLgPZX2f0b12p-6xijbgEr5bO_dHk0nLTx0Xh2L57lLvBs475/exec?adat=gyik"
+     data-bc-cel-kalkulator="#arajanlat" data-bc-cel-foglaltsag="#foglaltsag"
+     data-bc-telefon="+36 70 633 8833" data-bc-email="konczevolgyivendeghaz@gmail.com"></div>
+
+<script>
+/* ============================================================
+   FOGLALTSÁGJELZŐ MODUL — bc-vendeghaz-modulok
+   ------------------------------------------------------------
+   A foglalt napokat egy végpontról kéri le, ami csak dátumlistát
+   ad vissza (vendégnév, telefonszám nem jön ki).
+
+   Használat — az oldal csak egy üres dobozt tesz le, a többit a
+   modul rajzolja:
+
+     <div class="bc-foglaltsagjelzo"
+          data-bc-vegpont="https://script.google.com/macros/s/…/exec"
+          data-bc-telefon="+36 70 633 8833"
+          data-bc-email="vendeghaz@example.com"></div>
+
+   Beállítások (mind data-attribútum):
+     data-bc-vegpont      a végpont címe; üresen bemutató adatokkal fut
+     data-bc-honapok      hány hónapra előre lehet lapozni (alap: 12)
+     data-bc-telefon      telefonszám, ahogy megjelenjen
+     data-bc-email        e-mail cím
+     data-bc-email-targy  az e-mail tárgya (alap: „Szabad időpont”)
+
+   A foglaltságot közzéteszi, hogy a Foglalás kalkulátor modul is
+   jelezni tudja, ha a választott időszak ütközik:
+     window.bcFoglaltsag = { napok: {'2026-10-10': true, …}, allapot }
+     allapot: 'betoltes' | 'eles' | 'bemutato' | 'hiba'
+     esemény: 'bc:foglaltsag' a document-en, minden frissüléskor
+   ============================================================ */
+(function () {
+  'use strict';
+
+  var HONAP = ['január', 'február', 'március', 'április', 'május', 'június',
+               'július', 'augusztus', 'szeptember', 'október', 'november', 'december'];
+  var NAPROVID = ['H', 'K', 'Sze', 'Cs', 'P', 'Szo', 'V'];
+  var NAPTELJES = ['hétfő', 'kedd', 'szerda', 'csütörtök', 'péntek', 'szombat', 'vasárnap'];
+
+  /* ennél keskenyebb dobozban csak egy hónap látszik (ld. a CSS @container szabályát) */
+  var EGY_HONAP_ALATT = 700;
+
+  var IKON = {
+    elozo: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>',
+    kovetkezo: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>',
+    figyelem: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.01"/></svg>',
+    info: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v.01M11 11h1v5h1"/></svg>'
+  };
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function kulcs(d) {
+    return d.getFullYear() + '-' +
+           ('0' + (d.getMonth() + 1)).slice(-2) + '-' +
+           ('0' + d.getDate()).slice(-2);
+  }
+
+  /* A közzétett állapot közös: egy oldalon egy foglaltságjelző az irányadó. */
+  function kozzetesz(napok, allapot) {
+    window.bcFoglaltsag = { napok: napok, allapot: allapot };
+    document.dispatchEvent(new CustomEvent('bc:foglaltsag'));
+  }
+
+
+  function indit(root) {
+    if (root.getAttribute('data-bc-kesz')) { return; }
+    root.setAttribute('data-bc-kesz', '1');
+
+    var cfg = {
+      vegpont: root.getAttribute('data-bc-vegpont') || '',
+      honapok: parseInt(root.getAttribute('data-bc-honapok'), 10) || 12,
+      telefon: root.getAttribute('data-bc-telefon') || '',
+      email: root.getAttribute('data-bc-email') || '',
+      emailTargy: root.getAttribute('data-bc-email-targy') || 'Szabad időpont'
+    };
+
+    var telLink = cfg.telefon
+      ? '<a href="tel:' + esc(cfg.telefon.replace(/[^\d+]/g, '')) + '">' + esc(cfg.telefon) + '</a>'
+      : '';
+    var mailHref = cfg.email
+      ? 'mailto:' + esc(cfg.email) + '?subject=' + encodeURIComponent(cfg.emailTargy)
+      : '';
+
+    /* ---- Váz ---- */
+    var hibaSzoveg = telLink
+      ? 'A foglaltság most nem elérhető. Hívj minket a ' + telLink +
+        ' számon, és azonnal megmondjuk, szabad-e az időpont.'
+      : 'A foglaltság most nem elérhető. Írj vagy hívj minket, és megmondjuk, szabad-e az időpont.';
+
+    var kapcsolat = [];
+    if (mailHref) { kapcsolat.push('<a href="' + mailHref + '">írj e-mailt</a>'); }
+    if (telLink) {
+      kapcsolat.push('<a href="tel:' + esc(cfg.telefon.replace(/[^\d+]/g, '')) + '">hívj minket</a>');
+    }
+    var infoSzoveg = 'A naptár tájékoztató jellegű, néhány óránként frissül.' +
+      (kapcsolat.length
+        ? ' A pontos szabad időpontokért ' + kapcsolat.join(' vagy ') +
+          ' — azonnal megmondjuk, foglalható-e az időszak.'
+        : '');
+
+    root.innerHTML =
+      '<div class="bc-cal">' +
+        '<div class="bc-cal-bar">' +
+          '<button class="bc-cal-nav" type="button" data-bc-elozo aria-label="Előző hónap">' + IKON.elozo + '</button>' +
+          '<p class="bc-cal-range" data-bc-tartomany aria-live="polite">Naptár betöltése…</p>' +
+          '<button class="bc-cal-nav" type="button" data-bc-kovetkezo aria-label="Következő hónap">' + IKON.kovetkezo + '</button>' +
+        '</div>' +
+        '<p class="bc-cal-hiba" data-bc-hiba hidden>' + IKON.figyelem + '<span>' + hibaSzoveg + '</span></p>' +
+        '<div class="bc-cal-months" data-bc-honapok></div>' +
+        '<div class="bc-cal-foot">' +
+          '<ul class="bc-cal-legend">' +
+            '<li><span class="bc-k bc-k--free" aria-hidden="true"></span> Szabad</li>' +
+            '<li><span class="bc-k bc-k--busy" aria-hidden="true"></span> Foglalt</li>' +
+            '<li><span class="bc-k bc-k--past" aria-hidden="true"></span> Elmúlt</li>' +
+          '</ul>' +
+          '<p class="bc-cal-note" data-bc-megjegyzes></p>' +
+        '</div>' +
+        '<p class="bc-cal-info">' + IKON.info + '<span>' + infoSzoveg + '</span></p>' +
+      '</div>';
+
+    var kartya   = root.querySelector('.bc-cal');
+    var monthsEl = root.querySelector('[data-bc-honapok]');
+    var rangeEl  = root.querySelector('[data-bc-tartomany]');
+    var noteEl   = root.querySelector('[data-bc-megjegyzes]');
+    var prevBtn  = root.querySelector('[data-bc-elozo]');
+    var nextBtn  = root.querySelector('[data-bc-kovetkezo]');
+    var errorEl  = root.querySelector('[data-bc-hiba]');
+
+    var ma = new Date(); ma.setHours(0, 0, 0, 0);
+    var elsoHonap = new Date(ma.getFullYear(), ma.getMonth(), 1);
+    var utolsoHonap = new Date(ma.getFullYear(), ma.getMonth() + cfg.honapok, 1);
+    var mutatott = new Date(elsoHonap);
+    var foglalt = Object.create(null);
+    var egyHonapos = false;
+
+    /* ---- Egy hónap táblázata ---- */
+    function honapTabla(ev, ho) {
+      var elsoNap = new Date(ev, ho, 1);
+      var napokSzama = new Date(ev, ho + 1, 0).getDate();
+      var eltolas = (elsoNap.getDay() + 6) % 7;   // hétfővel kezdünk
+
+      var h = '<table class="bc-cal-m"><caption>' + ev + '. ' + HONAP[ho] + '</caption><thead><tr>';
+      for (var i = 0; i < 7; i++) {
+        h += '<th scope="col"><abbr title="' + NAPTELJES[i] + '">' + NAPROVID[i] + '</abbr></th>';
+      }
+      h += '</tr></thead><tbody><tr>';
+
+      for (var u = 0; u < eltolas; u++) { h += '<td class="bc-cal-d bc-cal-d--ures"></td>'; }
+
+      for (var d = 1; d <= napokSzama; d++) {
+        var dat = new Date(ev, ho, d);
+        var allapot = dat < ma ? 'past' : (foglalt[kulcs(dat)] ? 'busy' : 'free');
+        var maE = dat.getTime() === ma.getTime();
+        var cimke = ev + '. ' + HONAP[ho] + ' ' + d + '. — ' +
+                    (allapot === 'past' ? 'elmúlt' : allapot === 'busy' ? 'foglalt' : 'szabad');
+
+        h += '<td class="bc-cal-d bc-cal-d--' + allapot + (maE ? ' is-today' : '') + '">' +
+             '<span class="bc-cal-n" aria-hidden="true">' + d + '</span>' +
+             '<span class="bc-sr">' + cimke + '</span></td>';
+
+        if ((eltolas + d) % 7 === 0 && d !== napokSzama) { h += '</tr><tr>'; }
+      }
+
+      var maradek = (eltolas + napokSzama) % 7;
+      if (maradek !== 0) {
+        for (var z = maradek; z < 7; z++) { h += '<td class="bc-cal-d bc-cal-d--ures"></td>'; }
+      }
+
+      return h + '</tr></tbody></table>';
+    }
+
+    function rajzol() {
+      var masodik = new Date(mutatott.getFullYear(), mutatott.getMonth() + 1, 1);
+      monthsEl.innerHTML = honapTabla(mutatott.getFullYear(), mutatott.getMonth()) +
+                           honapTabla(masodik.getFullYear(), masodik.getMonth());
+
+      if (egyHonapos) {
+        rangeEl.textContent = mutatott.getFullYear() + '. ' + HONAP[mutatott.getMonth()];
+      } else if (mutatott.getFullYear() === masodik.getFullYear()) {
+        rangeEl.textContent = mutatott.getFullYear() + '. ' +
+          HONAP[mutatott.getMonth()] + ' – ' + HONAP[masodik.getMonth()];
+      } else {
+        rangeEl.textContent = mutatott.getFullYear() + '. ' + HONAP[mutatott.getMonth()] +
+          ' – ' + masodik.getFullYear() + '. ' + HONAP[masodik.getMonth()];
+      }
+
+      prevBtn.disabled = mutatott <= elsoHonap;
+      nextBtn.disabled = mutatott >= utolsoHonap;
+    }
+
+    /* A doboz szélességét figyeljük, nem a képernyőét: WordPressben a téma
+       dönti el, mekkora helyet kap a modul. */
+    function meretFigyel() {
+      var uj = root.clientWidth < EGY_HONAP_ALATT;
+      if (uj !== egyHonapos) { egyHonapos = uj; rajzol(); }
+    }
+    egyHonapos = root.clientWidth < EGY_HONAP_ALATT;
+    if ('ResizeObserver' in window) {
+      new ResizeObserver(meretFigyel).observe(root);
+    } else {
+      window.addEventListener('resize', meretFigyel);
+    }
+
+    function lepes(irany) {
+      mutatott = new Date(mutatott.getFullYear(), mutatott.getMonth() + irany, 1);
+      if (mutatott < elsoHonap) { mutatott = new Date(elsoHonap); }
+      if (mutatott > utolsoHonap) { mutatott = new Date(utolsoHonap); }
+      rajzol();
+    }
+
+    prevBtn.addEventListener('click', function () { lepes(-1); });
+    nextBtn.addEventListener('click', function () { lepes(1); });
+
+    /* ---- Bemutató adatok, amíg nincs megadva végpont ----
+       Fix magból generálva, hogy két betöltés között ne ugráljon. */
+    function bemutatoAdatok() {
+      var mag = 987654321;
+      function rnd() {
+        mag = (mag * 1103515245 + 12345) % 2147483648;
+        return mag / 2147483648;
+      }
+      var kurzor = new Date(ma);
+      kurzor.setDate(kurzor.getDate() + 2 + Math.floor(rnd() * 4));
+
+      for (var blokk = 0; blokk < 30; blokk++) {
+        var ejszaka = 2 + Math.floor(rnd() * 4);
+        for (var i = 0; i < ejszaka; i++) {
+          foglalt[kulcs(kurzor)] = true;
+          kurzor.setDate(kurzor.getDate() + 1);
+        }
+        kurzor.setDate(kurzor.getDate() + 3 + Math.floor(rnd() * 11));
+      }
+      noteEl.textContent = 'Bemutató adatok — élesben a Google Naptár foglaltsága látszik itt.';
+    }
+
+    /* ---- Betöltés ----
+       A végpont válasza: {"frissitve":"…","foglalt":["2026-10-10", …]} */
+    function betolt() {
+      if (!cfg.vegpont) {
+        bemutatoAdatok();
+        kozzetesz(foglalt, 'bemutato');
+        rajzol();
+        return;
+      }
+
+      // amíg nincs adat, ne mutassunk semmit szabadnak
+      kartya.classList.add('is-loading');
+      noteEl.textContent = 'Foglaltság betöltése…';
+      kozzetesz(foglalt, 'betoltes');
+      rajzol();
+
+      fetch(cfg.vegpont)
+        .then(function (r) {
+          if (!r.ok) { throw new Error('HTTP ' + r.status); }
+          return r.json();
+        })
+        .then(function (adat) {
+          if (adat.hiba) { throw new Error(adat.hiba); }
+          kartya.classList.remove('is-loading', 'is-error');
+          errorEl.hidden = true;
+
+          (adat.foglalt || []).forEach(function (nap) {
+            if (/^\d{4}-\d{2}-\d{2}$/.test(nap)) { foglalt[nap] = true; }
+          });
+
+          var frissitve = adat.frissitve ? new Date(adat.frissitve) : new Date();
+          noteEl.textContent = 'Frissítve: ' + frissitve.getFullYear() + '. ' +
+            HONAP[frissitve.getMonth()] + ' ' + frissitve.getDate() + '. ' +
+            ('0' + frissitve.getHours()).slice(-2) + ':' +
+            ('0' + frissitve.getMinutes()).slice(-2);
+          kozzetesz(foglalt, 'eles');
+          rajzol();
+        })
+        .catch(function () {
+          // Éles oldalon nem találhatunk ki foglaltságot: inkább ne
+          // állítsunk semmit, és irányítsuk a látogatót telefonra.
+          kartya.classList.remove('is-loading');
+          kartya.classList.add('is-error');
+          errorEl.hidden = false;
+          noteEl.textContent = '';
+          foglalt = Object.create(null);
+          kozzetesz(foglalt, 'hiba');
+          rajzol();
+        });
+    }
+
+    betolt();
+  }
+
+
+  function mind() {
+    Array.prototype.forEach.call(document.querySelectorAll('.bc-foglaltsagjelzo'), indit);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', mind);
+  } else {
+    mind();
+  }
+})();
+
+</script>
+<script>
+/* ============================================================
+   FOGLALÁS KALKULÁTOR MODUL — bc-vendeghaz-modulok
+   ------------------------------------------------------------
+   Az egész felületet egy LEÍRÁSBÓL rajzolja ki (árak, szezonok,
+   korosztályok, extrák, kuponok), és abból is számol. Ugyanezt a
+   leírást állítja elő később a Google Sheet, illetve WordPressben
+   a bővítmény — a modulnak mindegy, honnan jön.
+
+   Használat — az oldal egy dobozt tesz le, benne a leírással:
+
+     <div class="bc-foglalas-kalkulator" data-bc-naptar="#foglaltsag">
+       <script type="application/json" data-bc-adat> { …leírás… } </ script>
+     </div>
+   (a lezáró címke itt szóközzel van írva, mert a kód HTML-be ágyazva is fut)
+
+   vagy a leírás egy címről jön (pl. az Apps Script végpontról):
+
+     <div class="bc-foglalas-kalkulator"
+          data-bc-adat-url="https://…/exec?adat=arak"
+          data-bc-telefon="+36 70 633 8833"></div>
+
+   Beállítások (data-attribútum):
+     data-bc-adat-url   ahonnan a leírás jön (ha nincs beágyazott leírás)
+     data-bc-naptar     a foglaltságjelző horgonya, ide mutat a „foglalt” üzenet
+     data-bc-telefon    hiba esetén ezt a számot ajánlja
+
+   A leírás szerkezete: ld. proba-adat.json és a modulok/README.md.
+
+   Ha a Foglaltságjelző modul is az oldalon van, a kalkulátor jelzi,
+   ha a választott időszak foglalt (window.bcFoglaltsag + 'bc:foglaltsag').
+   ============================================================ */
+(function () {
+  'use strict';
+
+  var HONAPROVID = ['jan.', 'febr.', 'márc.', 'ápr.', 'máj.', 'jún.',
+                    'júl.', 'aug.', 'szept.', 'okt.', 'nov.', 'dec.'];
+
+  var IKON_LEVEL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>';
+
+  /* Extra-egységek: hogyan számol, és milyen vezérlőt kap a felületen */
+  var EGYSEG = {
+    'alkalom':   { vezerlo: 'pipa' },      // egyszeri, fix ár (bor, pezsgő)
+    'fo-reggel': { vezerlo: 'pipa' },      // fizető fők × éjszakák (reggeli)
+    'fo-ej':     { vezerlo: 'pipa' },      // fizető fők × éjszakák
+    'db':        { vezerlo: 'lepteto' },   // darab × ár, egyszer
+    'db-ej':     { vezerlo: 'lepteto' },   // darab × éjszakák (kutya)
+    'dijmentes': { vezerlo: 'lepteto' },   // nem kerül pénzbe, de a tulaj tudni akarja
+    'igeny':     { vezerlo: 'pipa' }       // csak jelzés (pl. speciális étrend) — a részleteket egyeztetik
+  };
+
+  /* ---- Segédek ---- */
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function ft(n) {
+    return Math.round(n).toLocaleString('hu-HU').replace(/ /g, ' ') + ' Ft';
+  }
+
+  function iso(d) {
+    return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
+  }
+
+  function napNev(d) { return HONAPROVID[d.getMonth()] + ' ' + d.getDate() + '.'; }
+
+  /* A foglaltságjelző adata csak akkor számít, ha tényleg megjött
+     (betöltés közben vagy hibánál üres — abból nem mondhatunk „szabad”-ot). */
+  function megbizhato(adat) {
+    return !!adat && (adat.allapot === 'eles' || adat.allapot === 'bemutato');
+  }
+
+  /* Egy szezon érvényes-e az adott napon.
+     "HH-NN": minden évben (átnyúlhat az évhatáron: 12-20 → 01-02)
+     "ÉÉÉÉ-HH-NN": konkrét időszak */
+  function szezonbanVan(sz, d) {
+    if (sz.tol.length === 10) {
+      var k = iso(d);
+      return k >= sz.tol && k <= sz.ig;
+    }
+    var md = (d.getMonth() + 1) * 100 + d.getDate();
+    var tol = +sz.tol.replace('-', ''), ig = +sz.ig.replace('-', '');
+    return tol <= ig ? (md >= tol && md <= ig) : (md >= tol || md <= ig);
+  }
+
+  /* Egy éjszaka ára. Elöl a konkrét dátumos szezonok, utánuk az évenként
+     ismétlődők, a sorrendjükben; ha egyik sem, az alapár. */
+  function ejszakaAra(cfg, d) {
+    var lista = cfg.szezonok || [];
+    var i;
+    for (i = 0; i < lista.length; i++) {
+      if (lista[i].tol.length === 10 && szezonbanVan(lista[i], d)) { return { ar: lista[i].ar, sav: i }; }
+    }
+    for (i = 0; i < lista.length; i++) {
+      if (lista[i].tol.length !== 10 && szezonbanVan(lista[i], d)) { return { ar: lista[i].ar, sav: i }; }
+    }
+    return { ar: cfg.alap.ar, sav: 'alap' };
+  }
+
+  function savNev(cfg, sav) { return sav === 'alap' ? (cfg.alap.nev || 'Alapár') : cfg.szezonok[sav].nev; }
+  function savAr(cfg, sav) { return sav === 'alap' ? cfg.alap.ar : cfg.szezonok[sav].ar; }
+
+  function kuponKeres(cfg, beirt) {
+    var b = String(beirt || '').trim().toUpperCase();
+    if (!b) { return null; }
+    var lista = cfg.kuponok || [];
+    for (var i = 0; i < lista.length; i++) {
+      if (String(lista[i].kod).toUpperCase() === b) { return lista[i]; }
+    }
+    return null;
+  }
+
+
+  /* ============================================================
+     SZÁMÍTÁS — tiszta függvény: leírás + bemenet → eredmény.
+     Ezek a szabályok minden szálláshelyre érvényesek, ezért vannak
+     a kódban és nem a Sheetben (ld. megoldástár, Ismert buktatók).
+
+     bemenet = { kezd: Date|null, veg: Date|null, letszam: [db, …],
+                 extrak: [db vagy 0/1, …], kupon: '…', elore: bool }
+     ============================================================ */
+  function szamol(cfg, be) {
+    var A = cfg.alap;
+    var ejek = 0;
+    if (be.kezd && be.veg && be.veg > be.kezd) {
+      ejek = Math.round((be.veg - be.kezd) / 86400000);
+    }
+
+    var kor = cfg.korosztalyok;
+    var fizetoFo = 0, ifaFo = 0;
+    var sorban = [];
+    kor.forEach(function (k, i) {
+      var db = be.letszam[i] || 0;
+      if (k.fizeto === false) { return; }      // pl. babák: nem számítanak bele
+      fizetoFo += db;
+      if (k.ifa) { ifaFo += db; }
+      for (var j = 0; j < db; j++) { sorban.push(k.szorzo); }
+    });
+
+    /* éjszakák szezonsávonként */
+    var savok = {}, savSorrend = [];
+    var szallas = 0;
+    for (var n = 0; n < ejek; n++) {
+      var d = new Date(be.kezd.getFullYear(), be.kezd.getMonth(), be.kezd.getDate() + n);
+      var e = ejszakaAra(cfg, d);
+      if (!(e.sav in savok)) { savok[e.sav] = 0; savSorrend.push(e.sav); }
+      savok[e.sav]++;
+      szallas += e.ar;
+    }
+
+    /* létszámfelár: az első `foig` fő benne van az alapárban. A drágább
+       kategóriák töltik fel az ingyenes helyeket, így a felár a kedvezményes
+       korosztályra esik — ez a vendégnek jobb. */
+    sorban.sort(function (a, b) { return b - a; });
+    var felarSuly = 0;
+    for (var s = A.foig; s < sorban.length; s++) { felarSuly += sorban[s]; }
+    var letszamFelar = felarSuly * A.felarFoEj * ejek;
+
+    /* extrák */
+    var extraOsszegek = cfg.extrak.map(function (x, i) {
+      var db = be.extrak[i] || 0;
+      switch (x.egyseg) {
+        case 'alkalom':   return db ? x.ar : 0;
+        case 'fo-reggel':
+        case 'fo-ej':     return db ? x.ar * fizetoFo * ejek : 0;
+        case 'db':        return db * x.ar;
+        case 'db-ej':     return db * x.ar * ejek;
+        default:          return 0;                 // díjmentes
+      }
+    });
+    var extraOssz = extraOsszegek.reduce(function (a, b) { return a + b; }, 0);
+
+    var reszosszeg = szallas + letszamFelar + extraOssz;
+
+    /* kedvezmények: előbb a százalék a részösszegre, utána a fix kupon */
+    var eloreKed = (be.elore && A.eloreFizetes) ? Math.round(reszosszeg * A.eloreFizetes / 100) : 0;
+    var kupon = kuponKeres(cfg, be.kupon);
+    var kuponOk = !!kupon && ejek >= (kupon.minEj || 0);
+    var kuponKed = kuponOk ? kupon.osszeg : 0;
+
+    /* IFA — adó, nem kedvezményezhető: a kedvezmények után jön */
+    var ifa = ifaFo * A.ifa * ejek;
+
+    var vegosszeg = Math.max(0, reszosszeg - eloreKed - kuponKed) + ifa;
+
+    return {
+      ejek: ejek, savok: savok, savSorrend: savSorrend, fizetoFo: fizetoFo, ifaFo: ifaFo,
+      szallas: szallas, letszamFelar: letszamFelar, extraOsszegek: extraOsszegek,
+      reszosszeg: reszosszeg, eloreKed: eloreKed, kupon: kupon, kuponOk: kuponOk,
+      kuponKed: kuponKed, ifa: ifa, vegosszeg: vegosszeg
+    };
+  }
+
+
+  /* ============================================================
+     FELÜLET
+     ============================================================ */
+  function lepteto(nev, kicsi, min, max, ertek, cimke, attr) {
+    return '<div class="bc-calc-stepper" data-min="' + min + '" data-max="' + max + '">' +
+        '<span class="bc-calc-st-txt"><b>' + esc(nev) + '</b>' + (kicsi ? '<small>' + esc(kicsi) + '</small>' : '') + '</span>' +
+        '<span class="bc-calc-st-ctl">' +
+          '<button type="button" data-step="-1" aria-label="Kevesebb: ' + esc(cimke) + '">−</button>' +
+          '<output ' + attr + '>' + ertek + '</output>' +
+          '<button type="button" data-step="1" aria-label="Több: ' + esc(cimke) + '">+</button>' +
+        '</span>' +
+      '</div>';
+  }
+
+  function pipa(nev, kicsi, arSzoveg, attr) {
+    return '<label class="bc-calc-check">' +
+        '<input type="checkbox" ' + attr + '>' +
+        '<span class="bc-calc-ch-txt"><b>' + esc(nev) + '</b>' + (kicsi ? '<small>' + esc(kicsi) + '</small>' : '') + '</span>' +
+        '<span class="bc-calc-ch-ar">' + esc(arSzoveg) + '</span>' +
+      '</label>';
+  }
+
+  /* Az extra árának felirata a felületen */
+  function extraFelirat(x) {
+    switch (x.egyseg) {
+      case 'alkalom':   return { kicsi: x.leiras, ar: ft(x.ar) };
+      case 'fo-reggel': return { kicsi: x.leiras, ar: ft(x.ar) + ' / fő / reggel' };
+      case 'fo-ej':     return { kicsi: x.leiras, ar: ft(x.ar) + ' / fő / éj' };
+      case 'db':        return { kicsi: [x.leiras, ft(x.ar) + ' / ' + (x.egysegNev || 'db')].filter(Boolean).join(' · ') };
+      case 'db-ej':     return { kicsi: [x.leiras, ft(x.ar) + ' / éj / ' + (x.egysegNev || 'db')].filter(Boolean).join(' · ') };
+      case 'igeny':     return { kicsi: x.leiras, ar: '' };
+      default:          return { kicsi: ['díjmentes', x.max ? x.max + ' db áll rendelkezésre' : x.leiras].filter(Boolean).join(' · ') };
+    }
+  }
+
+  function vaz(cfg, root) {
+    var A = cfg.alap;
+    var h = '<div class="bc-calc"><div class="bc-calc-form">';
+
+    /* időpont */
+    h += '<fieldset class="bc-calc-block"><legend>Mikor jönnétek?</legend>' +
+         '<div class="bc-calc-row">' +
+           '<label class="bc-calc-field"><span>Érkezés</span><input type="date" data-bc-erkezes></label>' +
+           '<label class="bc-calc-field"><span>Távozás</span><input type="date" data-bc-tavozas></label>' +
+         '</div>' +
+         '<p class="bc-calc-hint" data-bc-ej-info></p>' +
+         '<p class="bc-calc-hint" data-bc-szabad-info></p>' +
+         '</fieldset>';
+
+    /* létszám */
+    h += '<fieldset class="bc-calc-block"><legend>Hányan jöttök?</legend>';
+    cfg.korosztalyok.forEach(function (k, i) {
+      var max = k.max != null ? k.max : A.maxFo;
+      h += lepteto(k.nev, k.leiras, k.min || 0, max, k.kezdo || 0, k.nev, 'data-bc-letszam="' + i + '"');
+    });
+    h += '<p class="bc-calc-hint" data-bc-letszam-info></p></fieldset>';
+
+    /* extrák, csoportonként (a leírás sorrendjében) */
+    var csoportok = [], tagok = {};
+    cfg.extrak.forEach(function (x, i) {
+      var cs = x.csoport || 'Extrák';
+      if (!tagok[cs]) { tagok[cs] = []; csoportok.push(cs); }
+      tagok[cs].push(i);
+    });
+    csoportok.forEach(function (cs) {
+      h += '<fieldset class="bc-calc-block"><legend>' + esc(cs) + '</legend>';
+      var figyelo = false;
+      tagok[cs].forEach(function (i) {
+        var x = cfg.extrak[i];
+        var f = extraFelirat(x);
+        var attr = 'data-bc-extra="' + i + '"';
+        if ((EGYSEG[x.egyseg] || EGYSEG.dijmentes).vezerlo === 'pipa') {
+          h += pipa(x.nev, f.kicsi, f.ar, attr);
+        } else {
+          h += lepteto(x.nev, f.kicsi, 0, x.max || 9, 0, x.nev, attr);
+        }
+        if (x.figyelmeztetes) { figyelo = true; }
+      });
+      if (figyelo) { h += '<p class="bc-calc-hint" data-bc-extra-info="' + esc(cs) + '"></p>'; }
+      h += '</fieldset>';
+    });
+
+    /* kedvezmények */
+    var vanKupon = (cfg.kuponok || []).length > 0;
+    if (vanKupon || A.eloreFizetes) {
+      h += '<fieldset class="bc-calc-block"><legend>Kedvezmények</legend>';
+      if (vanKupon) {
+        h += '<label class="bc-calc-field bc-calc-field--wide"><span>Kuponkód</span>' +
+             '<input type="text" data-bc-kupon' + (cfg.kuponPelda ? ' placeholder="pl. ' + esc(cfg.kuponPelda) + '"' : '') +
+             ' autocomplete="off" spellcheck="false"></label>' +
+             '<p class="bc-calc-hint" data-bc-kupon-info></p>';
+      }
+      if (A.eloreFizetes) {
+        h += pipa('A teljes összeget előre kifizetem', A.eloreFizetesLeiras, '−' + A.eloreFizetes + '%', 'data-bc-elore');
+      }
+      h += '</fieldset>';
+    }
+
+    h += '</div>';
+
+    /* összesítő */
+    h += '<aside class="bc-calc-sum" aria-live="polite">' +
+           '<h3>Az ajánlatod</h3>' +
+           '<dl class="bc-calc-tetelek" data-bc-tetelek></dl>' +
+           '<div class="bc-calc-total"><span>Fizetendő</span><strong data-bc-vegosszeg>—</strong></div>' +
+           '<p class="bc-calc-fajlagos" data-bc-fajlagos></p>' +
+           (A.kaucio ? '<div class="bc-calc-kaucio"><span><b>Kaució</b> érkezéskor<small>károkozás hiányában teljes egészében visszajár</small></span><b>' + ft(A.kaucio) + '</b></div>' : '') +
+           '<button type="button" class="bc-calc-kuld" data-bc-kuldes aria-expanded="false">' + IKON_LEVEL + 'Pontos ajánlatot kérek</button>' +
+           /* Nem rögtön mailto: sokaknak nincs beállított levelezőprogramja
+              (böngészőben leveleznek), és a gomb náluk semmit nem csinálna. */
+           '<div class="bc-calc-panel" data-bc-panel hidden>' +
+             '<p class="bc-calc-panel-cim">Hogyan küldenéd el?</p>' +
+             '<a class="bc-calc-opcio" data-bc-gmail target="_blank" rel="noopener">Megnyitás Gmailben' +
+               '<small>ha Gmailt használsz</small></a>' +
+             '<a class="bc-calc-opcio" data-bc-mailto>Levelezőalkalmazással' +
+               '<small>telefonon, vagy ha a gépeden be van állítva levelező</small></a>' +
+             '<button type="button" class="bc-calc-opcio" data-bc-masol>Szöveg másolása' +
+               '<small>bármelyik levelezőbe beilleszthető</small></button>' +
+             '<p class="bc-calc-panel-info" data-bc-masol-info aria-live="polite"></p>' +
+             '<p class="bc-calc-panel-info">Címzett: <span class="bc-calc-cimzett">' + esc(A.email || '') + '</span>' +
+               (root.getAttribute('data-bc-telefon') ? '<br>Vagy hívj: <a href="tel:' +
+                 esc(root.getAttribute('data-bc-telefon').replace(/[^\d+]/g, '')) + '">' +
+                 esc(root.getAttribute('data-bc-telefon')) + '</a>' : '') +
+             '</p>' +
+           '</div>' +
+           (A.labjegyzet ? '<p class="bc-calc-laber">' + esc(A.labjegyzet) + '</p>' : '') +
+         '</aside></div>';
+
+    root.innerHTML = h;
+  }
+
+
+  function indit(root, cfg) {
+    var A = cfg.alap;
+    vaz(cfg, root);
+
+    var q = function (s) { return root.querySelector(s); };
+    var el = {
+      erkezes: q('[data-bc-erkezes]'), tavozas: q('[data-bc-tavozas]'),
+      ejInfo: q('[data-bc-ej-info]'), szabadInfo: q('[data-bc-szabad-info]'),
+      letszamInfo: q('[data-bc-letszam-info]'),
+      kupon: q('[data-bc-kupon]'), kuponInfo: q('[data-bc-kupon-info]'), elore: q('[data-bc-elore]'),
+      tetelek: q('[data-bc-tetelek]'), vegosszeg: q('[data-bc-vegosszeg]'),
+      fajlagos: q('[data-bc-fajlagos]'), kuldes: q('[data-bc-kuldes]'),
+      panel: q('[data-bc-panel]'), gmail: q('[data-bc-gmail]'),
+      mailto: q('[data-bc-mailto]'), masol: q('[data-bc-masol]'), masolInfo: q('[data-bc-masol-info]')
+    };
+
+    /* az aktuális ajánlat-levél — a rajzol() tölti, a küldési panel ebből dolgozik */
+    var level = { cimzett: A.email || '', targy: A.emailTargy || 'Ajánlatkérés', szoveg: '' };
+
+    function panelFrissit() {
+      var c = encodeURIComponent(level.cimzett), t = encodeURIComponent(level.targy),
+          s = encodeURIComponent(level.szoveg);
+      el.gmail.href = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + c + '&su=' + t + '&body=' + s;
+      el.mailto.href = 'mailto:' + level.cimzett + '?subject=' + t + '&body=' + s;
+      el.masolInfo.textContent = '';   // a korábban kimásolt szöveg már nem az aktuális ajánlat
+    }
+
+    function panelNyit(nyit) {
+      el.panel.hidden = !nyit;
+      el.kuldes.setAttribute('aria-expanded', nyit ? 'true' : 'false');
+      if (!nyit) { el.masolInfo.textContent = ''; }
+    }
+
+    function masol() {
+      var szoveg = 'Címzett: ' + level.cimzett + '\nTárgy: ' + level.targy + '\n\n' + level.szoveg;
+      function kesz() {
+        el.masolInfo.textContent = 'Kimásolva. Nyiss egy új levelet, és illeszd be (Ctrl+V).';
+      }
+      function tartalek() {
+        var t = document.createElement('textarea');
+        t.value = szoveg;
+        t.setAttribute('readonly', '');
+        t.style.cssText = 'position:fixed;top:0;left:0;opacity:0';
+        document.body.appendChild(t);
+        t.select();
+        var ok = false;
+        try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+        document.body.removeChild(t);
+        if (ok) { kesz(); } else { kezzel(); }
+      }
+      /* ha a böngésző nem engedi a másolást: a szöveg kijelölve, kézzel másolható */
+      function kezzel() {
+        el.masolInfo.innerHTML = 'Jelöld ki és másold ki (Ctrl+C), majd illeszd be egy új levélbe:' +
+          '<textarea class="bc-calc-masolo" readonly rows="6"></textarea>';
+        var t = el.masolInfo.querySelector('textarea');
+        t.value = szoveg;
+        t.focus();
+        t.select();
+      }
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(szoveg).then(kesz, tartalek);
+      } else {
+        tartalek();
+      }
+    }
+    var naptar = root.getAttribute('data-bc-naptar') || '';
+
+    function datumbol(input) {
+      if (!input.value) { return null; }
+      var p = input.value.split('-');
+      return new Date(+p[0], +p[1] - 1, +p[2]);
+    }
+
+    function letszamDb(i) {
+      var o = root.querySelector('[data-bc-letszam="' + i + '"]');
+      return parseInt(o.textContent, 10) || 0;
+    }
+
+    function extraDb(i) {
+      var o = root.querySelector('[data-bc-extra="' + i + '"]');
+      if (o.tagName === 'INPUT') { return o.checked ? 1 : 0; }
+      return parseInt(o.textContent, 10) || 0;
+    }
+
+    function bemenet() {
+      return {
+        kezd: datumbol(el.erkezes), veg: datumbol(el.tavozas),
+        letszam: cfg.korosztalyok.map(function (k, i) { return letszamDb(i); }),
+        extrak: cfg.extrak.map(function (x, i) { return extraDb(i); }),
+        kupon: el.kupon ? el.kupon.value : '',
+        elore: el.elore ? el.elore.checked : false
+      };
+    }
+
+    /* Melyik éjszakák ütköznek a foglaltságjelzővel? Az N éjszakás foglalás
+       a kezdőnaptól számított N éjszakát foglalja, a távozás napja már nem
+       tartozik bele — ugyanaz a logika, mint a naptárnál. */
+    function utkozoNapok(kezd, ejek) {
+      var adat = window.bcFoglaltsag;
+      if (!megbizhato(adat) || !kezd || !ejek) { return []; }
+      var ki = [];
+      for (var i = 0; i < ejek; i++) {
+        var d = new Date(kezd.getFullYear(), kezd.getMonth(), kezd.getDate() + i);
+        if (adat.napok[iso(d)]) { ki.push(d); }
+      }
+      return ki;
+    }
+
+    function sor(cimke, ertek, osztaly, alcim) {
+      return '<div class="bc-cs' + (osztaly ? ' ' + osztaly : '') + '">' +
+             '<dt>' + esc(cimke) + (alcim ? '<small>' + esc(alcim) + '</small>' : '') + '</dt>' +
+             '<dd>' + esc(ertek) + '</dd></div>';
+    }
+
+    function tipp(elem, szoveg, allapot) {
+      elem.textContent = szoveg;
+      elem.className = 'bc-calc-hint' + (allapot ? ' is-' + allapot : '');
+    }
+
+    function rajzol() {
+      var be = bemenet();
+      var a = szamol(cfg, be);
+      var utkozes = utkozoNapok(be.kezd, a.ejek);
+      var h = '';
+
+      /* éjszaka-visszajelzés */
+      if (!a.ejek) {
+        tipp(el.ejInfo, 'Minimum ' + A.minEj + ' éjszaka foglalható.');
+      } else if (a.ejek < A.minEj) {
+        tipp(el.ejInfo, 'A ház minimum ' + A.minEj + ' éjszakára foglalható — válassz legalább ennyit.', 'warn');
+      } else {
+        tipp(el.ejInfo, a.ejek + ' éjszaka', 'ok');
+      }
+
+      /* szabad-e az időszak? */
+      if (!a.ejek || a.ejek < A.minEj || !megbizhato(window.bcFoglaltsag)) {
+        tipp(el.szabadInfo, '');
+      } else if (utkozes.length) {
+        el.szabadInfo.innerHTML = 'Ebben az időszakban ' +
+          (utkozes.length === 1 ? 'egy nap már foglalt' : utkozes.length + ' nap már foglalt') +
+          ' (' + utkozes.slice(0, 4).map(napNev).join(', ') + (utkozes.length > 4 ? ' …' : '') + '). ' +
+          (naptar ? '<a href="' + esc(naptar) + '">Nézd meg a szabad időpontokat</a>' : 'Nézd meg a szabad időpontokat') +
+          ', vagy kérdezz rá — az ár alább így is kiszámolva.';
+        el.szabadInfo.className = 'bc-calc-hint is-warn';
+      } else {
+        tipp(el.szabadInfo, 'Ez az időszak szabad.', 'ok');
+      }
+
+      /* létszám-visszajelzés */
+      if (a.fizetoFo > A.maxFo) {
+        tipp(el.letszamInfo, 'A ház legfeljebb ' + A.maxFo + ' főt tud fogadni' +
+          (A.maxFoMegjegyzes ? ' (' + A.maxFoMegjegyzes + ')' : '') + '.', 'warn');
+      } else if (a.fizetoFo > 0 && a.fizetoFo <= A.foig) {
+        tipp(el.letszamInfo, A.foigMegjegyzes || ('Az ár ' + A.foig + ' főig azonos.'));
+      } else {
+        tipp(el.letszamInfo, '');
+      }
+
+      /* extrák figyelmeztetései (pl. „kettőnél több kutyánál…”), csoportonként */
+      Array.prototype.forEach.call(root.querySelectorAll('[data-bc-extra-info]'), function (p) {
+        var uzenet = '';
+        cfg.extrak.forEach(function (x, i) {
+          var cs = x.csoport || 'Extrák';
+          if (!uzenet && cs === p.getAttribute('data-bc-extra-info') && x.figyelmeztetes &&
+              be.extrak[i] >= (x.figyelmeztetesTol || 1)) { uzenet = x.figyelmeztetes; }
+        });
+        tipp(p, uzenet, uzenet ? 'warn' : '');
+      });
+
+      /* kupon-visszajelzés */
+      if (el.kupon) {
+        var beirt = el.kupon.value.trim();
+        if (!beirt) {
+          tipp(el.kuponInfo, '');
+        } else if (a.kuponOk) {
+          tipp(el.kuponInfo, 'Kuponkód elfogadva: −' + ft(a.kupon.osszeg), 'ok');
+        } else if (a.kupon) {
+          tipp(el.kuponInfo, 'Ez a kupon legalább ' + a.kupon.minEj + ' éjszakás foglalásnál használható.', 'warn');
+        } else {
+          tipp(el.kuponInfo, 'Ezt a kuponkódot nem ismerjük.', 'warn');
+        }
+      }
+
+      var ervenyes = a.ejek >= A.minEj && a.fizetoFo >= 1 && a.fizetoFo <= A.maxFo;
+
+      if (!ervenyes) {
+        el.tetelek.innerHTML = sor('Válassz időpontot és létszámot', '', 'bc-cs--ures');
+        el.vegosszeg.textContent = '—';
+        el.fajlagos.textContent = '';
+        el.kuldes.disabled = true;
+        panelNyit(false);
+        return;
+      }
+      el.kuldes.disabled = false;
+
+      /* szállás, szezonsávonként bontva */
+      if (a.savSorrend.length === 1) {
+        var sv = a.savSorrend[0];
+        h += sor('Szállás', ft(a.szallas), '', a.savok[sv] + ' éj · ' + savNev(cfg, sv));
+      } else {
+        a.savSorrend.forEach(function (sv) {
+          h += sor(savNev(cfg, sv), ft(savAr(cfg, sv) * a.savok[sv]), '',
+                   a.savok[sv] + ' éj × ' + ft(savAr(cfg, sv)));
+        });
+      }
+
+      if (a.letszamFelar > 0) {
+        h += sor('Létszámfelár', ft(a.letszamFelar), '', 'az ' + (A.foig + 1) + '. főtől, életkor szerint');
+      }
+
+      /* fizetős extrák */
+      var email = [];
+      cfg.extrak.forEach(function (x, i) {
+        var osszeg = a.extraOsszegek[i];
+        if (!osszeg) { return; }
+        var db = be.extrak[i];
+        var alcim = '', emailSor = '';
+        switch (x.egyseg) {
+          case 'fo-reggel': alcim = a.fizetoFo + ' fő × ' + a.ejek + ' reggel'; emailSor = alcim; break;
+          case 'fo-ej':     alcim = a.fizetoFo + ' fő × ' + a.ejek + ' éj'; emailSor = alcim; break;
+          case 'db':        alcim = db + ' ' + (x.egysegNev || 'db'); emailSor = db + ' db'; break;
+          case 'db-ej':     alcim = db + ' ' + (x.egysegNev || 'db') + ' × ' + a.ejek + ' éj'; emailSor = db + ' db'; break;
+          default:          emailSor = 'igen';
+        }
+        h += sor(x.nev, ft(osszeg), '', alcim);
+        email.push(x.nev + ': ' + emailSor);
+      });
+
+      /* díjmentes kérések: nem növelik az árat, de a szállásadónak tudnia kell róluk */
+      var ingyenes = [];
+      cfg.extrak.forEach(function (x, i) {
+        if (x.egyseg === 'dijmentes' && be.extrak[i] > 0) { ingyenes.push([x.rovidNev || x.nev, be.extrak[i]]); }
+      });
+      /* igények (pl. speciális étrend): csak jelzés, a részleteket egyeztetik */
+      var igenyek = [];
+      cfg.extrak.forEach(function (x, i) {
+        if (x.egyseg === 'igeny' && be.extrak[i]) { igenyek.push(x); }
+      });
+      if (ingyenes.length || igenyek.length) {
+        h += '<div class="bc-cs bc-cs--vonal bc-cs--cim"><dt>Bekészítjük még</dt><dd></dd></div>';
+        ingyenes.forEach(function (x) { h += sor(x[0] + ' · ' + x[1] + ' db', 'díjmentes', 'bc-cs--ingyen'); });
+        igenyek.forEach(function (x) { h += sor(x.rovidNev || x.nev, 'egyeztetjük', 'bc-cs--ingyen'); });
+      }
+
+      if (a.eloreKed || a.kuponKed) { h += sor('Részösszeg', ft(a.reszosszeg), 'bc-cs--vonal'); }
+      if (a.eloreKed) { h += sor('Előre fizetési kedvezmény', '−' + ft(a.eloreKed), 'bc-cs--ked', A.eloreFizetes + '%'); }
+      if (a.kuponKed) { h += sor('Kuponkód (' + a.kupon.kod + ')', '−' + ft(a.kuponKed), 'bc-cs--ked'); }
+
+      /* IFA: ha egyetlen korosztály köteles, annak a nevével írjuk ki */
+      var ifasok = cfg.korosztalyok.filter(function (k) { return k.ifa && k.fizeto !== false; });
+      var ifaNev = ifasok.length === 1 ? (ifasok[0].emailNev || ifasok[0].nev.toLowerCase()) : 'fő';
+      h += sor('Idegenforgalmi adó', ft(a.ifa), 'bc-cs--vonal',
+               a.ifaFo + ' ' + ifaNev + ' × ' + a.ejek + ' éj × ' + ft(A.ifa));
+
+      el.tetelek.innerHTML = h;
+      el.vegosszeg.textContent = ft(a.vegosszeg);
+      el.fajlagos.textContent = ft(a.vegosszeg / a.fizetoFo / a.ejek) + ' / fő / éj';
+
+      /* e-mail ajánlat */
+      var letszam = cfg.korosztalyok.map(function (k, i) {
+        return be.letszam[i] ? be.letszam[i] + ' ' + (k.emailNev || k.nev.toLowerCase()) : '';
+      }).filter(Boolean).join(', ');
+
+      var sorok = [
+        'Szia!', '',
+        'A weboldal kalkulátorával az alábbi ajánlatot állítottam össze:', '',
+        'Érkezés: ' + el.erkezes.value,
+        'Távozás: ' + el.tavozas.value + '  (' + a.ejek + ' éj)',
+        'Létszám: ' + letszam
+      ].concat(email);
+      if (ingyenes.length) {
+        sorok.push('', 'Kérnénk még bekészíteni:');
+        ingyenes.forEach(function (x) { sorok.push('  - ' + x[0] + ': ' + x[1] + ' db'); });
+      }
+      if (igenyek.length) {
+        sorok.push('');
+        igenyek.forEach(function (x) { sorok.push(x.nev + ' — a részleteket egyeztessük.'); });
+      }
+      if (utkozes.length) {
+        sorok.push('', 'Megjegyzés: a naptár szerint ebben az időszakban van foglalt nap, ' +
+          'de szeretnék rákérdezni.');
+      }
+      if (a.kuponKed) { sorok.push('Kuponkód: ' + a.kupon.kod); }
+      if (a.eloreKed) { sorok.push('A teljes összeget előre fizetném.'); }
+      sorok.push('', 'Kalkulált összeg: ' + ft(a.vegosszeg), '',
+                 'Kérlek, erősítsd meg, hogy szabad-e az időpont!', '', 'Köszönettel:');
+
+      level.szoveg = sorok.join('\n');
+      panelFrissit();
+    }
+
+    /* gombok tiltása a határértékeknél */
+    function gombokFrissit(box) {
+      var out = box.querySelector('output');
+      var v = parseInt(out.textContent, 10) || 0;
+      Array.prototype.forEach.call(box.querySelectorAll('button'), function (b) {
+        b.disabled = (+b.getAttribute('data-step') < 0) ? v <= +box.getAttribute('data-min') : v >= +box.getAttribute('data-max');
+      });
+    }
+
+    /* ---- Események ---- */
+    root.addEventListener('click', function (e) {
+      var gomb = e.target.closest ? e.target.closest('.bc-calc-st-ctl button') : null;
+      if (!gomb) { return; }
+      var box = gomb.closest('.bc-calc-stepper');
+      var out = box.querySelector('output');
+      var min = +box.getAttribute('data-min'), max = +box.getAttribute('data-max');
+      var uj = (parseInt(out.textContent, 10) || 0) + (+gomb.getAttribute('data-step'));
+      out.textContent = Math.min(max, Math.max(min, uj));
+      gombokFrissit(box);
+      rajzol();
+    });
+
+    root.addEventListener('input', rajzol);
+    root.addEventListener('change', rajzol);
+
+    el.kuldes.addEventListener('click', function () { panelNyit(el.panel.hidden); });
+    el.masol.addEventListener('click', masol);
+    root.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !el.panel.hidden) { panelNyit(false); el.kuldes.focus(); }
+    });
+
+    /* ---- Indulás: mától 2 hét múlva, minimum éjszakára ---- */
+    var ma = new Date(); ma.setHours(0, 0, 0, 0);
+    var be = new Date(ma.getFullYear(), ma.getMonth(), ma.getDate() + 14);
+    var ki = new Date(be.getFullYear(), be.getMonth(), be.getDate() + A.minEj);
+    el.erkezes.value = iso(be);
+    el.tavozas.value = iso(ki);
+    el.erkezes.min = iso(ma);
+    el.tavozas.min = iso(new Date(ma.getFullYear(), ma.getMonth(), ma.getDate() + A.minEj));
+
+    Array.prototype.forEach.call(root.querySelectorAll('.bc-calc-stepper'), gombokFrissit);
+
+    document.addEventListener('bc:foglaltsag', rajzol);
+
+    rajzol();
+  }
+
+
+  /* ---- Leírás betöltése: beágyazva vagy címről ---- */
+  function hibaUzenet(root) {
+    var tel = root.getAttribute('data-bc-telefon');
+    root.innerHTML = '<p class="bc-calc-hiba">Az árkalkulátor most nem elérhető. ' +
+      (tel ? 'Hívj minket a <a href="tel:' + esc(tel.replace(/[^\d+]/g, '')) + '">' + esc(tel) + '</a> számon, és megmondjuk az árat.'
+           : 'Írj vagy hívj minket, és megmondjuk az árat.') + '</p>';
+  }
+
+  function ellenoriz(cfg) {
+    if (!cfg || !cfg.alap || !cfg.korosztalyok || !cfg.korosztalyok.length) { throw new Error('hiányos leírás'); }
+    cfg.szezonok = cfg.szezonok || [];
+    cfg.extrak = cfg.extrak || [];
+    cfg.kuponok = cfg.kuponok || [];
+    return cfg;
+  }
+
+  function betolt(root) {
+    if (root.getAttribute('data-bc-kesz')) { return; }
+    root.setAttribute('data-bc-kesz', '1');
+
+    var beagyazott = root.querySelector('script[data-bc-adat]');
+    if (beagyazott) {
+      try { indit(root, ellenoriz(JSON.parse(beagyazott.textContent))); }
+      catch (e) { hibaUzenet(root); }
+      return;
+    }
+
+    var url = root.getAttribute('data-bc-adat-url');
+    if (!url) { hibaUzenet(root); return; }
+    root.innerHTML = '<p class="bc-calc-tolt">Árak betöltése…</p>';
+    fetch(url)
+      .then(function (r) { if (!r.ok) { throw new Error('HTTP ' + r.status); } return r.json(); })
+      .then(function (cfg) { if (cfg.hiba) { throw new Error(cfg.hiba); } indit(root, ellenoriz(cfg)); })
+      .catch(function () { hibaUzenet(root); });
+  }
+
+  function mind() {
+    Array.prototype.forEach.call(document.querySelectorAll('.bc-foglalas-kalkulator'), betolt);
+  }
+
+  /* a tesztekhez: a számítás kívülről is hívható */
+  window.bcKalkulator = { szamol: szamol };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', mind);
+  } else {
+    mind();
+  }
+})();
+
+</script>
+<script>
+/* ============================================================
+   GYIK MODUL (statikus) — bc-vendeghaz-modulok
+   ------------------------------------------------------------
+   Az Alap csomag gyakori kérdései: lenyitható lista (legfeljebb 6
+   kérdés), alatta a „Nem találtad, amit keresel? Kérdezz minket!”
+   blokk. A „Kérdezd a házat!” (Pimpelt) modul ugyanebből az adatból
+   dolgozik, de az külön modul — ezen az oldalon nincs belőle kód.
+
+   Használat:
+     <div class="bc-gyik" data-bc-adat-url="https://…/exec?adat=gyik"
+          data-bc-telefon="+36 …" data-bc-email="…"></div>
+   vagy beágyazott adattal:
+     <div class="bc-gyik"><script type="application/json" data-bc-adat> {…} </ script></div>
+   (a lezáró címke itt szóközzel van írva, mert a kód HTML-be ágyazva is fut)
+
+   Beállítások (data-attribútum):
+     data-bc-adat-url     ahonnan az adat jön (ha nincs beágyazott)
+     data-bc-telefon, data-bc-email, data-bc-hivhato
+                          tartalék elérhetőség, ha az adat nem jön meg
+     data-bc-cel-kalkulator, data-bc-cel-foglaltsag, data-bc-cel-hazirend
+                          az akciógombok célja (pl. "#arajanlat"); amelyik
+                          nincs megadva, ahhoz nem jelenik meg gomb
+
+   Az adat: { kerdesek: [{kerdes, valasz, statikus, akcio?}], kapcsolat: {email, telefon, hivhato, cim} }
+   ============================================================ */
+(function () {
+  'use strict';
+
+  var MAX = 6;
+  var szamlalo = 0;
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function telHref(t) { return 'tel:' + String(t).replace(/[^\d+]/g, ''); }
+
+  /* E-mail: nem sima mailto-link — sokaknak nincs beállított levelezőprogramja
+     (böngészőben leveleznek), náluk a mailto semmit nem csinál vagy egy beállítatlan
+     Outlookot nyit. Ezért: a cím szövegként + Gmail / levelezőalkalmazás / másolás. */
+  function emailBlokk(cim, targy) {
+    var c = encodeURIComponent(cim), t = encodeURIComponent(targy);
+    return '<span class="bc-email">' +
+      '<span class="bc-email-cim">' + esc(cim) + '</span>' +
+      '<span class="bc-email-opciok">' +
+        '<a href="https://mail.google.com/mail/?view=cm&fs=1&to=' + c + '&su=' + t + '" target="_blank" rel="noopener">Gmailben</a>' +
+        '<a href="mailto:' + esc(cim) + '?subject=' + t + '">Levelezőalkalmazással</a>' +
+        '<button type="button" data-bc-email-masol="' + esc(cim) + '">Cím másolása</button>' +
+      '</span></span>';
+  }
+
+  function emailMasol(gomb) {
+    var cim = gomb.getAttribute('data-bc-email-masol');
+    var eredeti = gomb.getAttribute('data-bc-felirat') || gomb.textContent;
+    gomb.setAttribute('data-bc-felirat', eredeti);
+    function jelez(szoveg) {
+      gomb.textContent = szoveg;
+      setTimeout(function () { gomb.textContent = eredeti; }, 2500);
+    }
+    function kijelol() {   // ha a böngésző nem engedi: kijelöljük, kézzel másolható
+      var el = gomb.closest('.bc-email').querySelector('.bc-email-cim');
+      var r = document.createRange(); r.selectNodeContents(el);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      jelez('Kijelölve — Ctrl+C');
+    }
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(cim).then(function () { jelez('Kimásolva ✓'); }, kijelol);
+    } else {
+      kijelol();
+    }
+  }
+
+  /* A válasz szövege → HTML. Üres sor = új bekezdés, **x** = félkövér,
+     az e-mail, a webcím és a telefonszám magától link lesz. */
+  function valaszHtml(szoveg) {
+    return String(szoveg).trim().split(/\n\s*\n/).map(function (bek) {
+      var h = esc(bek.trim())
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\bhttps?:\/\/[^\s<]+[^\s<.,;:!?)]/g, function (u) {
+          return '<a href="' + u + '" target="_blank" rel="noopener">' + u.replace(/^https?:\/\//, '') + '</a>';
+        })
+        .replace(/[\w.+-]+@[\w-]+\.[\w.-]+[a-z]/gi, '<strong class="bc-email-szoveg">$&</strong>')
+        .replace(/\+36[\d\s\/-]{8,}\d/g, function (t) { return '<a href="' + telHref(t) + '">' + t + '</a>'; })
+        .replace(/\n/g, '<br>');
+      return '<p>' + h + '</p>';
+    }).join('');
+  }
+
+  var AKCIO_FELIRAT = {
+    kalkulator: 'Számold ki az árat', foglaltsag: 'Szabad időpontok', hazirend: 'Teljes házirend',
+    utvonal: 'Útvonal a térképen', telefon: 'Hívd a házat'
+  };
+
+  function akcioHref(root, akcio, kap) {
+    if (akcio === 'utvonal') {
+      return kap.cim ? 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(kap.cim) : '';
+    }
+    if (akcio === 'telefon') { return kap.telefon ? telHref(kap.telefon) : ''; }
+    return root.getAttribute('data-bc-cel-' + akcio) || '';
+  }
+
+  function kerdezzMinket(kap) {
+    var sorok = [];
+    if (kap.email) { sorok.push(emailBlokk(kap.email, kap.targy || 'Kérdés a szállásról')); }
+    if (kap.telefon) { sorok.push('<span class="bc-gyik-tel">Telefon: <a href="' + esc(telHref(kap.telefon)) + '">' + esc(kap.telefon) + '</a></span>'); }
+    if (!sorok.length) { return ''; }
+    return '<div class="bc-gyik-kerdezz">' +
+      '<p class="bc-gyik-kerdezz-cim">Nem találtad, amit keresel? Kérdezz minket!</p>' +
+      '<div class="bc-gyik-kerdezz-elerhetoseg">' + sorok.join('') + '</div>' +
+      (kap.hivhato ? '<p class="bc-gyik-kerdezz-ido">' + esc(kap.hivhato) + '</p>' : '') +
+      '</div>';
+  }
+
+  function tartalekKapcsolat(root) {
+    return {
+      email: root.getAttribute('data-bc-email') || '',
+      telefon: root.getAttribute('data-bc-telefon') || '',
+      hivhato: root.getAttribute('data-bc-hivhato') || '',
+      targy: root.getAttribute('data-bc-email-targy') || ''
+    };
+  }
+
+  function rajzol(root, adat) {
+    var kap = adat.kapcsolat || {};
+    var tart = tartalekKapcsolat(root);
+    ['email', 'telefon', 'hivhato', 'targy'].forEach(function (k) { if (!kap[k] && tart[k]) { kap[k] = tart[k]; } });
+
+    var lista = (adat.kerdesek || []).filter(function (k) { return k.statikus && k.kerdes && k.valasz; })
+      .slice(0, MAX);
+    var id = 'bc-gyik-' + (++szamlalo);
+
+    var h = '<div class="bc-gyik-lista">';
+    lista.forEach(function (k, i) {
+      var href = k.akcio ? akcioHref(root, k.akcio, kap) : '';
+      h += '<div class="bc-gyik-elem">' +
+        '<h3><button type="button" class="bc-gyik-q" aria-expanded="false" aria-controls="' + id + '-a' + i + '" id="' + id + '-q' + i + '">' +
+          '<span>' + esc(k.kerdes) + '</span><span class="bc-gyik-ico" aria-hidden="true"></span>' +
+        '</button></h3>' +
+        '<div class="bc-gyik-panel" id="' + id + '-a' + i + '" role="region" aria-labelledby="' + id + '-q' + i + '">' +
+          '<div class="bc-gyik-a">' + valaszHtml(k.valasz) +
+            (href ? '<p class="bc-gyik-akcio"><a href="' + esc(href) + '"' +
+              (/^https?:/.test(href) ? ' target="_blank" rel="noopener"' : '') + '>' +
+              esc(AKCIO_FELIRAT[k.akcio]) + ' →</a></p>' : '') +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    });
+    h += '</div>' + kerdezzMinket(kap);
+    root.innerHTML = h;
+
+    root.addEventListener('click', function (e) {
+      var masol = e.target.closest ? e.target.closest('[data-bc-email-masol]') : null;
+      if (masol) { emailMasol(masol); return; }
+      var gomb = e.target.closest ? e.target.closest('.bc-gyik-q') : null;
+      if (!gomb) { return; }
+      var nyitva = gomb.closest('.bc-gyik-elem').classList.toggle('is-open');
+      gomb.setAttribute('aria-expanded', nyitva ? 'true' : 'false');
+    });
+  }
+
+  function betolt(root) {
+    if (root.getAttribute('data-bc-kesz')) { return; }
+    root.setAttribute('data-bc-kesz', '1');
+
+    var beagyazott = root.querySelector('script[data-bc-adat]');
+    if (beagyazott) {
+      try { rajzol(root, JSON.parse(beagyazott.textContent)); }
+      catch (e) { rajzol(root, { kerdesek: [] }); }
+      return;
+    }
+    var url = root.getAttribute('data-bc-adat-url');
+    if (!url) { rajzol(root, { kerdesek: [] }); return; }
+    root.innerHTML = '<p class="bc-gyik-tolt">Kérdések betöltése…</p>';
+    fetch(url)
+      .then(function (r) { if (!r.ok) { throw new Error('HTTP ' + r.status); } return r.json(); })
+      .then(function (adat) { if (adat.hiba) { throw new Error(adat.hiba); } rajzol(root, adat); })
+      // hiba esetén legalább a „Kérdezz minket” blokk megmarad
+      .catch(function () { rajzol(root, { kerdesek: [] }); });
+  }
+
+  function mind() {
+    Array.prototype.forEach.call(document.querySelectorAll('.bc-gyik'), betolt);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', mind);
+  } else {
+    mind();
+  }
+})();
+
+</script>
+<script>
+/* ============================================================
+   „KÉRDEZD A HÁZAT!” MODUL — bc-vendeghaz-modulok (Pimpelt csomag)
+   ------------------------------------------------------------
+   Lebegő fül a képernyő jobb szélének közepén. Kattintásra panel
+   nyílik: kategóriák → kérdések → válasz (+ legfeljebb 1 akciógomb).
+   Minden nézet alján: „Nem találtad, amit keresel? Kérdezz minket!”
+
+   Nem nyílik ki magától; az oldal kb. 40%-áig görgetve egyszer
+   finoman jelez („Segíthetek?”). Semmit nem ment, sütit nem használ.
+   Nincs mögötte AI: csak a táblában jóváhagyott válaszokat mutatja.
+
+   Használat (bárhol az oldalon — a fül mindig a képernyő szélén lebeg):
+     <div class="bc-kerdezd" data-bc-adat-url="https://…/exec?adat=gyik"
+          data-bc-cel-kalkulator="#arajanlat" data-bc-cel-foglaltsag="#foglaltsag"></div>
+
+   Beállítások (data-attribútum):
+     data-bc-adat-url        ahonnan az adat jön (vagy beágyazott <script data-bc-adat>)
+     data-bc-cel-kalkulator, data-bc-cel-foglaltsag, data-bc-cel-hazirend
+                             az akciógombok célja; amelyik nincs, ahhoz nincs gomb
+     data-bc-telefon, data-bc-email, data-bc-hivhato
+                             tartalék elérhetőség, ha az adat nem jön meg
+     data-bc-jelzes="nem"    ne jelezzen görgetéskor
+   ============================================================ */
+(function () {
+  'use strict';
+
+  var CIM = 'Kérdezd a házat!';
+
+  var IKON = {
+    vissza: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>',
+    zar: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+    tovabb: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>',
+    kerdes: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.4A8.5 8.5 0 1 1 21 12z"/><path d="M9.8 9.4a2.3 2.3 0 0 1 4.4.9c0 1.5-2.2 2-2.2 3.2M12 16.6v.01"/></svg>'
+  };
+
+  var AKCIO_FELIRAT = {
+    kalkulator: 'Számold ki az árat', foglaltsag: 'Szabad időpontok', hazirend: 'Teljes házirend',
+    utvonal: 'Útvonal a térképen', telefon: 'Hívd a házat'
+  };
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function telHref(t) { return 'tel:' + String(t).replace(/[^\d+]/g, ''); }
+
+  /* E-mail: nem sima mailto-link — sokaknak nincs beállított levelezőprogramja
+     (böngészőben leveleznek), náluk a mailto semmit nem csinál vagy egy beállítatlan
+     Outlookot nyit. Ezért: a cím szövegként + Gmail / levelezőalkalmazás / másolás. */
+  function emailBlokk(cim, targy) {
+    var c = encodeURIComponent(cim), t = encodeURIComponent(targy);
+    return '<span class="bc-email">' +
+      '<span class="bc-email-cim">' + esc(cim) + '</span>' +
+      '<span class="bc-email-opciok">' +
+        '<a href="https://mail.google.com/mail/?view=cm&fs=1&to=' + c + '&su=' + t + '" target="_blank" rel="noopener">Gmailben</a>' +
+        '<a href="mailto:' + esc(cim) + '?subject=' + t + '">Levelezőalkalmazással</a>' +
+        '<button type="button" data-bc-email-masol="' + esc(cim) + '">Cím másolása</button>' +
+      '</span></span>';
+  }
+
+  function emailMasol(gomb) {
+    var cim = gomb.getAttribute('data-bc-email-masol');
+    var eredeti = gomb.getAttribute('data-bc-felirat') || gomb.textContent;
+    gomb.setAttribute('data-bc-felirat', eredeti);
+    function jelez(szoveg) {
+      gomb.textContent = szoveg;
+      setTimeout(function () { gomb.textContent = eredeti; }, 2500);
+    }
+    function kijelol() {   // ha a böngésző nem engedi: kijelöljük, kézzel másolható
+      var el = gomb.closest('.bc-email').querySelector('.bc-email-cim');
+      var r = document.createRange(); r.selectNodeContents(el);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      jelez('Kijelölve — Ctrl+C');
+    }
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(cim).then(function () { jelez('Kimásolva ✓'); }, kijelol);
+    } else {
+      kijelol();
+    }
+  }
+
+  /* A válasz szövege → HTML (ugyanaz, mint a statikus GYIK modulban). */
+  function valaszHtml(szoveg) {
+    return String(szoveg).trim().split(/\n\s*\n/).map(function (bek) {
+      var h = esc(bek.trim())
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\bhttps?:\/\/[^\s<]+[^\s<.,;:!?)]/g, function (u) {
+          return '<a href="' + u + '" target="_blank" rel="noopener">' + u.replace(/^https?:\/\//, '') + '</a>';
+        })
+        .replace(/[\w.+-]+@[\w-]+\.[\w.-]+[a-z]/gi, '<strong class="bc-email-szoveg">$&</strong>')
+        .replace(/\+36[\d\s\/-]{8,}\d/g, function (t) { return '<a href="' + telHref(t) + '">' + t + '</a>'; })
+        .replace(/\n/g, '<br>');
+      return '<p>' + h + '</p>';
+    }).join('');
+  }
+
+  function indit(root, adat) {
+    var kap = adat.kapcsolat || {};
+    ['email', 'telefon', 'hivhato'].forEach(function (k) {
+      var t = root.getAttribute('data-bc-' + k);
+      if (!kap[k] && t) { kap[k] = t; }
+    });
+    var kerdesek = (adat.kerdesek || []).filter(function (k) { return k.widget && k.kategoria && k.valasz; });
+    var kategoriak = (adat.kategoriak || []).filter(function (kat) {
+      return kerdesek.some(function (k) { return k.kategoria === kat; });
+    });
+
+    function akcioHref(akcio) {
+      if (akcio === 'utvonal') {
+        return kap.cim ? 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(kap.cim) : '';
+      }
+      if (akcio === 'telefon') { return kap.telefon ? telHref(kap.telefon) : ''; }
+      return root.getAttribute('data-bc-cel-' + akcio) || '';
+    }
+
+    function kerdezzMinket() {
+      var sorok = [];
+      if (kap.email) { sorok.push(emailBlokk(kap.email, root.getAttribute('data-bc-email-targy') || 'Kérdés a szállásról')); }
+      if (kap.telefon) { sorok.push('<span class="bc-kh-tel">Telefon: <a href="' + esc(telHref(kap.telefon)) + '">' + esc(kap.telefon) + '</a></span>'); }
+      if (!sorok.length) { return ''; }
+      return '<div class="bc-kh-kerdezz">' +
+        '<p class="bc-kh-kerdezz-cim">Nem találtad, amit keresel? Kérdezz minket!</p>' +
+        sorok.join('') +
+        (kap.hivhato ? '<p class="bc-kh-halk">' + esc(kap.hivhato) + '</p>' : '') +
+        '</div>';
+    }
+
+    var panelId = 'bc-kh-panel-' + Math.random().toString(36).slice(2, 8);
+
+    root.innerHTML =
+      '<button type="button" class="bc-kh-ful" aria-expanded="false" aria-controls="' + panelId + '">' +
+        IKON.kerdes + '<span>' + CIM + '</span></button>' +
+      '<span class="bc-kh-jelzes" aria-hidden="true">Segíthetek?</span>' +
+      '<div class="bc-kh-panel" id="' + panelId + '" role="dialog" aria-label="' + CIM + '" hidden>' +
+        '<div class="bc-kh-fej">' +
+          '<button type="button" class="bc-kh-ikongomb" data-bc-vissza aria-label="Vissza" hidden>' + IKON.vissza + '</button>' +
+          '<p class="bc-kh-cim" tabindex="-1" data-bc-cim>' + CIM + '</p>' +
+          '<button type="button" class="bc-kh-ikongomb" data-bc-zar aria-label="Bezárás">' + IKON.zar + '</button>' +
+        '</div>' +
+        '<div class="bc-kh-tartalom" data-bc-tartalom></div>' +
+        kerdezzMinket() +
+      '</div>';
+
+    var ful = root.querySelector('.bc-kh-ful');
+    var jelzes = root.querySelector('.bc-kh-jelzes');
+    var panel = root.querySelector('.bc-kh-panel');
+    var tartalom = root.querySelector('[data-bc-tartalom]');
+    var cimEl = root.querySelector('[data-bc-cim]');
+    var vissza = root.querySelector('[data-bc-vissza]');
+    var utvonal = [];   // nézetek verme a „Vissza” gombhoz
+
+    /* ---- nézetek ---- */
+    function nyito() {
+      cimEl.textContent = CIM;
+      var h = '<p class="bc-kh-bevezeto">Miben segíthetünk? Válassz témát.</p><div class="bc-kh-gombok">';
+      kategoriak.forEach(function (kat, i) {
+        h += '<button type="button" class="bc-kh-gomb" data-bc-kat="' + i + '"><span>' + esc(kat) + '</span>' + IKON.tovabb + '</button>';
+      });
+      if (!kategoriak.length) {
+        h += '<p class="bc-kh-halk">Most nem érhetők el a kérdések — írj vagy hívj minket bátran.</p>';
+      }
+      return h + '</div>';
+    }
+
+    function kategoria(i) {
+      var kat = kategoriak[i];
+      cimEl.textContent = kat;
+      var h = '<div class="bc-kh-gombok">';
+      kerdesek.forEach(function (k, j) {
+        if (k.kategoria === kat) {
+          h += '<button type="button" class="bc-kh-gomb bc-kh-gomb--kerdes" data-bc-kerdes="' + j + '"><span>' + esc(k.kerdes) + '</span>' + IKON.tovabb + '</button>';
+        }
+      });
+      return h + '</div>';
+    }
+
+    function valasz(j) {
+      var k = kerdesek[j];
+      cimEl.textContent = k.kategoria;
+      var href = k.akcio ? akcioHref(k.akcio) : '';
+      return '<p class="bc-kh-kerdes">' + esc(k.kerdes) + '</p>' +
+        '<div class="bc-kh-valasz">' + valaszHtml(k.valasz) + '</div>' +
+        (href ? '<a class="bc-kh-akcio" href="' + esc(href) + '"' +
+          (/^https?:/.test(href) ? ' target="_blank" rel="noopener"' : '') + '>' +
+          esc(AKCIO_FELIRAT[k.akcio]) + IKON.tovabb + '</a>' : '');
+    }
+
+    function mutat(nezet, push) {
+      if (push) { utvonal.push(nezet); }
+      var n = utvonal[utvonal.length - 1];
+      tartalom.innerHTML = n.tipus === 'kat' ? kategoria(n.i) : n.tipus === 'valasz' ? valasz(n.i) : nyito();
+      vissza.hidden = utvonal.length <= 1;
+      tartalom.scrollTop = 0;
+      cimEl.focus({ preventScroll: true });
+    }
+
+    /* ---- nyitás, zárás ---- */
+    function nyit(allapot) {
+      panel.hidden = !allapot;
+      ful.setAttribute('aria-expanded', allapot ? 'true' : 'false');
+      root.classList.toggle('is-nyitva', allapot);
+      if (allapot) {
+        jelzes.classList.remove('is-latszik');
+        utvonal = [{ tipus: 'nyito' }];
+        mutat(null, false);
+      } else {
+        ful.focus({ preventScroll: true });
+      }
+    }
+
+    ful.addEventListener('click', function () { nyit(panel.hidden); });
+    panel.addEventListener('click', function (e) {
+      var masol = e.target.closest ? e.target.closest('[data-bc-email-masol]') : null;
+      if (masol) { emailMasol(masol); }
+    });
+    root.querySelector('[data-bc-zar]').addEventListener('click', function () { nyit(false); });
+    vissza.addEventListener('click', function () {
+      if (utvonal.length > 1) { utvonal.pop(); mutat(null, false); }
+    });
+    root.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !panel.hidden) { nyit(false); }
+    });
+    tartalom.addEventListener('click', function (e) {
+      var g = e.target.closest ? e.target.closest('[data-bc-kat],[data-bc-kerdes],.bc-kh-akcio') : null;
+      if (!g) { return; }
+      if (g.hasAttribute('data-bc-kat')) { mutat({ tipus: 'kat', i: +g.getAttribute('data-bc-kat') }, true); }
+      else if (g.hasAttribute('data-bc-kerdes')) { mutat({ tipus: 'valasz', i: +g.getAttribute('data-bc-kerdes') }, true); }
+      // az oldalon belüli akciógomb (pl. a kalkulátorhoz) a panelt is bezárja
+      else if ((g.getAttribute('href') || '').charAt(0) === '#') { panel.hidden = true; ful.setAttribute('aria-expanded', 'false'); root.classList.remove('is-nyitva'); }
+    });
+    // a panelen kívüli kattintás bezárja. A kattintás útvonalát nézzük, nem a célelemet:
+    // a nézetváltás újrarajzolja a tartalmat, és a kattintott gomb addigra már nincs a lapon.
+    document.addEventListener('click', function (e) {
+      if (panel.hidden) { return; }
+      var ut = e.composedPath ? e.composedPath() : [];
+      if (ut.indexOf(root) < 0 && !root.contains(e.target)) { nyit(false); }
+    });
+
+    /* ---- finom jelzés: egyszer, ha a vendég az oldal ~40%-áig görgetett ---- */
+    if (root.getAttribute('data-bc-jelzes') !== 'nem' && kategoriak.length) {
+      var jelzett = false;
+      var figyel = function () {
+        if (jelzett) { return; }
+        var h = document.documentElement.scrollHeight - window.innerHeight;
+        if (h > 0 && window.scrollY / h >= 0.4) {
+          jelzett = true;
+          window.removeEventListener('scroll', figyel);
+          if (panel.hidden) {
+            jelzes.classList.add('is-latszik');
+            setTimeout(function () { jelzes.classList.remove('is-latszik'); }, 6000);
+          }
+        }
+      };
+      window.addEventListener('scroll', figyel, { passive: true });
+    }
+  }
+
+  function betolt(root) {
+    if (root.getAttribute('data-bc-kesz')) { return; }
+    root.setAttribute('data-bc-kesz', '1');
+    var beagyazott = root.querySelector('script[data-bc-adat]');
+    if (beagyazott) {
+      try { indit(root, JSON.parse(beagyazott.textContent)); } catch (e) { indit(root, {}); }
+      return;
+    }
+    var url = root.getAttribute('data-bc-adat-url');
+    if (!url) { indit(root, {}); return; }
+    fetch(url)
+      .then(function (r) { if (!r.ok) { throw new Error('HTTP ' + r.status); } return r.json(); })
+      .then(function (adat) { if (adat.hiba) { throw new Error(adat.hiba); } indit(root, adat); })
+      // hiba esetén a fül megjelenik, és legalább az elérhetőséget mutatja
+      .catch(function () { indit(root, {}); });
+  }
+
+  function mind() {
+    Array.prototype.forEach.call(document.querySelectorAll('.bc-kerdezd'), betolt);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', mind);
+  } else {
+    mind();
+  }
+})();
+
+</script>
+<script>
+/* ============================================================
+   HÍRLEVÉL-FELIRATKOZÓ MODUL — bc-vendeghaz-modulok (mindkét csomag)
+   ------------------------------------------------------------
+   E-mail-mező + kötelező adatkezelési pipa + gomb. A feliratkozót a
+   táblához kötött script kapja meg (POST), és adja tovább a
+   hírlevélküldőnek (Brevo / MailerLite) dupla megerősítéssel.
+   Siker esetén felugró ablak: „nézd meg a postafiókodat, erősítsd meg,
+   utána érkezik a kuponkód”. A kuponos levelet a hírlevélküldő küldi.
+
+   A weboldalon nincs API-kulcs, és a modul semmit nem ment.
+
+   Használat:
+     <div class="bc-hirlevel"
+          data-bc-szovegek-url="https://…/exec?adat=hirlevel"
+          data-bc-kuldes-url="https://…/exec"></div>
+
+   Beállítások (data-attribútum):
+     data-bc-szovegek-url  a szövegek (cím, szöveg, gomb, pipa, siker) — vagy beágyazott <script data-bc-adat>
+     data-bc-kuldes-url    ide küldi a feliratkozást (a script /exec címe)
+     data-bc-proba         "siker" | "hiba": küldés nélkül, próbához
+   ============================================================ */
+(function () {
+  'use strict';
+
+  var ALAP = {
+    cim: 'Iratkozz fel hírlevelünkre',
+    szoveg: '',
+    gomb: 'Feliratkozom',
+    hozzajarulas: 'Elolvastam és elfogadom az adatkezelési tájékoztatót.',
+    adatkezelesUrl: '',
+    sikerCim: 'Már csak egy lépés!',
+    sikerSzoveg: 'Küldtünk egy levelet a megadott címre. Kattints benne a megerősítő gombra a feliratkozás befejezéséhez.'
+  };
+  var szamlalo = 0;
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  /* a pipa szövegében az „adatkezelési tájékoztató” kifejezés link lesz */
+  function hozzajarulasHtml(szoveg, url) {
+    var h = esc(szoveg);
+    if (!url) { return h; }
+    var link = '<a href="' + esc(url) + '"' + (/^https?:/.test(url) ? ' target="_blank" rel="noopener"' : '') + '>$1</a>';
+    var uj = h.replace(/(adatkezelési tájékoztató[a-záéíóöőúüű]*)/i, link);
+    return uj === h ? h + ' (<a href="' + esc(url) + '">adatkezelési tájékoztató</a>)' : uj;
+  }
+
+  /* ---- a felugró visszaigazoló ablak (a lap végére kerül, hogy semmi ne takarja) ---- */
+  function ablak(cim, szoveg, email, vissza) {
+    var hatter = document.createElement('div');
+    hatter.className = 'bc-hirlevel-ablak';
+    hatter.innerHTML =
+      '<div class="bc-hl-doboz" role="dialog" aria-modal="true" aria-labelledby="bc-hl-ab-cim">' +
+        '<div class="bc-hl-ikon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg></div>' +
+        '<p class="bc-hl-ab-cim" id="bc-hl-ab-cim">' + esc(cim) + '</p>' +
+        '<p class="bc-hl-ab-szoveg">' + esc(szoveg) + '</p>' +
+        (email ? '<p class="bc-hl-ab-email">' + esc(email) + '</p>' : '') +
+        '<button type="button" class="bc-hl-gomb" data-bc-rendben>Rendben</button>' +
+      '</div>';
+    document.body.appendChild(hatter);
+    var gomb = hatter.querySelector('[data-bc-rendben]');
+    function zar() {
+      document.removeEventListener('keydown', billentyu);
+      hatter.parentNode && hatter.parentNode.removeChild(hatter);
+      if (vissza) { vissza.focus(); }
+    }
+    function billentyu(e) {
+      if (e.key === 'Escape') { zar(); }
+      if (e.key === 'Tab') { e.preventDefault(); gomb.focus(); }   // az ablakban egy gomb van
+    }
+    gomb.addEventListener('click', zar);
+    hatter.addEventListener('click', function (e) { if (e.target === hatter) { zar(); } });
+    document.addEventListener('keydown', billentyu);
+    gomb.focus();
+  }
+
+  function indit(root, sz) {
+    var t = {};
+    Object.keys(ALAP).forEach(function (k) { t[k] = sz[k] || ALAP[k]; });
+    var id = 'bc-hl-' + (++szamlalo);
+    var proba = root.getAttribute('data-bc-proba');
+    var url = root.getAttribute('data-bc-kuldes-url');
+
+    root.innerHTML =
+      '<form class="bc-hl" novalidate>' +
+        '<p class="bc-hl-cim">' + esc(t.cim) + '</p>' +
+        (t.szoveg ? '<p class="bc-hl-szoveg">' + esc(t.szoveg) + '</p>' : '') +
+        '<div class="bc-hl-sor">' +
+          '<label class="bc-hl-sr" for="' + id + '-email">E-mail-cím</label>' +
+          '<input type="email" id="' + id + '-email" name="email" autocomplete="email" inputmode="email" placeholder="pelda@email.hu" required>' +
+          '<button type="submit" class="bc-hl-gomb">' + esc(t.gomb) + '</button>' +
+        '</div>' +
+        /* csapda a robotoknak: ember nem látja és nem tölti ki */
+        '<div class="bc-hl-csapda" aria-hidden="true"><label>Ezt hagyd üresen <input type="text" name="weboldal" tabindex="-1" autocomplete="off"></label></div>' +
+        '<label class="bc-hl-pipa"><input type="checkbox" name="hozzajarulas" required>' +
+          '<span>' + hozzajarulasHtml(t.hozzajarulas, t.adatkezelesUrl) + '</span></label>' +
+        '<p class="bc-hl-allapot" aria-live="polite"></p>' +
+      '</form>';
+
+    var urlap = root.querySelector('form');
+    var email = urlap.querySelector('input[name=email]');
+    var pipa = urlap.querySelector('input[name=hozzajarulas]');
+    var csapda = urlap.querySelector('input[name=weboldal]');
+    var gomb = urlap.querySelector('button[type=submit]');
+    var allapot = urlap.querySelector('.bc-hl-allapot');
+    var kezdet = Date.now();
+
+    function uzen(szoveg, tipus) {
+      allapot.textContent = szoveg;
+      allapot.className = 'bc-hl-allapot' + (tipus ? ' is-' + tipus : '');
+    }
+
+    function siker(cim) {
+      urlap.reset();
+      uzen('Köszönjük! Nézd meg a postafiókodat, és erősítsd meg a feliratkozást.', 'ok');
+      ablak(t.sikerCim, t.sikerSzoveg, cim, email);
+    }
+
+    urlap.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var cim = email.value.trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(cim)) {
+        uzen('Kérlek, adj meg egy érvényes e-mail-címet.', 'hiba'); email.focus(); return;
+      }
+      if (!pipa.checked) {
+        uzen('A feliratkozáshoz fogadd el az adatkezelési tájékoztatót.', 'hiba'); pipa.focus(); return;
+      }
+      if (proba === 'siker') { siker(cim); return; }
+      if (proba === 'hiba' || !url) { uzen('A feliratkozás most nem sikerült. Próbáld újra később, vagy írj nekünk.', 'hiba'); return; }
+
+      gomb.disabled = true;
+      uzen('Küldés…');
+      // text/plain törzs: így a böngésző nem küld előzetes (CORS) kérést, az Apps Script fogadja
+      fetch(url, {
+        method: 'POST',
+        body: JSON.stringify({ email: cim, hozzajarulas: true, csapda: csapda.value, ido: Date.now() - kezdet })
+      })
+        .then(function (r) { if (!r.ok) { throw new Error('HTTP ' + r.status); } return r.json(); })
+        .then(function (v) {
+          if (v.ok) { siker(cim); } else { uzen(v.hiba || 'A feliratkozás most nem sikerült.', 'hiba'); }
+        })
+        .catch(function () { uzen('A feliratkozás most nem sikerült. Próbáld újra később, vagy írj nekünk.', 'hiba'); })
+        .then(function () { gomb.disabled = false; });
+    });
+  }
+
+  function betolt(root) {
+    if (root.getAttribute('data-bc-kesz')) { return; }
+    root.setAttribute('data-bc-kesz', '1');
+    var beagyazott = root.querySelector('script[data-bc-adat]');
+    if (beagyazott) {
+      try { indit(root, JSON.parse(beagyazott.textContent)); } catch (e) { indit(root, {}); }
+      return;
+    }
+    var url = root.getAttribute('data-bc-szovegek-url');
+    if (!url) { indit(root, {}); return; }
+    fetch(url)
+      .then(function (r) { if (!r.ok) { throw new Error('HTTP ' + r.status); } return r.json(); })
+      .then(function (sz) { indit(root, sz.hiba ? {} : sz); })
+      .catch(function () { indit(root, {}); });   // a szövegek nélkül is működik, az alapszövegekkel
+  }
+
+  function mind() {
+    Array.prototype.forEach.call(document.querySelectorAll('.bc-hirlevel'), betolt);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', mind);
+  } else {
+    mind();
+  }
+})();
+
+</script>
 <script>
 /* Könczevölgyi Vendégház — interakciók */
 (function () {
@@ -2095,15 +4118,6 @@ table.cal-m th abbr{ text-decoration:none; border:0; }
     Array.prototype.forEach.call(reveals, function (el) { el.classList.add('is-in'); });
   }
 
-  /* ---- Összecsukható kérdés-válasz ---- */
-  Array.prototype.forEach.call(document.querySelectorAll('.faq-q'), function (btn) {
-    btn.addEventListener('click', function () {
-      var item = btn.closest('.faq-item');
-      var open = item.classList.toggle('is-open');
-      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-  });
-
   /* ---- Vissza a tetejére ---- */
   toTop.addEventListener('click', function () {
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -2113,612 +4127,6 @@ table.cal-m th abbr{ text-decoration:none; border:0; }
   /* ---- Évszám a láblécben ---- */
   var ev = document.getElementById('ev');
   if (ev) { ev.textContent = new Date().getFullYear(); }
-})();
-
-
-/* ============================================================
-   FOGLALTSÁG-NAPTÁR
-   Adatforrás: Google Apps Script végpont, ami a PRIVÁT Google
-   Naptárból kizárólag a foglalt dátumokat adja vissza.
-   Amíg a végpont üres, bemutató adatokkal működik.
-   ============================================================ */
-(function () {
-  'use strict';
-
-  /* ---- ITT KELL KITÖLTENI ÉLESÍTÉSKOR ---- */
-  var CONFIG = {
-    // Az Apps Script webalkalmazás címe (a /exec végű URL),
-    // pl. 'https://script.google.com/macros/s/AKfyc.../exec'
-    vegpont: 'https://script.google.com/macros/s/AKfycbx9qE_4j8Cum5ZA8BzV4DuBPVh0mDDKIb15-oHFda1wPR6PYTFqbIReLSlGBwAKVNsE/exec',
-
-    // Hány hónapra előre lehessen lapozni
-    honapokElore: 12
-  };
-  /* ---------------------------------------- */
-
-  var root = document.getElementById('foglaltsag');
-  if (!root) { return; }
-
-  var monthsEl = root.querySelector('[data-cal-months]');
-  var rangeEl  = root.querySelector('[data-cal-range]');
-  var noteEl   = root.querySelector('[data-cal-note]');
-  var prevBtn  = root.querySelector('[data-cal-prev]');
-  var nextBtn  = root.querySelector('[data-cal-next]');
-  var errorEl  = root.querySelector('[data-cal-error]');
-
-  var HONAP = ['január', 'február', 'március', 'április', 'május', 'június',
-               'július', 'augusztus', 'szeptember', 'október', 'november', 'december'];
-  var NAPROVID = ['H', 'K', 'Sze', 'Cs', 'P', 'Szo', 'V'];
-  var NAPTELJES = ['hétfő', 'kedd', 'szerda', 'csütörtök', 'péntek', 'szombat', 'vasárnap'];
-
-  var ma = new Date(); ma.setHours(0, 0, 0, 0);
-  var elsoHonap = new Date(ma.getFullYear(), ma.getMonth(), 1);
-  var utolsoHonap = new Date(ma.getFullYear(), ma.getMonth() + CONFIG.honapokElore, 1);
-  var mutatott = new Date(elsoHonap);
-  var foglalt = Object.create(null);
-
-
-  /* A foglaltságot közkinccsé tesszük, hogy az árajánlat-kalkulátor is
-     tudja jelezni, ha a kiválasztott időszak ütközik. */
-  function kozzetesz(allapot) {
-    window.foglaltsagAdat = { napok: foglalt, allapot: allapot };
-    document.dispatchEvent(new CustomEvent('foglaltsag:frissult'));
-  }
-
-  function kulcs(d) {
-    return d.getFullYear() + '-' +
-           ('0' + (d.getMonth() + 1)).slice(-2) + '-' +
-           ('0' + d.getDate()).slice(-2);
-  }
-
-  /* ---- Egy hónap táblázata ---- */
-  function honapTabla(ev, ho) {
-    var elsoNap = new Date(ev, ho, 1);
-    var napokSzama = new Date(ev, ho + 1, 0).getDate();
-    var eltolas = (elsoNap.getDay() + 6) % 7;   // hétfővel kezdünk
-
-    var h = '<table class="cal-m"><caption>' + ev + '. ' + HONAP[ho] + '</caption><thead><tr>';
-    for (var i = 0; i < 7; i++) {
-      h += '<th scope="col"><abbr title="' + NAPTELJES[i] + '">' + NAPROVID[i] + '</abbr></th>';
-    }
-    h += '</tr></thead><tbody><tr>';
-
-    for (var u = 0; u < eltolas; u++) { h += '<td class="cal-d cal-d--ures"></td>'; }
-
-    for (var d = 1; d <= napokSzama; d++) {
-      var dat = new Date(ev, ho, d);
-      var k = kulcs(dat);
-      var allapot = dat < ma ? 'past' : (foglalt[k] ? 'busy' : 'free');
-      var maE = dat.getTime() === ma.getTime();
-      var cimke = ev + '. ' + HONAP[ho] + ' ' + d + '. — ' +
-                  (allapot === 'past' ? 'elmúlt' : allapot === 'busy' ? 'foglalt' : 'szabad');
-
-      h += '<td class="cal-d cal-d--' + allapot + (maE ? ' is-today' : '') + '">' +
-           '<span class="cal-n" aria-hidden="true">' + d + '</span>' +
-           '<span class="sr">' + cimke + '</span></td>';
-
-      if ((eltolas + d) % 7 === 0 && d !== napokSzama) { h += '</tr><tr>'; }
-    }
-
-    var maradek = (eltolas + napokSzama) % 7;
-    if (maradek !== 0) {
-      for (var z = maradek; z < 7; z++) { h += '<td class="cal-d cal-d--ures"></td>'; }
-    }
-
-    return h + '</tr></tbody></table>';
-  }
-
-  // keskeny képernyőn csak az első hónap látszik (ld. styles.css)
-  var egyHonapos = window.matchMedia('(max-width: 760px)');
-
-  function rajzol() {
-    var masodik = new Date(mutatott.getFullYear(), mutatott.getMonth() + 1, 1);
-    monthsEl.innerHTML = honapTabla(mutatott.getFullYear(), mutatott.getMonth()) +
-                         honapTabla(masodik.getFullYear(), masodik.getMonth());
-
-    if (egyHonapos.matches) {
-      rangeEl.textContent = mutatott.getFullYear() + '. ' + HONAP[mutatott.getMonth()];
-    } else if (mutatott.getFullYear() === masodik.getFullYear()) {
-      rangeEl.textContent = mutatott.getFullYear() + '. ' +
-        HONAP[mutatott.getMonth()] + ' – ' + HONAP[masodik.getMonth()];
-    } else {
-      rangeEl.textContent = mutatott.getFullYear() + '. ' + HONAP[mutatott.getMonth()] +
-        ' – ' + masodik.getFullYear() + '. ' + HONAP[masodik.getMonth()];
-    }
-
-    prevBtn.disabled = mutatott <= elsoHonap;
-    nextBtn.disabled = mutatott >= utolsoHonap;
-  }
-
-  if (egyHonapos.addEventListener) {
-    egyHonapos.addEventListener('change', rajzol);
-  } else if (egyHonapos.addListener) {
-    egyHonapos.addListener(rajzol);
-  }
-
-  function lepes(irany) {
-    mutatott = new Date(mutatott.getFullYear(), mutatott.getMonth() + irany, 1);
-    if (mutatott < elsoHonap) { mutatott = new Date(elsoHonap); }
-    if (mutatott > utolsoHonap) { mutatott = new Date(utolsoHonap); }
-    rajzol();
-  }
-
-  prevBtn.addEventListener('click', function () { lepes(-1); });
-  nextBtn.addEventListener('click', function () { lepes(1); });
-
-  /* ---- Bemutató adatok, amíg nincs beállítva a naptár ----
-     Fix magból generálva, hogy két betöltés között ne ugráljon. */
-  function bemutatoAdatok() {
-    var mag = 987654321;
-    function rnd() {
-      mag = (mag * 1103515245 + 12345) % 2147483648;
-      return mag / 2147483648;
-    }
-    var kurzor = new Date(ma);
-    kurzor.setDate(kurzor.getDate() + 2 + Math.floor(rnd() * 4));
-
-    for (var blokk = 0; blokk < 30; blokk++) {
-      var ejszaka = 2 + Math.floor(rnd() * 4);
-      for (var i = 0; i < ejszaka; i++) {
-        foglalt[kulcs(kurzor)] = true;
-        kurzor.setDate(kurzor.getDate() + 1);
-      }
-      kurzor.setDate(kurzor.getDate() + 3 + Math.floor(rnd() * 11));
-    }
-    noteEl.textContent = 'Bemutató adatok — élesben a Google Naptár foglaltsága látszik itt.';
-  }
-
-  /* ---- Betöltés ----
-     A végpont csak dátumtömböt ad vissza, személyes adatot nem. */
-  function betolt() {
-    if (!CONFIG.vegpont) {
-      bemutatoAdatok();
-      kozzetesz('bemutato');
-      rajzol();
-      return;
-    }
-
-    // amíg nincs adat, ne mutassunk semmit szabadnak
-    var kartya = root.querySelector('.cal');
-    kartya.classList.add('is-loading');
-    noteEl.textContent = 'Foglaltság betöltése…';
-    rajzol();
-
-    fetch(CONFIG.vegpont)
-      .then(function (r) {
-        if (!r.ok) { throw new Error('HTTP ' + r.status); }
-        return r.json();
-      })
-      .then(function (adat) {
-        if (adat.hiba) { throw new Error(adat.hiba); }
-        kartya.classList.remove('is-loading');
-        kartya.classList.remove('is-error');
-        if (errorEl) { errorEl.hidden = true; }
-
-        (adat.foglalt || []).forEach(function (nap) {
-          if (/^\d{4}-\d{2}-\d{2}$/.test(nap)) { foglalt[nap] = true; }
-        });
-
-        var frissitve = adat.frissitve ? new Date(adat.frissitve) : new Date();
-        noteEl.textContent = 'Frissítve: ' + frissitve.getFullYear() + '. ' +
-          HONAP[frissitve.getMonth()] + ' ' + frissitve.getDate() + '. ' +
-          ('0' + frissitve.getHours()).slice(-2) + ':' +
-          ('0' + frissitve.getMinutes()).slice(-2);
-        kozzetesz('eles');
-        rajzol();
-      })
-      .catch(function () {
-        // Éles oldalon nem találhatunk ki foglaltságot: inkább ne
-        // állítsunk semmit, és irányítsuk a látogatót telefonra.
-        kartya.classList.remove('is-loading');
-        kartya.classList.add('is-error');
-        if (errorEl) { errorEl.hidden = false; }
-        noteEl.textContent = '';
-        foglalt = Object.create(null);
-        kozzetesz('hiba');
-        rajzol();
-      });
-  }
-
-  betolt();
-})();
-
-
-/* ============================================================
-   ÁRAJÁNLAT-KALKULÁTOR
-   Árak forrása: Szállás.hu, 2026-10-05 (ld. arak-szallas-hu-2026-10-05.md).
-   A szezonsávok és a bekészítés árai DEMÓ-értékek.
-   ============================================================ */
-(function () {
-  'use strict';
-
-  var root = document.getElementById('arajanlat');
-  if (!root) { return; }
-
-  /* ---- ÁRAK ---- */
-  var AR = {
-    alap: 70000,          // Ft/éj, az egész házra, 4 főig
-    kiemelt: 77000,       // dec. 20 – jan. 2.
-    kedvezmenyes: 62000,  // jan. 3 – febr. utolsó napja
-    fotolFelar: 10000,    // Ft/fő/éj az 5. főtől
-    ifa: 400,             // Ft/fő/éj, csak 18 év felett
-    reggeli: 3000,        // Ft/fő
-    bor: 4900,
-    pezsgo: 7900,
-    kutya: 5000,          // Ft/éj
-    kaucio: 50000,
-    eloreFizetes: 0.05,   // 5%
-    minEj: 2,
-    maxFo: 7              // babák nélkül
-  };
-
-  var KUPON = { kod: 'KÖSZI10', osszeg: 10000, minEj: 3 };
-
-  /* életkori szorzók az 5. főtől járó felárra */
-  var SULY = { felnott: 1, gyerekNagy: 0.75, gyerekKicsi: 0.5 };
-
-  /* ---- Elemek ---- */
-  var el = {
-    erkezes: document.getElementById('ar-erkezes'),
-    tavozas: document.getElementById('ar-tavozas'),
-    ejInfo: document.getElementById('ar-ejszaka-info'),
-    letszamInfo: document.getElementById('ar-letszam-info'),
-    kupon: document.getElementById('ar-kupon'),
-    kuponInfo: document.getElementById('ar-kupon-info'),
-    kutyaInfo: document.getElementById('ar-kutya-info'),
-    szabadInfo: document.getElementById('ar-szabad-info'),
-    reggeli: document.getElementById('ar-reggeli'),
-    bor: document.getElementById('ar-bor'),
-    pezsgo: document.getElementById('ar-pezsgo'),
-    elore: document.getElementById('ar-elore'),
-    tetelek: document.getElementById('ar-tetelek'),
-    vegosszeg: document.getElementById('ar-vegosszeg'),
-    fajlagos: document.getElementById('ar-fajlagos'),
-    kuldes: document.getElementById('ar-kuldes')
-  };
-
-  var szamlalok = {};
-  ['felnott', 'gyerek-nagy', 'gyerek-kicsi', 'baba', 'kutya',
-   'kisagy', 'etetoszek', 'potagy', 'bicikli'].forEach(function (n) {
-    szamlalok[n] = document.getElementById('ar-' + n);
-  });
-
-  function ert(n) { return parseInt(szamlalok[n].textContent, 10) || 0; }
-
-  /* ---- Segédek ---- */
-  function ft(n) {
-    return Math.round(n).toLocaleString('hu-HU').replace(/ /g, ' ') + ' Ft';
-  }
-
-  function datumbol(input) {
-    if (!input.value) { return null; }
-    var p = input.value.split('-');
-    return new Date(+p[0], +p[1] - 1, +p[2]);
-  }
-
-  /* Egy adott éjszaka ára a szezonsáv szerint.
-     Kiemelt: dec. 20 – jan. 2.  |  Kedvezményes: jan. 3 – febr. vége */
-  function ejszakaAra(d) {
-    var ho = d.getMonth() + 1, nap = d.getDate();
-    if ((ho === 12 && nap >= 20) || (ho === 1 && nap <= 2)) { return { ar: AR.kiemelt, sav: 'kiemelt' }; }
-    if ((ho === 1 && nap >= 3) || ho === 2) { return { ar: AR.kedvezmenyes, sav: 'kedvezmenyes' }; }
-    return { ar: AR.alap, sav: 'alap' };
-  }
-
-  var SAVNEV = {
-    alap: 'Alapszezon',
-    kiemelt: 'Kiemelt időszak (ünnepek)',
-    kedvezmenyes: 'Téli kedvezményes időszak'
-  };
-  var SAVAR = { alap: AR.alap, kiemelt: AR.kiemelt, kedvezmenyes: AR.kedvezmenyes };
-
-
-  /* Melyik éjszakák ütköznek a foglaltság-naptárral?
-     Az N éjszakás foglalás a kezdőnaptól számított N éjszakát foglalja el,
-     a távozás napja már nem tartozik bele — ugyanaz a logika, mint a naptárnál. */
-  function utkozoNapok(kezd, ejek) {
-    var adat = window.foglaltsagAdat;
-    if (!adat || adat.allapot === 'hiba' || !kezd || !ejek) { return []; }
-    var ki = [];
-    for (var i = 0; i < ejek; i++) {
-      var d = new Date(kezd.getFullYear(), kezd.getMonth(), kezd.getDate() + i);
-      var k = d.getFullYear() + '-' +
-              ('0' + (d.getMonth() + 1)).slice(-2) + '-' +
-              ('0' + d.getDate()).slice(-2);
-      if (adat.napok[k]) { ki.push(d); }
-    }
-    return ki;
-  }
-
-  var HONAPROVID = ['jan.', 'febr.', 'márc.', 'ápr.', 'máj.', 'jún.',
-                    'júl.', 'aug.', 'szept.', 'okt.', 'nov.', 'dec.'];
-
-  function napNev(d) { return HONAPROVID[d.getMonth()] + ' ' + d.getDate() + '.'; }
-
-  /* ---- Számítás ---- */
-  function szamol() {
-    var kezd = datumbol(el.erkezes);
-    var veg = datumbol(el.tavozas);
-    var ejek = 0;
-    if (kezd && veg && veg > kezd) {
-      ejek = Math.round((veg - kezd) / 86400000);
-    }
-
-    var felnott = ert('felnott');
-    var gyNagy = ert('gyerek-nagy');
-    var gyKicsi = ert('gyerek-kicsi');
-    var baba = ert('baba');
-    var fizetoFo = felnott + gyNagy + gyKicsi;   // babák nem számítanak
-
-    /* éjszakák szezonsávonként */
-    var savok = {};
-    var szallas = 0;
-    for (var i = 0; i < ejek; i++) {
-      var d = new Date(kezd.getFullYear(), kezd.getMonth(), kezd.getDate() + i);
-      var e = ejszakaAra(d);
-      savok[e.sav] = (savok[e.sav] || 0) + 1;
-      szallas += e.ar;
-    }
-
-    /* létszámfelár: az első 4 fő benne van az alapárban.
-       A drágább kategóriák töltik fel az ingyenes helyeket, így a
-       felár a kedvezményes korosztályra esik — ez a vendégnek jobb. */
-    var sorban = [];
-    var k;
-    for (k = 0; k < felnott; k++) { sorban.push(SULY.felnott); }
-    for (k = 0; k < gyNagy; k++) { sorban.push(SULY.gyerekNagy); }
-    for (k = 0; k < gyKicsi; k++) { sorban.push(SULY.gyerekKicsi); }
-    sorban.sort(function (a, b) { return b - a; });
-
-    var felarSuly = 0;
-    for (k = 4; k < sorban.length; k++) { felarSuly += sorban[k]; }
-    var letszamFelar = felarSuly * AR.fotolFelar * ejek;
-
-    /* extrák */
-    var reggeli = el.reggeli.checked ? AR.reggeli * fizetoFo * ejek : 0;
-    var bor = el.bor.checked ? AR.bor : 0;
-    var pezsgo = el.pezsgo.checked ? AR.pezsgo : 0;
-    var kutya = ert('kutya') * AR.kutya * ejek;
-
-    var reszosszeg = szallas + letszamFelar + reggeli + bor + pezsgo + kutya;
-
-    /* kedvezmények */
-    var eloreKed = el.elore.checked ? Math.round(reszosszeg * AR.eloreFizetes) : 0;
-    var kuponOk = el.kupon.value.trim().toUpperCase() === KUPON.kod && ejek >= KUPON.minEj;
-    var kuponKed = kuponOk ? KUPON.osszeg : 0;
-
-    /* IFA — csak 18 év felett */
-    var ifa = felnott * AR.ifa * ejek;
-
-    var vegosszeg = Math.max(0, reszosszeg - eloreKed - kuponKed) + ifa;
-
-    var utkozes = utkozoNapok(kezd, ejek);
-
-    return {
-      ejek: ejek, savok: savok, utkozes: utkozes,
-      felnott: felnott, gyNagy: gyNagy, gyKicsi: gyKicsi, baba: baba,
-      fizetoFo: fizetoFo, szallas: szallas, letszamFelar: letszamFelar,
-      reggeli: reggeli, bor: bor, pezsgo: pezsgo, kutya: kutya,
-      reszosszeg: reszosszeg, eloreKed: eloreKed, kuponKed: kuponKed,
-      kuponOk: kuponOk, ifa: ifa, vegosszeg: vegosszeg
-    };
-  }
-
-  /* ---- Megjelenítés ---- */
-  function sor(cimke, ertek, osztaly, alcim) {
-    return '<div class="cs' + (osztaly ? ' ' + osztaly : '') + '">' +
-           '<dt>' + cimke + (alcim ? '<small>' + alcim + '</small>' : '') + '</dt>' +
-           '<dd>' + ertek + '</dd></div>';
-  }
-
-  function rajzol() {
-    var a = szamol();
-    var h = '';
-
-    /* éjszaka-visszajelzés */
-    if (!a.ejek) {
-      el.ejInfo.textContent = 'Minimum ' + AR.minEj + ' éjszaka foglalható.';
-      el.ejInfo.className = 'calc-hint';
-    } else if (a.ejek < AR.minEj) {
-      el.ejInfo.textContent = 'A ház minimum ' + AR.minEj + ' éjszakára foglalható — válassz legalább ennyit.';
-      el.ejInfo.className = 'calc-hint is-warn';
-    } else {
-      el.ejInfo.textContent = a.ejek + ' éjszaka';
-      el.ejInfo.className = 'calc-hint is-ok';
-    }
-
-    /* szabad-e az időszak? */
-    var adat = window.foglaltsagAdat;
-    if (!a.ejek || a.ejek < AR.minEj || !adat || adat.allapot === 'hiba') {
-      el.szabadInfo.textContent = '';
-      el.szabadInfo.className = 'calc-hint';
-    } else if (a.utkozes.length) {
-      el.szabadInfo.innerHTML = 'Ebben az időszakban ' +
-        (a.utkozes.length === 1 ? 'egy nap már foglalt' : a.utkozes.length + ' nap már foglalt') +
-        ' (' + a.utkozes.slice(0, 4).map(napNev).join(', ') +
-        (a.utkozes.length > 4 ? ' …' : '') + '). ' +
-        '<a href="#foglaltsag">Nézd meg a szabad időpontokat</a>, vagy kérdezz rá — az ár alább így is kiszámolva.';
-      el.szabadInfo.className = 'calc-hint is-warn';
-    } else {
-      el.szabadInfo.textContent = 'Ez az időszak szabad.';
-      el.szabadInfo.className = 'calc-hint is-ok';
-    }
-
-    /* létszám-visszajelzés */
-    if (a.fizetoFo > AR.maxFo) {
-      el.letszamInfo.textContent = 'A ház legfeljebb ' + AR.maxFo + ' főt tud fogadni (a 3 év alattiak nem számítanak bele).';
-      el.letszamInfo.className = 'calc-hint is-warn';
-    } else if (a.fizetoFo > 0 && a.fizetoFo <= 4) {
-      el.letszamInfo.textContent = 'Az ár 4 főig azonos — a 3. és 4. vendég nem kerül többe.';
-      el.letszamInfo.className = 'calc-hint';
-    } else {
-      el.letszamInfo.textContent = '';
-      el.letszamInfo.className = 'calc-hint';
-    }
-
-    /* kutya-visszajelzés */
-    var kutyaDb = ert('kutya');
-    if (kutyaDb >= 2) {
-      el.kutyaInfo.textContent = 'Kettőnél több kutyánál kérj egyedi ajánlatot — az összeg tájékoztató.';
-      el.kutyaInfo.className = 'calc-hint is-warn';
-    } else {
-      el.kutyaInfo.textContent = '';
-      el.kutyaInfo.className = 'calc-hint';
-    }
-
-    /* kupon-visszajelzés */
-    var kuponBeirt = el.kupon.value.trim();
-    if (!kuponBeirt) {
-      el.kuponInfo.textContent = '';
-      el.kuponInfo.className = 'calc-hint';
-    } else if (a.kuponOk) {
-      el.kuponInfo.textContent = 'Kuponkód elfogadva: −' + ft(KUPON.osszeg);
-      el.kuponInfo.className = 'calc-hint is-ok';
-    } else if (kuponBeirt.toUpperCase() === KUPON.kod) {
-      el.kuponInfo.textContent = 'Ez a kupon legalább ' + KUPON.minEj + ' éjszakás foglalásnál használható.';
-      el.kuponInfo.className = 'calc-hint is-warn';
-    } else {
-      el.kuponInfo.textContent = 'Ezt a kuponkódot nem ismerjük.';
-      el.kuponInfo.className = 'calc-hint is-warn';
-    }
-
-    var ervenyes = a.ejek >= AR.minEj && a.fizetoFo >= 1 && a.fizetoFo <= AR.maxFo;
-
-    if (!ervenyes) {
-      el.tetelek.innerHTML = sor('Válassz időpontot és létszámot', '', 'cs--ures');
-      el.vegosszeg.textContent = '—';
-      el.fajlagos.textContent = '';
-      el.kuldes.setAttribute('aria-disabled', 'true');
-      return;
-    }
-    el.kuldes.removeAttribute('aria-disabled');
-
-    /* szállás, szezonsávonként bontva */
-    var savKulcsok = Object.keys(a.savok);
-    if (savKulcsok.length === 1) {
-      var sav = savKulcsok[0];
-      h += sor('Szállás', ft(a.szallas), '', a.savok[sav] + ' éj · ' + SAVNEV[sav]);
-    } else {
-      savKulcsok.forEach(function (sv) {
-        h += sor(SAVNEV[sv], ft(SAVAR[sv] * a.savok[sv]), '',
-                 a.savok[sv] + ' éj × ' + ft(SAVAR[sv]));
-      });
-    }
-
-    if (a.letszamFelar > 0) {
-      h += sor('Létszámfelár', ft(a.letszamFelar), '', 'az 5. főtől, életkor szerint');
-    }
-    if (a.reggeli) { h += sor('Reggeli kosár', ft(a.reggeli), '', a.fizetoFo + ' fő × ' + a.ejek + ' reggel'); }
-    if (a.bor) { h += sor('Házi bor', ft(a.bor)); }
-    if (a.pezsgo) { h += sor('Pezsgő és gyümölcstál', ft(a.pezsgo)); }
-    if (a.kutya) { h += sor('Kutya', ft(a.kutya), '', ert('kutya') + ' kutya × ' + a.ejek + ' éj'); }
-
-    /* díjmentes kérések: nem növelik az árat, de a szállásadónak tudnia kell róluk */
-    var ingyenes = [
-      ['Kiságy', ert('kisagy')],
-      ['Etetőszék', ert('etetoszek')],
-      ['Pótágy', ert('potagy')],
-      ['Kerékpár', ert('bicikli')]
-    ].filter(function (x) { return x[1] > 0; });
-
-    if (ingyenes.length) {
-      h += '<div class="cs cs--vonal cs--cim"><dt>Bekészítjük még</dt><dd></dd></div>';
-      ingyenes.forEach(function (x) {
-        h += sor(x[0] + ' · ' + x[1] + ' db', 'díjmentes', 'cs--ingyen');
-      });
-    }
-
-    if (a.eloreKed || a.kuponKed) {
-      h += sor('Részösszeg', ft(a.reszosszeg), 'cs--vonal');
-    }
-    if (a.eloreKed) { h += sor('Előre fizetési kedvezmény', '−' + ft(a.eloreKed), 'cs--ked', '5%'); }
-    if (a.kuponKed) { h += sor('Kuponkód (' + KUPON.kod + ')', '−' + ft(a.kuponKed), 'cs--ked'); }
-
-    h += sor('Idegenforgalmi adó', ft(a.ifa), 'cs--vonal',
-             a.felnott + ' felnőtt × ' + a.ejek + ' éj × ' + ft(AR.ifa));
-
-    el.tetelek.innerHTML = h;
-    el.vegosszeg.textContent = ft(a.vegosszeg);
-    el.fajlagos.textContent = ft(a.vegosszeg / a.fizetoFo / a.ejek) + ' / fő / éj';
-
-    /* e-mail ajánlat */
-    var sorok = [
-      'Szia!', '',
-      'A weboldal kalkulátorával az alábbi ajánlatot állítottam össze:', '',
-      'Érkezés: ' + el.erkezes.value,
-      'Távozás: ' + el.tavozas.value + '  (' + a.ejek + ' éj)',
-      'Létszám: ' + a.felnott + ' felnőtt' +
-        (a.gyNagy ? ', ' + a.gyNagy + ' gyerek (6-18)' : '') +
-        (a.gyKicsi ? ', ' + a.gyKicsi + ' kisgyerek (3-6)' : '') +
-        (a.baba ? ', ' + a.baba + ' baba (3 alatt)' : '')
-    ];
-    if (a.reggeli) { sorok.push('Reggeli kosár: ' + a.fizetoFo + ' fő × ' + a.ejek + ' reggel'); }
-    if (a.bor) { sorok.push('Házi bor: igen'); }
-    if (a.pezsgo) { sorok.push('Pezsgő és gyümölcstál: igen'); }
-    if (ert('kutya')) { sorok.push('Kutyát hoznánk: ' + ert('kutya') + ' db'); }
-    if (ingyenes.length) {
-      sorok.push('', 'Kérnénk még bekészíteni:');
-      ingyenes.forEach(function (x) { sorok.push('  - ' + x[0] + ': ' + x[1] + ' db'); });
-    }
-    if (a.utkozes.length) {
-      sorok.push('', 'Megjegyzés: a naptár szerint ebben az időszakban van foglalt nap, '
-        + 'de szeretnék rákérdezni.');
-    }
-    if (a.kuponKed) { sorok.push('Kuponkód: ' + KUPON.kod); }
-    if (a.eloreKed) { sorok.push('A teljes összeget előre fizetném.'); }
-    sorok.push('', 'Kalkulált összeg: ' + ft(a.vegosszeg), '',
-               'Kérlek, erősítsd meg, hogy szabad-e az időpont!', '', 'Köszönettel:');
-
-    el.kuldes.setAttribute('href',
-      'mailto:konczevolgyivendeghaz@gmail.com' +
-      '?subject=' + encodeURIComponent('Ajánlatkérés – Könczevölgyi Vendégház') +
-      '&body=' + encodeURIComponent(sorok.join('\n')));
-  }
-
-  /* gombok tiltása a határértékeknél */
-  function gombokFrissit(box) {
-    var out = box.querySelector('output');
-    var v = parseInt(out.textContent, 10) || 0;
-    Array.prototype.forEach.call(box.querySelectorAll('button'), function (b) {
-      b.disabled = (+b.dataset.step < 0) ? v <= +box.dataset.min : v >= +box.dataset.max;
-    });
-  }
-
-  /* ---- Események ---- */
-  root.addEventListener('click', function (e) {
-    var gomb = e.target.closest ? e.target.closest('.calc-st-ctl button') : null;
-    if (!gomb) { return; }
-    var box = gomb.closest('.calc-stepper');
-    var out = box.querySelector('output');
-    var min = +box.dataset.min, max = +box.dataset.max;
-    var uj = (parseInt(out.textContent, 10) || 0) + (+gomb.dataset.step);
-    out.textContent = Math.min(max, Math.max(min, uj));
-    gombokFrissit(box);
-    rajzol();
-  });
-
-  root.addEventListener('input', rajzol);
-  root.addEventListener('change', rajzol);
-
-  /* ---- Indulás: mától 2 hét múlva, 2 éj ---- */
-  (function () {
-    function iso(d) {
-      return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
-    }
-    var ma = new Date(); ma.setHours(0, 0, 0, 0);
-    var be = new Date(ma.getFullYear(), ma.getMonth(), ma.getDate() + 14);
-    var ki = new Date(be.getFullYear(), be.getMonth(), be.getDate() + 2);
-    el.erkezes.value = iso(be);
-    el.tavozas.value = iso(ki);
-    el.erkezes.min = iso(ma);
-    el.tavozas.min = iso(new Date(ma.getFullYear(), ma.getMonth(), ma.getDate() + AR.minEj));
-
-    Array.prototype.forEach.call(root.querySelectorAll('.calc-stepper'), gombokFrissit);
-  })();
-
-  document.addEventListener('foglaltsag:frissult', rajzol);
-
-  rajzol();
 })();
 
 </script>
