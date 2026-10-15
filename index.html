@@ -651,6 +651,13 @@ body.menu-open .burger span::after{ top:0; transform:rotate(-45deg); }
 
 .contact-cta{ display:flex; flex-wrap:wrap; gap:.9rem; margin-top:2.4rem; }
 
+/* Kapcsolat: csak elérhetőség — az ajánlatkérés a kalkulátorból megy */
+.contact-list .sub{ display:block; font-size:.86rem; color:var(--ink-soft); margin-top:.2rem; line-height:1.5; }
+.contact-list .val--select{ user-select:all; -webkit-user-select:all; cursor:text; }
+.contact-note{ margin-top:2.2rem; font-size:.98rem; color:var(--ink-soft); max-width:46ch; }
+.contact-note a{ color:var(--green-deep); font-weight:600; text-decoration:none; border-bottom:1.5px solid var(--green); }
+.contact-note a:hover{ color:var(--ink); }
+
 .contact-card{
   border-radius:var(--arch); overflow:hidden;
   box-shadow:var(--shadow-lift); position:relative;
@@ -1831,7 +1838,7 @@ table.bc-cal-m th abbr{ text-decoration:none; border:0; }
       <a href="#kapcsolat">Kapcsolat</a>
     </nav>
 
-    <a class="btn header-cta" href="#kapcsolat">Foglalj most</a>
+    <a class="btn header-cta" href="#arajanlat">Foglalj most</a>
 
     <button class="burger" id="burger" type="button" aria-label="Menü megnyitása" aria-expanded="false" aria-controls="fomenu">
       <span></span>
@@ -1878,7 +1885,7 @@ table.bc-cal-m th abbr{ text-decoration:none; border:0; }
       <h1 class="anim">Egy hely, ahol az ősi falak megnyugvást adnak <em>és ahol elcsendesedik a világ.</em></h1>
       <p class="hero-sub anim">Önálló, 120 m²-es vendégház a dombok között — három háló&shy;térrel, három saját fürdőszobával és egy nyári konyhával, ami köré összegyűlik a társaság.</p>
       <div class="hero-cta anim">
-        <a class="btn" href="#kapcsolat">
+        <a class="btn" href="#arajanlat">
           Foglalj most
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7"/></svg>
         </a>
@@ -2218,8 +2225,8 @@ table.bc-cal-m th abbr{ text-decoration:none; border:0; }
     <div data-reveal>
       <div class="s-head" style="margin-bottom:0">
         <p class="eyebrow">Kapcsolat</p>
-        <h2>Foglalj időpontot nálunk</h2>
-        <p>Írj vagy hívj minket bátran — segítünk kiválasztani a nektek legjobb időszakot.</p>
+        <h2>Itt érsz el minket</h2>
+        <p>Kérdésed van a házról, a környékről vagy egy különleges kérésről? Írj vagy hívj bátran — 24 órán belül válaszolunk.</p>
       </div>
 
       <ul class="contact-list">
@@ -2239,6 +2246,7 @@ table.bc-cal-m th abbr{ text-decoration:none; border:0; }
           <span>
             <span class="lbl">Telefon</span>
             <a href="tel:+36706338833">+36 70 633 8833</a>
+            <span class="sub">Ha épp nem tudjuk felvenni, 24 órán belül visszahívunk.</span>
           </span>
         </li>
         <li>
@@ -2247,7 +2255,7 @@ table.bc-cal-m th abbr{ text-decoration:none; border:0; }
           </span>
           <span>
             <span class="lbl">E-mail</span>
-            <a href="mailto:konczevolgyivendeghaz@gmail.com">konczevolgyivendeghaz@gmail.com</a>
+            <span class="val val--select">konczevolgyivendeghaz@gmail.com</span>
           </span>
         </li>
         <li>
@@ -2261,16 +2269,7 @@ table.bc-cal-m th abbr{ text-decoration:none; border:0; }
         </li>
       </ul>
 
-      <div class="contact-cta">
-        <a class="btn" href="mailto:konczevolgyivendeghaz@gmail.com?subject=Foglal%C3%A1si%20%C3%A9rdekl%C5%91d%C3%A9s%20%E2%80%93%20K%C3%B6nczev%C3%B6lgyi%20Vend%C3%A9gh%C3%A1z">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>
-          Írok e-mailt
-        </a>
-        <a class="btn btn--ghost" href="tel:+36706338833">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
-          Telefonálok
-        </a>
-      </div>
+      <p class="contact-note">Foglalni szeretnél? Az <a href="#arajanlat">árkalkulátorban</a> megadod a dátumokat, azonnal látod az árat, és onnan egy kattintással ajánlatot kérhetsz.</p>
     </div>
 
     <figure class="contact-card" data-reveal style="margin:0">
@@ -2299,7 +2298,7 @@ table.bc-cal-m th abbr{ text-decoration:none; border:0; }
         <h4>Elérhetőség</h4>
         <ul>
           <li><a href="tel:+36706338833">+36 70 633 8833</a></li>
-          <li><a href="mailto:konczevolgyivendeghaz@gmail.com">konczevolgyivendeghaz@gmail.com</a></li>
+          <li><span style="user-select:all;-webkit-user-select:all">konczevolgyivendeghaz@gmail.com</span></li>
           <li>9938 Nagyrákos, Alsószer 37.</li>
           <li><a href="https://facebook.com/vendeghaz.konczevolgyi.7" target="_blank" rel="noopener">Facebook</a></li>
         </ul>
