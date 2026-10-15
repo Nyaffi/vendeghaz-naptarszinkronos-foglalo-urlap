@@ -3130,7 +3130,7 @@ table.bc-cal-m th abbr{ text-decoration:none; border:0; }
           (utkozes.length === 1 ? 'egy nap már foglalt' : utkozes.length + ' nap már foglalt') +
           ' (' + utkozes.slice(0, 4).map(napNev).join(', ') + (utkozes.length > 4 ? ' …' : '') + '). ' +
           (naptar ? '<a href="' + esc(naptar) + '">Nézd meg a szabad időpontokat</a>' : 'Nézd meg a szabad időpontokat') +
-          ', vagy kérdezz rá — az ár alább így is kiszámolva.';
+          ', vagy kérdezz rá. Az árat lent így is kiszámoltuk.';
         el.szabadInfo.className = 'bc-calc-hint is-warn';
       } else {
         tipp(el.szabadInfo, 'Ez az időszak szabad.', 'ok');
